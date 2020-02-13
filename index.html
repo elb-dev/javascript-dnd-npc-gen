@@ -6,8 +6,25 @@
 	<title>NPC Generator</title>
 </head>
 <body>
-	<script type="text/javascript" src = "js/functions.js"></script>
 	<h1>NPC Generator</h1>
 	<p>This is a test.</p>
+	<p id="stats"></p>
+	<script type="text/javascript" src = "js/functions.js"></script>
+	<script type="text/javascript"> 
+		//Rolling stats
+		var statStrength = diceRoll(3,6);
+		statStrength = statModCalc(statStrength);
+		var statDexterity = diceRoll(3,6);
+		statDexterity = statModCalc(statDexterity);
+		var statConstitution = diceRoll(3,6);
+		statConstitution = statModCalc(statConstitution);
+		var statIntelligence = diceRoll(3,6);
+		statIntelligence = statModCalc(statIntelligence);
+		var statWisdom = diceRoll(3,6);
+		statWisdom = statModCalc(statWisdom);
+		var statCharisma = diceRoll(3,6);
+		statCharisma = statModCalc(statCharisma);
+		document.getElementById("stats").innerHTML = "STR: " + statStrength + " DEX: " + statDexterity + " CON: " + statConstitution + " INT: " + statIntelligence + " WIS: " + statWisdom + " CHA: " + statCharisma;
+	</script>
 </body>
 </html>
