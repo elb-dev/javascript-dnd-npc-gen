@@ -35,11 +35,9 @@
 		//Age
 		document.getElementById("age").innerHTML = "Age: " + iRandomRange(18,99);
 		//Sex
-		var sex = function(){
-			var s = ["M", "F"];
-			return s[iRandomRange(0,1)];
-		}
-		document.getElementById("sex").innerHTML = "Sex: " + sex();
+		var sexChoice = ["M", "F"];
+		var sex = iRandomRange(0,1);
+		document.getElementById("sex").innerHTML = "Sex: " + sexChoice[sex];
 		//Alignment
 		var alignGNE = ["Good","Neutral","Evil"];
 		var alignLNC = ["Lawful","Neutral","Chaotic"];
@@ -71,7 +69,29 @@
 		//Height
 		var heightInches = 56+diceRoll(2,10);
 		heightInches = heightFormat(heightInches);
-		document.getElementById("height").innerHTML = heightInches;
+		document.getElementById("height").innerHTML = "Height: " + heightInches;
+		//Build
+		var buildMale = 
+		[["Malnourished","Boney","Boney","Gangly","Gangly","Athletic","Muscular","Buff","Body Builder"],
+		["Twig","Twig","Twig","Lithe","Lithe","Athletic","Muscular","Buff","Strong Man"],
+		["Chubby","Chubby","Chubby","Average","Average","Average","Athletic","Hardy","Strong Man"],
+		["Fat","Fat","Fat","Husky","Husky","Husky","Hardy","Hardy","Hardy"],
+		["Obese","Obese","Obese","Obese","Obese","Obese","Obese","Bear Wrestler"]];
+		var buildFemale = 
+		[["Malnourished","Boney","Boney","Gangly","Gangly","Athletic","Athletic","Built","Body Builder"],
+		["Twig","Twig","Twig","Lithe","Lithe","Athletic","Athletic","Built","Strong Woman"],
+		["Chubby","Chubby","Chubby","Curvy","Curvy","Curvy","Athletic","Built","Strong Woman"],
+		["Fat","Fat","Fat","Heavy Set","Thicc","Thicc","Thicc","Strong Woman","Strong Woman"],
+		["Obese","Obese","Obese","Obese","Obese","Obese","Obese","Obese","Bear Tamer"]];
+		var buildFat = diceRollDrop(2,5,true,1)-1;
+		var buildStr = statStrength+4;
+		if(sex == 0) {
+			document.getElementById("build").innerHTML = "Build: " + buildMale[buildFat][buildStr];
+		} else {
+			document.getElementById("build").innerHTML = "Build: " + buildFemale[buildFat][buildStr];
+		}
+		
+
 	</script>
 </body>
 </html>

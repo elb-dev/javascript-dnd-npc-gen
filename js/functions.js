@@ -10,6 +10,12 @@ function testDisplay(){
 	console.log("statModCalc(14); = " + statModCalc(14));
 	console.log("heightFormat(69); = " + heightFormat(69));
     console.log("iRandomRange(65,90); = " + iRandomRange(65,90));
+    var myDiceList2 = diceLister(4,6);
+    console.log("Dice list: " + myDiceList2);
+    diceRemover(myDiceList2,true,1);
+    console.log("Dice list: " + myDiceList2);
+    console.log("Removing dice from list");
+    console.log("Rolling 4 dice = " + myDiceList2);
 	console.log("The functions are now finished.");
 }
 
@@ -21,7 +27,7 @@ function diceRoll(diceCount, sides){
 }
 
 function diceRollDrop(diceCount, sides, highOrLow, dropCount){
-    //false for dropping high, true for dropping low
+    //true for dropping high, false for dropping low
     diceList = diceLister(diceCount, sides);
     diceRemover(diceList, highOrLow, dropCount);
     diceAdded = diceAdder(diceList);
@@ -37,9 +43,9 @@ function diceLister(diceCount, sides){
 }
 
 function diceRemover(diceList, highOrLow, dropCount){
-    //false for dropping high, true for dropping low
+    //true for dropping high, false for dropping low
     diceList.sort(function(a, b){return a-b});
-    if(highOrLow){
+    if(!highOrLow){
     	diceList.reverse();
     }
     for(var n = 0; n < dropCount; n++){
