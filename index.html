@@ -40,6 +40,18 @@
 			return s[iRandomRange(0,1)];
 		}
 		document.getElementById("sex").innerHTML = "Sex: " + sex();
+		//Alignment
+		var alignGNE = ["Good","Neutral","Evil"];
+		var alignLNC = ["Lawful","Neutral","Chaotic"];
+		var alignGNEChoice = iRandomRange(0,2);
+		var alignLNCChoice = iRandomRange(0,2);
+		var alignment;
+		if(alignLNCChoice == 1 && alignGNEChoice == 1){
+			alignment = "True Neutral";
+		} else {
+			alignment = alignLNC[alignLNCChoice] + " " + alignGNE[alignGNEChoice];
+		}
+		document.getElementById("alignment").innerHTML = alignment;
 		//Stats
 		var statStrength = diceRoll(3,6);
 		statStrength = statModCalc(statStrength);
