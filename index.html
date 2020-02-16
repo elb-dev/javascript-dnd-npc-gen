@@ -66,6 +66,12 @@
 		var statCharisma = diceRoll(3,6);
 		statCharisma = statModCalc(statCharisma);
 		document.getElementById("stats").innerHTML = "STR: " + statStrength + " DEX: " + statDexterity + " CON: " + statConstitution + " INT: " + statIntelligence + " WIS: " + statWisdom + " CHA: " + statCharisma;
+		//Class/Occupation
+		document.getElementById("class/occupation").innerHTML = "Class/Occupation: Doorknob Licker";
+		//Height
+		var heightInches = 56+diceRoll(2,10);
+		heightInches = heightFormat(heightInches);
+		document.getElementById("height").innerHTML = heightInches;
 	</script>
 </body>
 </html>
