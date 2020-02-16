@@ -7,10 +7,9 @@
 </head>
 <body>
 	<h1>NPC Generator</h1>
-	<p>This is a test.</p>
 	<p id="name"></p>
 	<p id="age"></p>
-	<p id="race"></p>
+	<p id="race">Race: </p>
 	<p id="sex"></p>
 	<p id="alignment"></p>
 	<p id="stats"></p>
@@ -28,8 +27,20 @@
 	<p id="description">Description: </p>
 
 	<script type="text/javascript" src = "js/functions.js"></script>
-	<script type="text/javascript"> 
-		//Rolling stats
+	<script type="text/javascript">
+		//Name
+		var fName = String.fromCharCode(iRandomRange(65,90));
+		var lName = String.fromCharCode(iRandomRange(65,90));
+		document.getElementById("name").innerHTML = "Name: " + fName + " " + lName;
+		//Age
+		document.getElementById("age").innerHTML = "Age: " + iRandomRange(18,99);
+		//Sex
+		var sex = function(){
+			var s = ["M", "F"];
+			return s[iRandomRange(0,1)];
+		}
+		document.getElementById("sex").innerHTML = "Sex: " + sex();
+		//Stats
 		var statStrength = diceRoll(3,6);
 		statStrength = statModCalc(statStrength);
 		var statDexterity = diceRoll(3,6);

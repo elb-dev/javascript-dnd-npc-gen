@@ -9,6 +9,7 @@ function testDisplay(){
 	console.log("statModCalc(13); = " + statModCalc(13));
 	console.log("statModCalc(14); = " + statModCalc(14));
 	console.log("heightFormat(69); = " + heightFormat(69));
+    console.log("iRandomRange(65,90); = " + iRandomRange(65,90));
 	console.log("The functions are now finished.");
 }
 
@@ -63,6 +64,13 @@ function heightFormat(inches){
     inches = inches%12;
     output = feet + "'" + inches + '"';
     return output;
+}
+
+//This returns an integer from min to max
+function iRandomRange(min,max){
+    var range = max-min+1;
+    var num =  Math.floor(Math.random()*range)+min;
+    return num;
 }
 
 testDisplay();
