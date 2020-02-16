@@ -90,7 +90,29 @@
 		} else {
 			document.getElementById("build").innerHTML = "Build: " + buildFemale[buildFat][buildStr];
 		}
-		
+		//Appearance
+		var appearance = 
+		["Distinctive Jewelry",
+        "Piercings",
+		"Flamboyant or outlandish clothing",
+		"Formal, clean clothes",
+		"Ragged, dirty clothes",
+		"Pronounced scar",
+		"Missing teeth",
+		"Missing fingers",
+		"Unusual eye color",
+		"Tattoos",
+		"Birthmark",
+		"Unusual skin color",
+		"Bald",
+		"Braided beard or hair",
+		"Unusual hair color",
+		"Nervous eye twitch",
+		"Distinctive nose",
+		"Distinctive posture",
+		"Exceptionally beautiful",
+		"Exceptionally ugly"];
+		document.getElementById("appearance").innerHTML = "Appearance: " + appearance[iRandomRange(0,appearance.length-1)];
 
 	</script>
 </body>
