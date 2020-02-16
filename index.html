@@ -32,12 +32,15 @@
 		var fName = String.fromCharCode(iRandomRange(65,90));
 		var lName = String.fromCharCode(iRandomRange(65,90));
 		document.getElementById("name").innerHTML = "Name: " + fName + " " + lName;
+
 		//Age
 		document.getElementById("age").innerHTML = "Age: " + iRandomRange(18,99);
+
 		//Sex
 		var sexChoice = ["M", "F"];
 		var sex = iRandomRange(0,1);
 		document.getElementById("sex").innerHTML = "Sex: " + sexChoice[sex];
+
 		//Alignment
 		var alignGNE = ["Good","Neutral","Evil"];
 		var alignLNC = ["Lawful","Neutral","Chaotic"];
@@ -50,6 +53,7 @@
 			alignment = alignLNC[alignLNCChoice] + " " + alignGNE[alignGNEChoice];
 		}
 		document.getElementById("alignment").innerHTML = alignment;
+
 		//Stats
 		var statStrength = diceRoll(3,6);
 		statStrength = statModCalc(statStrength);
@@ -64,12 +68,15 @@
 		var statCharisma = diceRoll(3,6);
 		statCharisma = statModCalc(statCharisma);
 		document.getElementById("stats").innerHTML = "STR: " + statStrength + " DEX: " + statDexterity + " CON: " + statConstitution + " INT: " + statIntelligence + " WIS: " + statWisdom + " CHA: " + statCharisma;
+
 		//Class/Occupation
 		document.getElementById("class/occupation").innerHTML = "Class/Occupation: Doorknob Licker";
+
 		//Height
 		var heightInches = 56+diceRoll(2,10);
 		heightInches = heightFormat(heightInches);
 		document.getElementById("height").innerHTML = "Height: " + heightInches;
+
 		//Build
 		var buildMale = 
 		[["Malnourished","Boney","Boney","Gangly","Gangly","Athletic","Muscular","Buff","Body Builder"],
@@ -90,6 +97,7 @@
 		} else {
 			document.getElementById("build").innerHTML = "Build: " + buildFemale[buildFat][buildStr];
 		}
+
 		//Appearance
 		var appearance = 
 		["Distinctive Jewelry",
@@ -114,6 +122,29 @@
 		"Exceptionally ugly"];
 		document.getElementById("appearance").innerHTML = "Appearance: " + appearance[iRandomRange(0,appearance.length-1)];
 
+		//Mannerism
+		var mannerism = 
+		["Prone to singing, whistling, or humming quietly",
+		"Speaks in rhyme or some other peculiar way",
+		"Particularly low or high voice",
+		"Slurs words, lisps, or stutters",
+		"Enunciates overly clearly",
+		"Speaks loudly",
+		"Whispers",
+		"Uses flowery speech or long words",
+		"Frequently uses the wrong word",
+		"Uses colorful oaths and exclamations",
+		"Makes constant jokes or puns",
+		"Prone to predictions of doom",
+		"Fidgets",
+		"Squints",
+		"Stares into the distance",
+		"Chews something",
+		"Paces",
+		"Taps fingers",
+		"Bites fingernails",
+		"Twirls hair or tugs beard"];
+		document.getElementById("mannerism").innerHTML = "Mannerism: " + mannerism[iRandomRange(0,mannerism.length-1)];
 	</script>
 </body>
 </html>
