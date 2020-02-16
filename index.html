@@ -161,6 +161,61 @@
 		"Quiet",
 		"Suspicious"];
 		document.getElementById("interaction").innerHTML = "Interaction: " + interaction[iRandomRange(0,interaction.length-1)];
+
+		//Ideal
+		var idealGood = 
+		["Beauty",
+		"Charity",
+		"Greater Good",
+		"Life",
+		"Respect",
+		"Self-Sacrifice"];
+		var idealNeutral = 
+		["Balance",
+		"Knowledge",
+		"Live and Let Live",
+		"Moderation",
+		"Neutrality",
+		"People (Sociability?)"];
+		var idealEvil = 
+		["Domination",
+		"Greed",
+		"Might",
+		"Pain",
+		"Retribution",
+		"Slaughter"];
+		var idealLawful = 
+		["Community",
+		"Fairness",
+		"Honor",
+		"Logic",
+		"Responsibility",
+		"Tradition"];
+		var idealChaotic = 
+		["Change",
+		"Creativity",
+		"Freedom",
+		"Independence",
+		"No Limits",
+		"Freedom"];
+		var idealAlternate = 
+		["Aspiration",
+		"Discovery",
+		"Glory",
+		"Nation",
+		"Redemption",
+		"Self-Knowledge"];
+		var idealGNE = [idealGood, idealNeutral, idealEvil];
+		var idealLNC = [idealLawful, idealNeutral, idealChaotic];
+		var ideal;
+		var normalOrAlternate = iRandomRange(1,10);
+		if(normalOrAlternate == 10){
+			ideal = idealAlternate[iRandomRange(0,idealAlternate.length-1)];
+		} else {
+			var fullIdeals = idealGNE[alignGNEChoice].concat(idealLNC[alignLNCChoice]);
+			ideal = fullIdeals[iRandomRange(0,fullIdeals.length-1)];
+		}
+		document.getElementById("ideal").innerHTML = "Ideal: " + ideal;
 	</script>
 </body>
 </html>
