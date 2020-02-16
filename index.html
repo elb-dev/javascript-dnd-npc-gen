@@ -216,6 +216,20 @@
 			ideal = fullIdeals[iRandomRange(0,fullIdeals.length-1)];
 		}
 		document.getElementById("ideal").innerHTML = "Ideal: " + ideal;
+
+		//Bond
+		var bond = 
+		["Dedicated to fulfilling a personal life goal",
+		"Protective of close family members",
+		"Protective of colleagues or compatriots",
+		"Loyal to a benefactor, patron, or employer",
+		"Captivated by a romantic interest",
+		"Drawn to a special place",
+		"Protective of a sentimental keepsake",
+		"Protective of a valuable possession",
+		"Out for revenge"];
+		document.getElementById("bond").innerHTML = "Bond: " + bond[iRandomRange(0,bond.length-1)];
+
 	</script>
 </body>
 </html>
