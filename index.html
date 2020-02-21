@@ -3,28 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style/style.css">
 	<title>NPC Generator</title>
 </head>
 <body>
-	<h1>NPC Generator</h1>
-	<p id="name"></p>
-	<p id="age"></p>
-	<p id="race">Race: </p>
-	<p id="sex"></p>
-	<p id="alignment"></p>
-	<p id="stats"></p>
-	<p id="class/occupation"></p>
-	<p id="height"></p>
-	<p id="build"></p>
-	<p id="appearance"></p>
-	<p id="talent"></p>
-	<p id="mannerism"></p>
-	<p id="interaction"></p>
-	<p id="useful knowledge"></p>
-	<p id="ideal"></p>
-	<p id="bond"></p>
-	<p id="flaw/secret"></p>
-	<p id="description">Description: </p>
+	<header class="header">
+		<h1>NPC Generator</h1>
+	</header>
+	<main class = "main">
+		<p id="name"></p>
+		<p id="age"></p>
+		<p id="race">Race: </p>
+		<p id="sex"></p>
+		<p id="alignment"></p>
+		<p id="stats"></p>
+		<p id="class/occupation"></p>
+		<p id="height"></p>
+		<p id="build"></p>
+		<p id="appearance"></p>
+		<p id="talent"></p>
+		<p id="mannerism"></p>
+		<p id="interaction"></p>
+		<p id="useful knowledge"></p>
+		<p id="ideal"></p>
+		<p id="bond"></p>
+		<p id="flaw/secret"></p>
+		<p id="description">Description: </p>
+	</main>
 
 	<script type="text/javascript" src = "js/functions.js"></script>
 	<script type="text/javascript">
@@ -39,6 +44,8 @@
 			age = iRandomRangeBell(-36,90,4);
 		} while(age < 15)
 		document.getElementById("age").innerHTML = "Age: " + age;
+
+		//Race
 
 		//Sex
 		var sexChoice = ["M", "F"];
