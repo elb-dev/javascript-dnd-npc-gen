@@ -79,4 +79,28 @@ function iRandomRange(min,max){
     return num;
 }
 
+//This returns an integer from min to max, on a bell curve.
+function iRandomRangeBell(min,max,v){
+    //v is the number of time random is summed and should be >= 1
+    var num = 0;
+    for(var i = v; i > 0; i--){
+        num += Math.random();
+    }
+    num = num/v;
+    var range = max-min+1;
+    num = Math.floor(num*range)+min;
+    return num;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 //testDisplay();

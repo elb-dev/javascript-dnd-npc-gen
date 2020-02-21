@@ -34,7 +34,11 @@
 		document.getElementById("name").innerHTML = "Name: " + fName + " " + lName;
 
 		//Age
-		document.getElementById("age").innerHTML = "Age: " + iRandomRange(18,99);
+		var age;
+		do{
+			age = iRandomRangeBell(-36,90,4);
+		} while(age < 15)
+		document.getElementById("age").innerHTML = "Age: " + age;
 
 		//Sex
 		var sexChoice = ["M", "F"];
