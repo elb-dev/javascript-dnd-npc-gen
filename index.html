@@ -53,7 +53,7 @@
 		do{
 			age = iRandomRangeBell(-36,90,4);
 		} while(age < 15)
-		document.getElementById("age").innerHTML = "Age: " + age;
+		document.getElementById("age").innerHTML = 'Age: ' + age;
 
 		//Race
 
@@ -268,7 +268,8 @@
 		document.getElementById("flaw/secret").innerHTML = "Flaw or Secret: " + flaw[iRandomRange(0,flaw.length-1)];
 
 		//Things in the footer
-		document.querySelector("#copyright").innerHTML = "&copy; 2018-" + YEAR + " ELB";
+		document.querySelector("#copyright").innerHTML = '&copy; 2018-' + YEAR + ' ELB';
+		console.log('&copy; 2018-\${YEAR} ELB')
 
 	</script>
 </body>
