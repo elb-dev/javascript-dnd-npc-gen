@@ -10,6 +10,19 @@ body {
 	flex-direction: column;
 }
 
+header {
+font-family: Impact, Charcoal, sans-serif;
+font-size: 27px;
+letter-spacing: 3px;
+word-spacing: 0px;
+color: #000000;
+font-weight: 400;
+text-decoration: none;
+font-style: normal;
+font-variant: normal;
+text-transform: none;
+}
+
 .bookend {
 	background-color:#fff5e3;
 }
