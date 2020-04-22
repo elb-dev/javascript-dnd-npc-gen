@@ -23,6 +23,15 @@ header {
 	text-transform: none;
 }
 
+a {
+	color: black;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #962117;
+}
+
 .bookend {
 	background-color:#fff5e3;
 }
