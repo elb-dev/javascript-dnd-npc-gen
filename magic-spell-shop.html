@@ -32,6 +32,8 @@
 
 	<script type="text/javascript" src = "js/functions.js"></script>
 	<script type="text/javascript">
+		var spellCosts = [10, 60, 120, 200, 320, 640, 1280, 2560, 5120, 10240];
+
 		var spells = [[],[],[],[],[],[],[],[],[],[]];
 		spells[0].push("Spell 0-0");
 		spells[1].push("Spell 1-0");
@@ -56,20 +58,20 @@
 
 
 
-		var budget = 20;
+		var budget = 10;
 		document.getElementById("box").innerHTML = "";
 
 		do{
 			level = iRandomRangeBell(-9,9,5);
 		} while (level < 0)
-		document.getElementById("box").innerHTML += spells[level][iRandomRange(0,spells[level].length-1)];
+		document.getElementById("box").innerHTML += spells[level][iRandomRange(0,spells[level].length-1)] + " | " + spellCosts[level]+"gp";
 		budget -= level+1;
 
 		while (budget > 0){
 			do{
 				level = iRandomRangeBell(-9,9,5);
 			} while (level < 0)
-			document.getElementById("box").innerHTML += "\n"+spells[level][iRandomRange(0,spells[level].length-1)];
+			document.getElementById("box").innerHTML += "\n"+spells[level][iRandomRange(0,spells[level].length-1)] + " | " + spellCosts[level]+"gp";
 			budget -= level+1;
 		}
 
