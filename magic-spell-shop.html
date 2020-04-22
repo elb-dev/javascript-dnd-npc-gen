@@ -33,25 +33,47 @@
 	<script type="text/javascript" src = "js/functions.js"></script>
 	<script type="text/javascript">
 		var spells = [[],[],[],[],[],[],[],[],[],[]];
-		spells[0].push("Spell 0");
-		spells[1].push("Spell 1");
-		spells[2].push("Spell 2");
-		spells[3].push("Spell 3");
-		spells[4].push("Spell 4");
-		spells[5].push("Spell 5");
-		spells[6].push("Spell 6");
-		spells[7].push("Spell 7");
-		spells[8].push("Spell 8");
-		spells[9].push("Spell 9");
+		spells[0].push("Spell 0-0");
+		spells[1].push("Spell 1-0");
+		spells[2].push("Spell 2-0");
+		spells[3].push("Spell 3-0");
+		spells[4].push("Spell 4-0");
+		spells[5].push("Spell 5-0");
+		spells[6].push("Spell 6-0");
+		spells[7].push("Spell 7-0");
+		spells[8].push("Spell 8-0");
+		spells[9].push("Spell 9-0");
+		spells[0].push("Spell 0-1");
+		spells[1].push("Spell 1-1");
+		spells[2].push("Spell 2-1");
+		spells[3].push("Spell 3-1");
+		spells[4].push("Spell 4-1");
+		spells[5].push("Spell 5-1");
+		spells[6].push("Spell 6-1");
+		spells[7].push("Spell 7-1");
+		spells[8].push("Spell 8-1");
+		spells[9].push("Spell 9-1");
 
-		
 
-		level = iRandomRangeBell(-9,9,4);
-		if(level < 0){
-			level = level*-1;
+
+		var budget = 20;
+		document.getElementById("box").innerHTML = "";
+
+		do{
+			level = iRandomRangeBell(-9,9,5);
+		} while (level < 0)
+		document.getElementById("box").innerHTML += spells[level][iRandomRange(0,spells[level].length-1)];
+		budget -= level+1;
+
+		while (budget > 0){
+			do{
+				level = iRandomRangeBell(-9,9,5);
+			} while (level < 0)
+			document.getElementById("box").innerHTML += "\n"+spells[level][iRandomRange(0,spells[level].length-1)];
+			budget -= level+1;
 		}
 
-		document.getElementById("box").innerHTML = spells[level][0];
+		
 
 		var date = new Date();
 		const YEAR = date.getFullYear();
