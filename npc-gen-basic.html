@@ -33,6 +33,19 @@
 		var date = new Date();
 		const YEAR = date.getFullYear();
 
+		//Alignment
+		var alignGNE = ["Good","Neutral","Evil"];
+		var alignLNC = ["Lawful","Neutral","Chaotic"];
+		var alignGNEChoice = iRandomRange(0,2);
+		var alignLNCChoice = iRandomRange(0,2);
+		var alignment;
+		if(alignLNCChoice == 1 && alignGNEChoice == 1){
+			alignment = "True Neutral";
+		} else {
+			alignment = alignLNC[alignLNCChoice] + " " + alignGNE[alignGNEChoice];
+		}
+		document.getElementById("box").innerHTML = '\nAlignment: ' + alignment;
+
 		//Appearance
 		var appearance = 
 		["Distinctive Jewelry",
@@ -55,7 +68,7 @@
 		"Distinctive posture",
 		"Exceptionally beautiful",
 		"Exceptionally ugly"];
-		document.getElementById("box").innerHTML = "\nAppearance: " + appearance[iRandomRange(0,appearance.length-1)];
+		document.getElementById("box").innerHTML += "\nAppearance: " + appearance[iRandomRange(0,appearance.length-1)];
 
 		//Talent
 		var talent = 
