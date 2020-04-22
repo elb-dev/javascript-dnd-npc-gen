@@ -11,16 +11,16 @@ body {
 }
 
 header {
-font-family: Impact, Charcoal, sans-serif;
-font-size: 27px;
-letter-spacing: 3px;
-word-spacing: 0px;
-color: #000000;
-font-weight: 400;
-text-decoration: none;
-font-style: normal;
-font-variant: normal;
-text-transform: none;
+	font-family: Impact, Charcoal, sans-serif;
+	font-size: 27px;
+	letter-spacing: 3px;
+	word-spacing: 0px;
+	color: #000000;
+	font-weight: 400;
+	text-decoration: none;
+	font-style: normal;
+	font-variant: normal;
+	text-transform: none;
 }
 
 .bookend {
@@ -37,17 +37,23 @@ text-transform: none;
 	min-width: ;
 }
 
+.nav-item {
+	display: inline;
+	margin-left: 2em;
+	margin-right: 2em;
+}
+
 #box, p {
-font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-font-size: 20px;
-letter-spacing: 0px;
-word-spacing: 0px;
-color: #000000;
-font-weight: 400;
-text-decoration: none;
-font-style: normal;
-font-variant: normal;
-text-transform: none;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: 20px;
+	letter-spacing: 0px;
+	word-spacing: 0px;
+	color: #000000;
+	font-weight: 400;
+	text-decoration: none;
+	font-style: normal;
+	font-variant: normal;
+	text-transform: none;
 }
 
 #footer {
