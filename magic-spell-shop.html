@@ -19,7 +19,8 @@
 		</nav>
 	</header>
 	<main class = "main">
-		<p>Hi! Welcome to my D&D tools. Right now I've just got an NPC generator, and I'm still building it. Check the links above.</p>
+		<p>This will be the magic shop.</p>
+		<textarea id="box" rows="18" cols="50"></textarea>
 	</main>
 	<footer class="bookend" id="footer">
 		<ul id="footerul">
@@ -28,9 +29,12 @@
 			<li><a href="https://github.com/elb-dev/javascript-dnd-npc-gen/blob/master/LICENSE">License</a></li>
 		</ul>
 	</footer>
+
+	<script type="text/javascript" src = "js/functions.js"></script>
 	<script type="text/javascript">
 		var date = new Date();
 		const YEAR = date.getFullYear();
+
 		//Things in the footer
 		document.querySelector("#copyright").innerHTML = '&copy; 2018-' + YEAR + ' ELB';
 		console.log('&copy; 2018-\${YEAR} ELB')
