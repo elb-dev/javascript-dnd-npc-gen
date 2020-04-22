@@ -37,7 +37,7 @@ text-transform: none;
 	min-width: ;
 }
 
-#box {
+#box, p {
 font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 font-size: 20px;
 letter-spacing: 0px;
