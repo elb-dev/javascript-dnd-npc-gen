@@ -33,9 +33,25 @@
 	<script type="text/javascript" src = "js/functions.js"></script>
 	<script type="text/javascript">
 		var spells = [[],[],[],[],[],[],[],[],[],[]];
-		spells[0].push("Scribble");
+		spells[0].push("Spell 0");
+		spells[1].push("Spell 1");
+		spells[2].push("Spell 2");
+		spells[3].push("Spell 3");
+		spells[4].push("Spell 4");
+		spells[5].push("Spell 5");
+		spells[6].push("Spell 6");
+		spells[7].push("Spell 7");
+		spells[8].push("Spell 8");
+		spells[9].push("Spell 9");
 
-		document.getElementById("box").innerHTML = spells[0][0];
+		
+
+		level = iRandomRangeBell(-9,9,4);
+		if(level < 0){
+			level = level*-1;
+		}
+
+		document.getElementById("box").innerHTML = spells[level][0];
 
 		var date = new Date();
 		const YEAR = date.getFullYear();
