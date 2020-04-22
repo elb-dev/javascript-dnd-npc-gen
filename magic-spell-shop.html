@@ -32,6 +32,11 @@
 
 	<script type="text/javascript" src = "js/functions.js"></script>
 	<script type="text/javascript">
+		var spells = [[],[],[],[],[],[],[],[],[],[]];
+		spells[0].push("Scribble");
+
+		document.getElementById("box").innerHTML = spells[0][0];
+
 		var date = new Date();
 		const YEAR = date.getFullYear();
 
