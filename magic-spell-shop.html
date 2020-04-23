@@ -20,6 +20,16 @@
 	</header>
 	<main class = "main">
 		<p>Prices of spells are based on <a href="https://forums.giantitp.com/showthread.php?424243-Sane-Magic-Item-Prices" style="text-decoration: underline;">Sane Magic Item Prices</a>.</p>
+
+		<form id="form">
+			<select id="budgetOption">
+				<option value=3>Village</option>
+				<option value=7>Town</option>
+				<option value=15>City</option>
+			</select>
+			<input type="button" onclick="randomizeSpells()" value="RANDOMIZE">
+		</form>
+
 		<textarea id="box" rows="18" cols="50"></textarea>
 	</main>
 	<footer class="bookend" id="footer">
@@ -56,26 +66,28 @@
 		spells[8].push("Spell 8-1");
 		spells[9].push("Spell 9-1");
 
+		function randomizeSpells(){
+			var budget = document.getElementById("budgetOption").value;
 
 
-		var budget = 10;
-		document.getElementById("box").innerHTML = "";
+			document.getElementById("box").innerHTML = "";
 
-		do{
-			level = iRandomRangeBell(-9,9,5);
-		} while (level < 0)
-		document.getElementById("box").innerHTML += spells[level][iRandomRange(0,spells[level].length-1)] + " | " + spellCosts[level]+"gp";
-		budget -= level+1;
-
-		while (budget > 0){
 			do{
 				level = iRandomRangeBell(-9,9,5);
 			} while (level < 0)
-			document.getElementById("box").innerHTML += "\n"+spells[level][iRandomRange(0,spells[level].length-1)] + " | " + spellCosts[level]+"gp";
+			document.getElementById("box").innerHTML += spells[level][iRandomRange(0,spells[level].length-1)] + " | " + spellCosts[level]+"gp";
 			budget -= level+1;
-		}
 
+			while (budget > 0){
+				do{
+					level = iRandomRangeBell(-9,9,5);
+				} while (level < 0)
+				document.getElementById("box").innerHTML += "\n"+spells[level][iRandomRange(0,spells[level].length-1)] + " | " + spellCosts[level]+"gp";
+				budget -= level+1;
+			}
+		}
 		
+		randomizeSpells(5);
 
 		var date = new Date();
 		const YEAR = date.getFullYear();

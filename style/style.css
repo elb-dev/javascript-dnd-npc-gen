@@ -32,6 +32,10 @@ a:hover {
 	color: #962117;
 }
 
+form {
+	margin-bottom: 1em;
+}
+
 .bookend {
 	background-color:#fff5e3;
 }
