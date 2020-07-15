@@ -337,5 +337,69 @@ spells[9].push(['https://www.dndbeyond.com/spells/wish','Wish',0]);
 spells[6].push(['https://www.dndbeyond.com/spells/word-of-recall','Word of Recall',0]);
 spells[2].push(['https://www.dndbeyond.com/spells/zone-of-truth','Zone of Truth',0]);
 
+//Player Hand Book
+spells[6].push(['https://www.dndbeyond.com/spells/arcane-gate','Arcane Gate',1]);
+spells[1].push(['https://www.dndbeyond.com/spells/armor-of-agathys','Armor of Agathys',1]);
+spells[1].push(['https://www.dndbeyond.com/spells/arms-of-hadar','Arms of Hadar',1]);
+spells[4].push(['https://www.dndbeyond.com/spells/aura-of-life','Aura of Life',1]);
+spells[4].push(['https://www.dndbeyond.com/spells/aura-of-purity','Aura of Purity',1]);
+spells[3].push(['https://www.dndbeyond.com/spells/aura-of-vitality','Aura of Vitality',1]);
+spells[5].push(['https://www.dndbeyond.com/spells/banishing-smite','Banishing Smite',1]);
+spells[2].push(['https://www.dndbeyond.com/spells/beast-sense','Beast Sense',1]);
+spells[5].push(['https://www.dndbeyond.com/spells/bigbys-hand','Bigby\'s Hand',1]);
+spells[0].push(['https://www.dndbeyond.com/spells/blade-ward','Blade Ward',1]);
+spells[3].push(['https://www.dndbeyond.com/spells/blinding-smite','Blinding Smite',1]);
+spells[1].push(['https://www.dndbeyond.com/spells/chromatic-orb','Chromatic Orb',1]);
+spells[5].push(['https://www.dndbeyond.com/spells/circle-of-power','Circle of Power',1]);
+spells[2].push(['https://www.dndbeyond.com/spells/cloud-of-daggers','Cloud of Daggers',1]);
+spells[1].push(['https://www.dndbeyond.com/spells/compelled-duel','Compelled Duel',1]);
+spells[3].push(['https://www.dndbeyond.com/spells/conjure-barrage','Conjure Barrage',1]);
+spells[5].push(['https://www.dndbeyond.com/spells/conjure-volley','Conjure Volley',1]);
+spells[2].push(['https://www.dndbeyond.com/spells/cordon-of-arrows','Cordon of Arrows',1]);
+spells[2].push(['https://www.dndbeyond.com/spells/crown-of-madness','Crown of Madness',1]);
+spells[3].push(['https://www.dndbeyond.com/spells/crusaders-mantle','Crusader’s Mantle',1]);
+spells[5].push(['https://www.dndbeyond.com/spells/destructive-wave','Destructive Wave',1]);
+spells[1].push(['https://www.dndbeyond.com/spells/dissonant-whispers','Dissonant Whispers',1]);
+spells[6].push(['https://www.dndbeyond.com/spells/drawmijs-instant-summons','Drawmij\'s Instant Summons',1]);
+spells[3].push(['https://www.dndbeyond.com/spells/elemental-weapon','Elemental Weapon',1]);
+spells[1].push(['https://www.dndbeyond.com/spells/ensnaring-strike','Ensnaring Strike',1]);
+spells[4].push(['https://www.dndbeyond.com/spells/evards-black-tentacles','Evard’s Black Tentacles',1]);
+spells[3].push(['https://www.dndbeyond.com/spells/feign-death','Feign Death',1]);
+spells[0].push(['https://www.dndbeyond.com/spells/friends','Friends',1]);
+spells[4].push(['https://www.dndbeyond.com/spells/grasping-vine','Grasping Vine',1]);
+spells[1].push(['https://www.dndbeyond.com/spells/hail-of-thorns','Hail of Thorns',1]);
+spells[1].push(['https://www.dndbeyond.com/spells/hex','Hex',1]);
+spells[3].push(['https://www.dndbeyond.com/spells/hunger-of-hadar','Hunger of Hadar',1]);
+spells[4].push(['https://www.dndbeyond.com/spells/leomunds-secret-chest','Leomund’s Secret Chest',1]);
+spells[3].push(['https://www.dndbeyond.com/spells/leomunds-tiny-hut','Leomund’s Tiny Hut',1]);
+spells[3].push(['https://www.dndbeyond.com/spells/lightning-arrow','Lightning Arrow',1]);
+spells[2].push(['https://www.dndbeyond.com/spells/melfs-acid-arrow','Melf’s Acid Arrow',1]);
+spells[4].push(['https://www.dndbeyond.com/spells/mordenkainens-faithful-hound','Mordenkainen’s Faithful Hound',1]);
+spells[4].push(['https://www.dndbeyond.com/spells/mordenkainens-private-sanctum','Mordenkainen’s Private Sanctum',1]);
+spells[7].push(['https://www.dndbeyond.com/spells/mordenkainens-magnificent-mansion','Mordenkainen\'s Magnificent Mansion',1]);
+spells[2].push(['https://www.dndbeyond.com/spells/nystuls-magic-aura','Nystul’s Magic Aura',1]);
+spells[4].push(['https://www.dndbeyond.com/spells/otilukes-resilient-sphere','Otiluke’s Resilient Sphere',1]);
+spells[6].push(['https://www.dndbeyond.com/spells/otilukes-freezing-sphere','Otiluke\'s Freezing Sphere',1]);
+spells[2].push(['https://www.dndbeyond.com/spells/phantasmal-force','Phantasmal Force',1]);
+spells[9].push(['https://www.dndbeyond.com/spells/power-word-heal','Power Word Heal',1]);
+spells[5].push(['https://www.dndbeyond.com/spells/rarys-telepathic-bond','Rary\'s Telepathic Bond',1]);
+spells[1].push(['https://www.dndbeyond.com/spells/ray-of-sickness','Ray of Sickness',1]);
+spells[1].push(['https://www.dndbeyond.com/spells/searing-smite','Searing Smite',1]);
+spells[4].push(['https://www.dndbeyond.com/spells/staggering-smite','Staggering Smite',1]);
+spells[5].push(['https://www.dndbeyond.com/spells/swift-quiver','Swift Quiver',1]);
+spells[1].push(['https://www.dndbeyond.com/spells/tashas-hideous-laughter','Tasha’s Hideous Laughter',1]);
+spells[8].push(['https://www.dndbeyond.com/spells/telepathy','Telepathy',1]);
+spells[1].push(['https://www.dndbeyond.com/spells/tensers-floating-disk','Tenser’s Floating Disk',1]);
+spells[0].push(['https://www.dndbeyond.com/spells/thorn-whip','Thorn Whip',1]);
+spells[1].push(['https://www.dndbeyond.com/spells/thunderous-smite','Thunderous Smite',1]);
+spells[8].push(['https://www.dndbeyond.com/spells/tsunami','Tsunami',1]);
+spells[1].push(['https://www.dndbeyond.com/spells/witch-bolt','Witch Bolt',1]);
+spells[1].push(['https://www.dndbeyond.com/spells/wrathful-smite','Wrathful Smite',1]);
+
+
+
+
+
+
 	return spells;
 }
