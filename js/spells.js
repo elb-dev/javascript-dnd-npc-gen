@@ -443,8 +443,9 @@ spells[2].push(['https://www.dndbeyond.com/spells/warding-wind','Warding Wind',2
 spells[4].push(['https://www.dndbeyond.com/spells/watery-sphere','Watery Sphere',2]);
 spells[7].push(['https://www.dndbeyond.com/spells/whirlwind','Whirlwind',2]);
 
-
-
+//Guildmasters Guide to Ravnica
+spells[1].push(['https://www.dndbeyond.com/spells/chaos-bolt','Chaos Bolt',3]);
+spells[0].push(['https://www.dndbeyond.com/spells/encode-thoughts','Encode Thoughts',3]);
 
 	return spells;
 }
