@@ -39,6 +39,8 @@
 			<input id="scag" type="button" onclick="changeSource('scag', 4)" style="background-color:red" value="Sword Coast Adventurer's Guide">
 			<br>
 			<input id="xgte" type="button" onclick="changeSource('xgte', 5)" style="background-color:red" value="Xanathar's Guide to Everything">
+			<br>
+			<input id="ua" type="button" onclick="changeSource('ua', 6)" style="background-color:red" value="Unearthed Arcana">
 		</div>
 		<br/>
 		<p id="shop"></p>
@@ -51,45 +53,15 @@
 		</ul>
 	</footer>
 
+	<script type="text/javascript" src = "js/spells.js"></script>
 	<script type="text/javascript" src = "js/functions.js"></script>
 	<script type="text/javascript">
 		var spellCosts = [10, 60, 120, 200, 320, 640, 1280, 2560, 5120, 10240];
 
-		//An individual spell is a three index array.
-		//[0] = link to spell on DnD Beyond
-		//[1] = spell name
-		//[2] = Source
-		//Sources:
-		//0 = Basic Rules
-		//1 = Player's Hand Book
-		//2 = Elemental Evil Player's Companion
-		//3 = Guildmaster's Guide to Ravnica
-		//4 = Sword Coast Adventurer's Guide
-		//5 = Xanathar's Guide to Everything
-		var spells = [[],[],[],[],[],[],[],[],[],[]];
-		spells[0].push(["https://www.google.com","Spell 0-0",0]);
-		spells[1].push(["https://www.google.com","Spell 1-0",0]);
-		spells[2].push(["https://www.google.com","Spell 2-0",0]);
-		spells[3].push(["https://www.google.com","Spell 3-0",0]);
-		spells[4].push(["https://www.google.com","Spell 4-0",0]);
-		spells[5].push(["https://www.google.com","Spell 5-0",0]);
-		spells[6].push(["https://www.google.com","Spell 6-0",0]);
-		spells[7].push(["https://www.google.com","Spell 7-0",0]);
-		spells[8].push(["https://www.google.com","Spell 8-0",0]);
-		spells[9].push(["https://www.google.com","Spell 9-0",0]);
-		spells[0].push(["https://www.google.com","Spell 0-1",1]);
-		spells[1].push(["https://www.google.com","Spell 1-1",1]);
-		spells[2].push(["https://www.google.com","Spell 2-1",1]);
-		spells[3].push(["https://www.google.com","Spell 3-1",1]);
-		spells[4].push(["https://www.google.com","Spell 4-1",1]);
-		spells[5].push(["https://www.google.com","Spell 5-1",1]);
-		spells[6].push(["https://www.google.com","Spell 6-1",1]);
-		spells[7].push(["https://www.google.com","Spell 7-1",1]);
-		spells[8].push(["https://www.google.com","Spell 8-1",1]);
-		spells[9].push(["https://www.google.com","Spell 9-1",1]);
+		var spells = createSpells();
 
-		var sourceChoices = [true, false, false, false, false, false];
-		var sourceNames = ["Basic Rules", "Player's Hand Book", "Elemental Evil PLayer's Companion", "Guildmaster's Guide to Ravnica", "Sword Coast Adventurer's Guide", "Xanathar's Guide to Everything"];
+		var sourceChoices = [true, false, false, false, false, false, false];
+		var sourceNames = ["Basic Rules", "Player's Hand Book", "Elemental Evil PLayer's Companion", "Guildmaster's Guide to Ravnica", "Sword Coast Adventurer's Guide", "Xanathar's Guide to Everything", "Unearthed Arcana"];
 
 		function changeSource(id, num){
 			sourceChoices[num] = !sourceChoices[num];
@@ -114,7 +86,7 @@
 				spellChoice = iRandomRange(0,spells[level].length-1);
 			} while (sourceChoices[spells[level][spellChoice][2]] == false)
 			
-			document.getElementById("shop").innerHTML += '<a href="' + spells[level][spellChoice][0] + '" target="_blank">' + spells[level][spellChoice][1] + " | " + spellCosts[level]+"gp | " + sourceNames[spells[level][spellChoice][2]] + "<a>";
+			document.getElementById("shop").innerHTML += '<a href="' + spells[level][spellChoice][0] + '" target="_blank">' + spells[level][spellChoice][1] + " | " + spellCosts[level]+"gp | " + sourceNames[spells[level][spellChoice][2]] + " | " + spells[level][spellChoice][0] + "<a>";
 			budget -= level+1;
 
 			while (budget > 0){
@@ -124,7 +96,7 @@
 				do{
 					spellChoice = iRandomRange(0,spells[level].length-1);
 				} while (sourceChoices[spells[level][spellChoice][2]] == false)
-				document.getElementById("shop").innerHTML += '<br/><a href="' + spells[level][spellChoice][0] + '" target="_blank">' + spells[level][spellChoice][1] + " | " + spellCosts[level]+"gp | " + sourceNames[spells[level][spellChoice][2]] + "<a>";
+				document.getElementById("shop").innerHTML += '<br/><a href="' + spells[level][spellChoice][0] + '" target="_blank">' + spells[level][spellChoice][1] + " | " + spellCosts[level]+"gp | " + sourceNames[spells[level][spellChoice][2]] + " | " + spells[level][spellChoice][0] + "<a>";
 				budget -= level+1;
 			}
 		}
