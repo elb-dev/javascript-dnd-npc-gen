@@ -396,20 +396,20 @@ function createSpells(){
 	spells[1].push(['https://www.dndbeyond.com/spells/wrathful-smite','Wrathful Smite',1]);
 
 	//Unearthed Arcana
-	spells[1].push(['https://www.dndbeyond.com/spells/acid-stream-ua','Acid Stream (UA)',2]);
-	spells[4].push(['https://www.dndbeyond.com/spells/intellect-fortress-ua','Intellect Fortress (UA)',2]);
-	spells[0].push(['https://www.dndbeyond.com/spells/mind-sliver-ua','Mind Sliver (UA)',2]);
-	spells[2].push(['https://www.dndbeyond.com/spells/mind-thrust-ua','Mind Thrust (UA)',2]);
-	spells[6].push(['https://www.dndbeyond.com/spells/otherworldly-form-ua','Otherworldly Form (UA)',2]);
-	spells[3].push(['https://www.dndbeyond.com/spells/spirit-shroud-ua','Spirit Shroud (UA)',2]);
-	spells[4].push(['https://www.dndbeyond.com/spells/summon-aberrant-spirit-ua','Summon Aberrant Spirit (UA)',2]);
-	spells[2].push(['https://www.dndbeyond.com/spells/summon-bestial-spirit-ua','Summon Bestial Spirit (UA)',2]);
-	spells[5].push(['https://www.dndbeyond.com/spells/summon-celestial-spirit-ua','Summon Celestial Spirit (UA)',2]);
-	spells[4].push(['https://www.dndbeyond.com/spells/summon-elemental-spirit-ua','Summon Elemental Spirit (UA)',2]);
-	spells[3].push(['https://www.dndbeyond.com/spells/summon-fey-spirit-ua','Summon Fey Spirit (UA)',2]);
-	spells[6].push(['https://www.dndbeyond.com/spells/summon-fiendish-spirit-ua','Summon Fiendish Spirit (UA)',2]);
-	spells[3].push(['https://www.dndbeyond.com/spells/summon-shadow-spirit-ua','Summon Shadow Spirit (UA)',2]);
-	spells[3].push(['https://www.dndbeyond.com/spells/summon-undead-spirit-ua','Summon Undead Spirit (UA)',2]);
+	spells[1].push(['https://www.dndbeyond.com/spells/acid-stream-ua','Acid Stream (UA)',0]);
+	spells[4].push(['https://www.dndbeyond.com/spells/intellect-fortress-ua','Intellect Fortress (UA)',0]);
+	spells[0].push(['https://www.dndbeyond.com/spells/mind-sliver-ua','Mind Sliver (UA)',0]);
+	spells[2].push(['https://www.dndbeyond.com/spells/mind-thrust-ua','Mind Thrust (UA)',0]);
+	spells[6].push(['https://www.dndbeyond.com/spells/otherworldly-form-ua','Otherworldly Form (UA)',0]);
+	spells[3].push(['https://www.dndbeyond.com/spells/spirit-shroud-ua','Spirit Shroud (UA)',0]);
+	spells[4].push(['https://www.dndbeyond.com/spells/summon-aberrant-spirit-ua','Summon Aberrant Spirit (UA)',0]);
+	spells[2].push(['https://www.dndbeyond.com/spells/summon-bestial-spirit-ua','Summon Bestial Spirit (UA)',0]);
+	spells[5].push(['https://www.dndbeyond.com/spells/summon-celestial-spirit-ua','Summon Celestial Spirit (UA)',0]);
+	spells[4].push(['https://www.dndbeyond.com/spells/summon-elemental-spirit-ua','Summon Elemental Spirit (UA)',0]);
+	spells[3].push(['https://www.dndbeyond.com/spells/summon-fey-spirit-ua','Summon Fey Spirit (UA)',0]);
+	spells[6].push(['https://www.dndbeyond.com/spells/summon-fiendish-spirit-ua','Summon Fiendish Spirit (UA)',0]);
+	spells[3].push(['https://www.dndbeyond.com/spells/summon-shadow-spirit-ua','Summon Shadow Spirit (UA)',0]);
+	spells[3].push(['https://www.dndbeyond.com/spells/summon-undead-spirit-ua','Summon Undead Spirit (UA)',0]);
 
 	//Guildmasters Guide to Ravnica
 	spells[1].push(['https://www.dndbeyond.com/spells/chaos-bolt','Chaos Bolt',3]);
