@@ -19,6 +19,6 @@ for(i = 0; i < collectionDivLevel.length; i++){
 	}
 	names.push(collectionDivName.item(i).getElementsByTagName("A").item(0).innerHTML);
 	links.push(collectionDivName.item(i).getElementsByTagName("A").item(0).href);
-	code.push("spells["+levels[i]+"].push(['"+links[i]+"','"+names[i]+"',0]);");
+	code.push("spells["+levels[i]+"].push(['"+links[i]+"','"+names[i]+"',2]);");
 }
 console.log(code);

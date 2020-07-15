@@ -396,7 +396,52 @@ spells[8].push(['https://www.dndbeyond.com/spells/tsunami','Tsunami',1]);
 spells[1].push(['https://www.dndbeyond.com/spells/witch-bolt','Witch Bolt',1]);
 spells[1].push(['https://www.dndbeyond.com/spells/wrathful-smite','Wrathful Smite',1]);
 
-
+//Elemental Evil Player's Companion
+spells[8].push(['https://www.dndbeyond.com/spells/abi-dalzims-horrid-wilting','Abi-Dalzim’s Horrid Wilting',2]);
+spells[1].push(['https://www.dndbeyond.com/spells/absorb-elements','Absorb Elements',2]);
+spells[2].push(['https://www.dndbeyond.com/spells/aganazzars-scorcher','Aganazzar’s Scorcher',2]);
+spells[1].push(['https://www.dndbeyond.com/spells/beast-bond','Beast Bond',2]);
+spells[6].push(['https://www.dndbeyond.com/spells/bones-of-the-earth','Bones of the Earth',2]);
+spells[1].push(['https://www.dndbeyond.com/spells/catapult','Catapult',2]);
+spells[0].push(['https://www.dndbeyond.com/spells/control-flames','Control Flames',2]);
+spells[5].push(['https://www.dndbeyond.com/spells/control-winds','Control Winds',2]);
+spells[0].push(['https://www.dndbeyond.com/spells/create-bonfire','Create Bonfire',2]);
+spells[2].push(['https://www.dndbeyond.com/spells/dust-devil','Dust Devil',2]);
+spells[1].push(['https://www.dndbeyond.com/spells/earth-tremor','Earth Tremor',2]);
+spells[2].push(['https://www.dndbeyond.com/spells/earthbind','Earthbind',2]);
+spells[4].push(['https://www.dndbeyond.com/spells/elemental-bane','Elemental Bane',2]);
+spells[3].push(['https://www.dndbeyond.com/spells/erupting-earth','Erupting Earth',2]);
+spells[3].push(['https://www.dndbeyond.com/spells/flame-arrows','Flame Arrows',2]);
+spells[0].push(['https://www.dndbeyond.com/spells/frostbite','Frostbite',2]);
+spells[0].push(['https://www.dndbeyond.com/spells/gust','Gust',2]);
+spells[1].push(['https://www.dndbeyond.com/spells/ice-knife','Ice Knife',2]);
+spells[5].push(['https://www.dndbeyond.com/spells/immolation','Immolation',2]);
+spells[6].push(['https://www.dndbeyond.com/spells/investiture-of-flame','Investiture of Flame',2]);
+spells[6].push(['https://www.dndbeyond.com/spells/investiture-of-ice','Investiture of Ice',2]);
+spells[6].push(['https://www.dndbeyond.com/spells/investiture-of-stone','Investiture of Stone',2]);
+spells[6].push(['https://www.dndbeyond.com/spells/investiture-of-wind','Investiture of Wind',2]);
+spells[5].push(['https://www.dndbeyond.com/spells/maelstrom','Maelstrom',2]);
+spells[0].push(['https://www.dndbeyond.com/spells/magic-stone','Magic Stone',2]);
+spells[2].push(['https://www.dndbeyond.com/spells/maximilians-earthen-grasp','Maximilian’s Earthen Grasp',2]);
+spells[3].push(['https://www.dndbeyond.com/spells/melfs-minute-meteors','Melf\'s Minute Meteors',2]);
+spells[0].push(['https://www.dndbeyond.com/spells/mold-earth','Mold Earth',2]);
+spells[6].push(['https://www.dndbeyond.com/spells/primordial-ward','Primordial Ward',2]);
+spells[2].push(['https://www.dndbeyond.com/spells/pyrotechnics','Pyrotechnics',2]);
+spells[0].push(['https://www.dndbeyond.com/spells/shape-water','Shape Water',2]);
+spells[0].push(['https://www.dndbeyond.com/spells/shape-water','Shape Water',2]);
+spells[2].push(['https://www.dndbeyond.com/spells/skywrite','Skywrite',2]);
+spells[2].push(['https://www.dndbeyond.com/spells/snillocs-snowball-swarm','Snilloc’s Snowball Swarm',2]);
+spells[4].push(['https://www.dndbeyond.com/spells/storm-sphere','Storm Sphere',2]);
+spells[0].push(['https://www.dndbeyond.com/spells/thunderclap','Thunderclap',2]);
+spells[3].push(['https://www.dndbeyond.com/spells/tidal-wave','Tidal Wave',2]);
+spells[5].push(['https://www.dndbeyond.com/spells/transmute-rock','Transmute Rock',2]);
+spells[4].push(['https://www.dndbeyond.com/spells/vitriolic-sphere','Vitriolic Sphere',2]);
+spells[3].push(['https://www.dndbeyond.com/spells/wall-of-sand','Wall of Sand',2]);
+spells[3].push(['https://www.dndbeyond.com/spells/wall-of-water','Wall of Water',2]);
+spells[3].push(['https://www.dndbeyond.com/spells/wall-of-water','Wall of Water',2]);
+spells[2].push(['https://www.dndbeyond.com/spells/warding-wind','Warding Wind',2]);
+spells[4].push(['https://www.dndbeyond.com/spells/watery-sphere','Watery Sphere',2]);
+spells[7].push(['https://www.dndbeyond.com/spells/whirlwind','Whirlwind',2]);
 
 
 
