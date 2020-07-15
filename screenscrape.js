@@ -22,23 +22,3 @@ for(i = 0; i < collectionDivLevel.length; i++){
 	code.push("spells["+levels[i]+"].push(['"+links[i]+"','"+names[i]+"',0]);");
 }
 console.log(code);
-
-
-//These are the divs that hold the level
-var levelDivs = [];
-
-//Here we grab the levelDivs and the linkDivs. They have the info we need, but they are not the info we need.
-for (i = 0; i < divs.length; i++){
-	levelDivs.push(collectionDivs[i].getElementsByClassName('row spell-level'));
-}
-console.log(levelDivs);
-var singleLevelDiv = levelDivs[0].item(0);
-console.log(singleLevelDiv);
-console.log(singleLevelDiv.getElementsByTagName("SPAN"));
-
-//These are the levels grabbed from the levelDivs
-levels = [];
-for(i = 0; i < levelDivs.length; i++){
-	levels.push(levelDivs[i].getElementsByTagName("SPAN"));
-}
-console.log(levels);
