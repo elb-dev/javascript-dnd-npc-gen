@@ -43,7 +43,7 @@
 			<input id="ua" type="button" onclick="changeSource('ua', 6)" style="background-color:red" value="Unearthed Arcana">
 		</div>
 		<br/>
-		<ol id="shop"></ol>
+		<ul id="shop"></ul>
 	</main>
 	<footer class="bookend" id="footer">
 		<ul id="footerul">
@@ -86,7 +86,7 @@
 				do{
 					spellChoice = iRandomRange(0,spells[level].length-1);
 				} while (sourceChoices[spells[level][spellChoice][2]] == false)
-				document.getElementById("shop").innerHTML += '<li><a href="' + spells[level][spellChoice][0] + '" target="_blank">' + spells[level][spellChoice][1] + " | " + spellCosts[level]+"gp | " + sourceNames[spells[level][spellChoice][2]] + " | " + spells[level][spellChoice][0] + "</a></li>";
+				document.getElementById("shop").innerHTML += '<li class="listSpell"><a href="' + spells[level][spellChoice][0] + '" target="_blank">' + spells[level][spellChoice][1] + " | " + spellCosts[level]+"gp | " + sourceNames[spells[level][spellChoice][2]] + " | " + spells[level][spellChoice][0] + "</a></li>";
 				budget -= level+1;
 			}
 		}
