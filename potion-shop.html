@@ -39,22 +39,22 @@
 		</ul>
 	</footer>
 
-	<script type="text/javascript" src = "js/spells.js"></script>
+	<script type="text/javascript" src = "js/potions.js"></script>
 	<script type="text/javascript" src = "js/functions.js"></script>
 	<script type="text/javascript">
 
 		var potions = createPotions();
+		var rarityNames = ["Common","Uncommon","Rare","Very Rare","Legendary"];
 
 		function randomizePotions(){
 			var budget = document.getElementById("budgetOption").value;
 			var potionChoice;
 
-
 			document.getElementById("shop").innerHTML = "";
 
 			while (budget > 0){
-				potionIndex = irandomRange(0,potions.length-1)
-				document.getElementById("shop").innerHTML += '<li class="listPotion"><a href="' + potions[potionIndex][0] + '" target="_blank">' + potions[potionIndex][1] + " | " + potions[potionIndex][2]+"gp | " + potions[potionIndex][3] + " | " + potions[potionIndex][3] + "</a></li>";
+				potionIndex = iRandomRange(0,potions.length-1)
+				document.getElementById("shop").innerHTML += '<li class="listPotion"><a href="' + potions[potionIndex][0] + '" target="_blank">' + potions[potionIndex][1] + " | " + potions[potionIndex][2]+"gp | " + rarityNames[potions[potionIndex][3]] + " | " + potions[potionIndex][0] + "</a></li>";
 				budget -= potions[potionIndex][2];
 			}
 			/*
