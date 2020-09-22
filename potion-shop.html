@@ -20,27 +20,14 @@
 		</nav>
 	</header>
 	<main class = "main">
-		<p>Prices of spells are based on <a href="https://forums.giantitp.com/showthread.php?424243-Sane-Magic-Item-Prices" style="text-decoration: underline;">Sane Magic Item Prices</a>.</p>
+		<p>Prices of potions are based on <a href="https://forums.giantitp.com/showthread.php?424243-Sane-Magic-Item-Prices" style="text-decoration: underline;">Sane Magic Item Prices</a>.</p>
 		<br/>
 		<select id="budgetOption">
-			<option value=3>Village</option>
-			<option value=7>Town</option>
-			<option value=15>City</option>
+			<option value=100>Village</option>
+			<option value=400>Town</option>
+			<option value=1000>City</option>
 		</select>
-		<input type="button" onclick="randomizeSpells()" value="RANDOMIZE">
-		<br/>
-		<p>Spell Sources:</p>
-		<div id="divSource">
-			<input id="phb" type="button" onclick="changeSource('phb', 1)" style="background-color:red" value="Player's Hand Book">
-			<br>
-			<input id="ggtr" type="button" onclick="changeSource('ggtr', 3)" style="background-color:red" value="Guildmaster's Guide to Ravnica">
-			<br>
-			<input id="scag" type="button" onclick="changeSource('scag', 4)" style="background-color:red" value="Sword Coast Adventurer's Guide">
-			<br>
-			<input id="xgte" type="button" onclick="changeSource('xgte', 5)" style="background-color:red" value="Xanathar's Guide to Everything">
-			<br>
-			<input id="ua" type="button" onclick="changeSource('ua', 2)" style="background-color:red" value="Unearthed Arcana">
-		</div>
+		<input type="button" onclick="randomizePotions()" value="RANDOMIZE">
 		<br/>
 		<ul id="shop"></ul>
 	</main>
@@ -55,29 +42,22 @@
 	<script type="text/javascript" src = "js/spells.js"></script>
 	<script type="text/javascript" src = "js/functions.js"></script>
 	<script type="text/javascript">
-		var spellCosts = [10, 60, 120, 200, 320, 640, 1280, 2560, 5120, 10240];
 
-		var spells = createSpells();
+		var potions = createPotions();
 
-		var sourceChoices = [true, false, false, false, false, false];
-		var sourceNames = ["Basic Rules", "Player's Hand Book", "Unearthed Arcana", "Guildmaster's Guide to Ravnica", "Sword Coast Adventurer's Guide", "Xanathar's Guide to Everything"];
-
-		function changeSource(id, num){
-			sourceChoices[num] = !sourceChoices[num];
-			if(sourceChoices[num] == true){
-				document.getElementById(id).setAttribute("style", "background-color:green");
-			} else {
-				document.getElementById(id).setAttribute("style", "background-color:red");
-			}
-		}
-
-		function randomizeSpells(){
+		function randomizePotions(){
 			var budget = document.getElementById("budgetOption").value;
-			var spellChoice;
+			var potionChoice;
 
 
 			document.getElementById("shop").innerHTML = "";
 
+			while (budget > 0){
+				potionIndex = irandomRange(0,potions.length-1)
+				document.getElementById("shop").innerHTML += '<li class="listPotion"><a href="' + potions[potionIndex][0] + '" target="_blank">' + potions[potionIndex][1] + " | " + potions[potionIndex][2]+"gp | " + potions[potionIndex][3] + " | " + potions[potionIndex][3] + "</a></li>";
+				budget -= potions[potionIndex][2];
+			}
+			/*
 			while (budget > 0){
 				do{
 					level = iRandomRangeBell(-9,9,5);
@@ -87,10 +67,10 @@
 				} while (sourceChoices[spells[level][spellChoice][2]] == false)
 				document.getElementById("shop").innerHTML += '<li class="listSpell"><a href="' + spells[level][spellChoice][0] + '" target="_blank">' + spells[level][spellChoice][1] + " | " + spellCosts[level]+"gp | " + sourceNames[spells[level][spellChoice][2]] + " | " + spells[level][spellChoice][0] + "</a></li>";
 				budget -= level+1;
-			}
+			}*/
 		}
 		
-		randomizeSpells();
+		randomizePotions();
 
 		var date = new Date();
 		const YEAR = date.getFullYear();
