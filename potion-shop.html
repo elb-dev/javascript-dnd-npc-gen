@@ -24,8 +24,13 @@
 		<br/>
 		<select id="budgetOption">
 			<option value=100>Village</option>
-			<option value=400>Town</option>
+			<option value=300>Town</option>
 			<option value=1000>City</option>
+		</select>
+		<select id="storeType">
+			<option value=0>Potions</option>
+			<option value=1>Poisons</option>
+			<option value=2>Potions and Poisons</option>
 		</select>
 		<input type="button" onclick="randomizePotions()" value="RANDOMIZE">
 		<br/>
@@ -48,26 +53,38 @@
 
 		function randomizePotions(){
 			var budget = document.getElementById("budgetOption").value;
+			var type = document.getElementById("storeType").value;
+			var maxRarity;
+			switch(budget){
+				case "100":
+					maxRarity = 0;
+					break;
+				case "300":
+					maxRarity = 1;
+					break;
+				case "1000":
+					maxRarity = 3;
+			}
+			console.log("rarity: " + maxRarity);
+			console.log("budget: " + budget);
 			var potionChoice;
 
 			document.getElementById("shop").innerHTML = "";
-
+			/*
 			while (budget > 0){
 				potionIndex = iRandomRange(0,potions.length-1)
 				document.getElementById("shop").innerHTML += '<li class="listPotion"><a href="' + potions[potionIndex][0] + '" target="_blank">' + potions[potionIndex][1] + " | " + potions[potionIndex][2]+"gp | " + rarityNames[potions[potionIndex][3]] + " | " + potions[potionIndex][0] + "</a></li>";
 				budget -= potions[potionIndex][2];
 			}
-			/*
+			*/
+			
 			while (budget > 0){
-				do{
-					level = iRandomRangeBell(-9,9,5);
-				} while (level < 0)
-				do{
-					spellChoice = iRandomRange(0,spells[level].length-1);
-				} while (sourceChoices[spells[level][spellChoice][2]] == false)
-				document.getElementById("shop").innerHTML += '<li class="listSpell"><a href="' + spells[level][spellChoice][0] + '" target="_blank">' + spells[level][spellChoice][1] + " | " + spellCosts[level]+"gp | " + sourceNames[spells[level][spellChoice][2]] + " | " + spells[level][spellChoice][0] + "</a></li>";
-				budget -= level+1;
-			}*/
+				potionIndex = iRandomRange(0,potions.length-1)
+				if (potions[potionIndex][3] <= maxRarity && (potions[potionIndex][4] == type || type == 2)) {
+					document.getElementById("shop").innerHTML += '<li class="listPotion"><a href="' + potions[potionIndex][0] + '" target="_blank">' + potions[potionIndex][1] + " | " + potions[potionIndex][2]+"gp | " + rarityNames[potions[potionIndex][3]] + " | " + potions[potionIndex][0] + "</a></li>";
+					budget -= potions[potionIndex][2];
+				}
+			}
 		}
 		
 		randomizePotions();
@@ -77,7 +94,6 @@
 
 		//Things in the footer
 		document.querySelector("#copyright").innerHTML = '&copy; 2018-' + YEAR + ' ELB';
-		console.log('&copy; 2018-\${YEAR} ELB')
 
 	</script>
 </body>
