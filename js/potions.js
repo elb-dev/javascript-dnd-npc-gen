@@ -58,7 +58,7 @@ function createPotions(){
 
 	//Poisons
 	potions.push(['https://www.dndbeyond.com/equipment/assassins-blood-ingested','Assassin\'s Blood',150,1,1]);
-	potions.push(['https://www.dndbeyond.com/equipment/poison-basic-vial','Basic Poison',100,1,1]);
+	potions.push(['https://www.dndbeyond.com/equipment/poison-basic-vial','Basic Poison',100,0,1]);
 	potions.push(['https://www.dndbeyond.com/equipment/burnt-othur-fumes-inhaled','Burnt Othur Fumes',500,1,1]);
 	potions.push(['https://www.dndbeyond.com/equipment/crawler-mucus-contact','Carrion Crawler Mucus',200,1,1]);
 	potions.push(['https://www.dndbeyond.com/equipment/drow-poison-injury','Drow Poison',200,1,1]);
