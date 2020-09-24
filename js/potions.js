@@ -56,5 +56,34 @@ function createPotions(){
 	potions.push(['https://www.dndbeyond.com/magic-items/potion-of-vitality','Potion of Vitality',960,3,0]);
 	potions.push(['https://www.dndbeyond.com/magic-items/potion-of-water-breathing','Potion of Water Breathing',180,1,0]);
 
+	//Poisons
+	potions.push(['https://www.dndbeyond.com/equipment/assassins-blood-ingested','Assassin\'s Blood',150,1,1]);
+	potions.push(['https://www.dndbeyond.com/equipment/poison-basic-vial','Basic Poison',100,1,1]);
+	potions.push(['https://www.dndbeyond.com/equipment/burnt-othur-fumes-inhaled','Burnt Othur Fumes',500,1,1]);
+	potions.push(['https://www.dndbeyond.com/equipment/crawler-mucus-contact','Carrion Crawler Mucus',200,1,1]);
+	potions.push(['https://www.dndbeyond.com/equipment/drow-poison-injury','Drow Poison',200,1,1]);
+	potions.push(['https://www.dndbeyond.com/equipment/essence-of-ether-inhaled','Essence of Ether',300,1,1]);
+	potions.push(['https://www.dndbeyond.com/equipment/malice-inhaled','Malice',250,1,1]);
+	potions.push(['https://www.dndbeyond.com/equipment/midnight-tears-ingested','Midnight Tears',1500,2,1]);
+	potions.push(['https://www.dndbeyond.com/equipment/oil-of-taggit-contact','Oil of Taggit',400,1,1]);
+	potions.push(['https://www.dndbeyond.com/equipment/pale-tincture-ingested','Pale Tincture',250,1,1]);
+	potions.push(['https://www.dndbeyond.com/equipment/purple-worm-poison-injury','Purple Worm Poison',2000,2,1]);
+	potions.push(['https://www.dndbeyond.com/equipment/serpent-venom-injury','Serpent Venom',200,1,1]);
+	potions.push(['https://www.dndbeyond.com/equipment/torpor-ingested','Torpor',600,1,1]);
+	potions.push(['https://www.dndbeyond.com/equipment/truth-serum-ingested','Truth Serum',150,1,1]);
+	potions.push(['https://www.dndbeyond.com/equipment/wyvern-poison-injury','Wyvern Poison',1200,2,1]);
+
+	//Other
+	potions.push(['https://www.dndbeyond.com/equipment/acid-vial','Acid Vial',25,0,2]);
+	potions.push(['https://www.dndbeyond.com/equipment/alchemists-fire-flask','Alchemist Fire Flask',50,0,2]);
+	potions.push(['https://www.dndbeyond.com/equipment/antitoxin','Antitoxin',50,0,2]);
+	potions.push(['https://www.dndbeyond.com/equipment/black-sap','Black Sap',300,1,2]);
+	potions.push(['https://www.dndbeyond.com/equipment/blight-ichor','Blight Ichor',200,1,2]);
+	potions.push(['https://www.dndbeyond.com/equipment/dreamlily','Dreamlily',1,0,2]);
+	potions.push(['https://www.dndbeyond.com/equipment/soothsalts','Soothsalts',150,1,2]);
+	potions.push(['https://www.dndbeyond.com/equipment/olisuba-leaf','Olisuba Leaf',50,0,2]);
+	potions.push(['https://www.dndbeyond.com/equipment/theki-root','Theki Root',3,0,2]);
+
+
 	return potions;
 }
