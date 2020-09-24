@@ -22,10 +22,10 @@
 	<main class = "main">
 		<p>Prices of potions are based on <a href="https://forums.giantitp.com/showthread.php?424243-Sane-Magic-Item-Prices" style="text-decoration: underline;">Sane Magic Item Prices</a>, with minor changes for the potions of giant strength. Poison rarity was decided by price with standard rules.</p>
 		<br/>
-		<select id="budgetOption">
-			<option value=100>Village</option>
-			<option value=300>Town</option>
-			<option value=1000>City</option>
+		<select id="rarityOption">
+			<option value=0>Village</option>
+			<option value=1>Town</option>
+			<option value=3>City</option>
 		</select>
 		<select id="storeType">
 			<option value=0>Potions</option>
@@ -53,37 +53,32 @@
 		var rarityNames = ["Common","Uncommon","Rare","Very Rare","Legendary"];
 
 		function randomizePotions(){
-			var budget = document.getElementById("budgetOption").value;
+			var maxRarity = document.getElementById("rarityOption").value;
 			var type = document.getElementById("storeType").value;
-			var maxRarity;
-			switch(budget){
-				case "100":
-					maxRarity = 0;
+			var budget;
+			switch(maxRarity){
+				case "0":
+					budget = 10;
 					break;
-				case "300":
-					maxRarity = 1;
+				case "1":
+					budget = 20;
 					break;
-				case "1000":
-					maxRarity = 3;
+				case "3":
+					budget = 50;
 			}
-			console.log("rarity: " + maxRarity);
-			console.log("budget: " + budget);
 			var potionChoice;
 
 			document.getElementById("shop").innerHTML = "";
-			/*
-			while (budget > 0){
-				potionIndex = iRandomRange(0,potions.length-1)
-				document.getElementById("shop").innerHTML += '<li class="listPotion"><a href="' + potions[potionIndex][0] + '" target="_blank">' + potions[potionIndex][1] + " | " + potions[potionIndex][2]+"gp | " + rarityNames[potions[potionIndex][3]] + " | " + potions[potionIndex][0] + "</a></li>";
-				budget -= potions[potionIndex][2];
-			}
-			*/
 			
 			while (budget > 0){
+				var rarityLimit;
+				do{
+					rarityLimit = iRandomRangeBell((maxRarity*(-1)),maxRarity,5);
+				}while(rarityLimit < 0)
 				potionIndex = iRandomRange(0,potions.length-1)
-				if (potions[potionIndex][3] <= maxRarity && (potions[potionIndex][4] == type || type == 3)) {
+				if (potions[potionIndex][3] <= rarityLimit && (potions[potionIndex][4] == type || type == 3)) {
 					document.getElementById("shop").innerHTML += '<li class="listPotion"><a href="' + potions[potionIndex][0] + '" target="_blank">' + potions[potionIndex][1] + " | " + potions[potionIndex][2]+"gp | " + rarityNames[potions[potionIndex][3]] + " | " + potions[potionIndex][0] + "</a></li>";
-					budget -= potions[potionIndex][2];
+					budget -= potions[potionIndex][3]+1;
 				}
 			}
 		}
