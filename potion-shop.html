@@ -69,6 +69,11 @@
 			var potionChoice;
 
 			document.getElementById("shop").innerHTML = "";
+
+			var potionCounter = [];
+			for(let i = 0; i < potions.length; i++){
+				potionCounter.push(0);
+			}
 			
 			while (budget > 0){
 				var rarityLimit;
@@ -77,8 +82,17 @@
 				}while(rarityLimit < 0)
 				potionIndex = iRandomRange(0,potions.length-1)
 				if (potions[potionIndex][3] <= rarityLimit && (potions[potionIndex][4] == type || type == 3)) {
-					document.getElementById("shop").innerHTML += '<li class="listPotion"><a href="' + potions[potionIndex][0] + '" target="_blank">' + potions[potionIndex][1] + " | " + potions[potionIndex][2]+"gp | " + rarityNames[potions[potionIndex][3]] + " | " + potions[potionIndex][0] + "</a></li>";
+					potionCounter[potionIndex] = potionCounter[potionIndex] + 1;
 					budget -= potions[potionIndex][3]+1;
+				}
+			}
+
+			console.log(potionCounter);
+
+			//Finally putting the potions on the page
+			for(let i = 0; i < potions.length; i++){
+				for(let n = 0; n < potionCounter[i]; n++){
+					document.getElementById("shop").innerHTML += '<li class="listPotion"><a href="' + potions[i][0] + '" target="_blank">' + potions[i][1] + " | " + potions[i][2]+"gp | " + rarityNames[potions[i][3]] + " | " + potions[i][0] + "</a></li>";
 				}
 			}
 		}
