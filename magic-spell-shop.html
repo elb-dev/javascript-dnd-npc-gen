@@ -77,6 +77,7 @@
 
 
 			document.getElementById("shop").innerHTML = "";
+			var spellList = [];
 
 			while (budget > 0){
 				do{
@@ -85,8 +86,13 @@
 				do{
 					spellChoice = iRandomRange(0,spells[level].length-1);
 				} while (sourceChoices[spells[level][spellChoice][2]] == false)
-				document.getElementById("shop").innerHTML += '<li class="listSpell"><a href="' + spells[level][spellChoice][0] + '" target="_blank">' + spells[level][spellChoice][1] + " | " + spellCosts[level]+"gp | " + sourceNames[spells[level][spellChoice][2]] + " | " + spells[level][spellChoice][0] + "</a></li>";
+				spellList.push('<li class="listSpell"><a href="' + spells[level][spellChoice][0] + '" target="_blank">' + spells[level][spellChoice][1] + " | " + spellCosts[level]+"gp | " + sourceNames[spells[level][spellChoice][2]] + " | " + spells[level][spellChoice][0] + "</a></li>");
 				budget -= level+1;
+			}
+
+			spellList.sort();
+			for(let i = 0; i < spellList.length; i++){
+				document.getElementById("shop").innerHTML += spellList[i];
 			}
 		}
 		
