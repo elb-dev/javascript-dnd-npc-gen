@@ -40,13 +40,23 @@ form {
 	background-color:#fff5e3;
 }
 
-.main {
+.main-npc{
 	border-style: solid;
 	border-width: 3px;
 	border-color: #962117;
 	margin: 12px;
 	padding: 20px;
 	max-width: 700px;
+	min-width: ;
+}
+
+.main-shop{
+	border-style: solid;
+	border-width: 3px;
+	border-color: #962117;
+	margin: 12px;
+	padding: 20px;
+	max-width: ;
 	min-width: ;
 }
 
