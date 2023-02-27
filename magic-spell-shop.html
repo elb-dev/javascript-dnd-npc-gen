@@ -20,7 +20,7 @@
 		</nav>
 	</header>
 	<main class = "main-shop">
-		<p>Prices of spells are based on <a href="https://forums.giantitp.com/showthread.php?424243-Sane-Magic-Item-Prices" style="text-decoration: underline;">Sane Magic Item Prices</a>.</p>
+		<p>Prices of spells are based on <a href="https://2e.aonprd.com/Equipment.aspx?Category=15&Subcategory=52" style="text-decoration: underline;">spell scroll prices</a> multiplied by 10.</p>
 		<br/>
 		<select id="budgetOption">
 			<option value=3>Village</option>
@@ -29,18 +29,13 @@
 		</select>
 		<input type="button" onclick="randomizeSpells()" value="RANDOMIZE">
 		<br/>
-		<p>Spell Sources:</p>
-		<div id="divSource">
-			<input id="phb" type="button" onclick="changeSource('phb', 1)" style="background-color:red" value="Player's Hand Book">
-			<br>
-			<input id="ggtr" type="button" onclick="changeSource('ggtr', 3)" style="background-color:red" value="Guildmaster's Guide to Ravnica">
-			<br>
-			<input id="scag" type="button" onclick="changeSource('scag', 4)" style="background-color:red" value="Sword Coast Adventurer's Guide">
-			<br>
-			<input id="xgte" type="button" onclick="changeSource('xgte', 5)" style="background-color:red" value="Xanathar's Guide to Everything">
-			<br>
-			<input id="ua" type="button" onclick="changeSource('ua', 2)" style="background-color:red" value="Unearthed Arcana">
-		</div>
+		<p>Maximum Rarity:</p>
+		<select id="rarityOption">
+			<option value=0>Common</option>
+			<option value=1>Uncommon</option>
+			<option value=2>Rare</option>
+			<option value=3>Unique</option>
+		</select>
 		<br/>
 		<ul id="shop"></ul>
 	</main>
@@ -55,38 +50,27 @@
 	<script type="text/javascript" src = "js/spells.js"></script>
 	<script type="text/javascript" src = "js/functions.js"></script>
 	<script type="text/javascript">
-		var spellCosts = [10, 60, 120, 200, 320, 640, 1280, 2560, 5120, 10240];
-
+		var spellCosts = [1, 4, 12, 30, 70, 150, 300, 600, 1300, 3000, 8000];
 		var spells = createSpells();
-
-		var sourceChoices = [true, false, false, false, false, false];
-		var sourceNames = ["Basic Rules", "Player's Hand Book", "Unearthed Arcana", "Guildmaster's Guide to Ravnica", "Sword Coast Adventurer's Guide", "Xanathar's Guide to Everything"];
-
-		function changeSource(id, num){
-			sourceChoices[num] = !sourceChoices[num];
-			if(sourceChoices[num] == true){
-				document.getElementById(id).setAttribute("style", "background-color:green");
-			} else {
-				document.getElementById(id).setAttribute("style", "background-color:red");
-			}
-		}
+		var rarityNames = ["Common","Uncommon","Rare","Unique"];
 
 		function randomizeSpells(){
 			var budget = document.getElementById("budgetOption").value;
+			//var maxRarity = 1;
+			var maxRarity = document.getElementById("rarityOption").value;
 			var spellChoice;
-
 
 			document.getElementById("shop").innerHTML = "";
 			var spellList = [];
 
 			while (budget > 0){
 				do{
-					level = iRandomRangeBell(-9,9,5);
+					level = iRandomRangeBell(-10,10,5);
 				} while (level < 0)
 				do{
 					spellChoice = iRandomRange(0,spells[level].length-1);
-				} while (sourceChoices[spells[level][spellChoice][2]] == false)
-				spellList.push('<li class="listSpell"><a href="' + spells[level][spellChoice][0] + '" target="_blank">' + spells[level][spellChoice][1] + " | " + spellCosts[level]+"gp | " + sourceNames[spells[level][spellChoice][2]] + " | " + spells[level][spellChoice][0] + "</a></li>");
+				} while (spells[level][spellChoice][2] > maxRarity)
+				spellList.push('<li class="listSpell"><a href="' + spells[level][spellChoice][0] + '" target="_blank">' + spells[level][spellChoice][1] + " | " + spellCosts[level]*10 + "gp | " + rarityNames[spells[level][spellChoice][2]] + " | " + spells[level][spellChoice][0] + "</a></li>");
 				budget -= level+1;
 			}
 
