@@ -21,14 +21,14 @@
 		</nav>
 	</header>
 	<main class = "main-shop">
-		<p>Prices of oils are based on <a href="https://2e.aonprd.com/Equipment.aspx?Category=15&Subcategory=17" style="text-decoration: underline;">oil prices</a>.</p>
+		<p>Prices of snares are based on <a href="https://2e.aonprd.com/Equipment.aspx?Category=31&include-pfs=standard&include-sources=Advanced%20Player%27s%20Guide%3BCore%20Rulebook&sort=level-asc%2Cprice-asc%2Cname-asc&display=table&columns=pfs%2Csource%2Crarity%2Ctrait%2Clevel%2Cprice%2Cbulk%2Cusage%2Cspoilers" style="text-decoration: underline;">snare prices</a>.</p>
 		<br/>
 		<select id="rarityOption">
 			<option value=0>Village</option>
 			<option value=1>Town</option>
 			<option value=3>City</option>
 		</select>
-		<input type="button" onclick="randomizeOils()" value="RANDOMIZE">
+		<input type="button" onclick="randomizeSnares()" value="RANDOMIZE">
 		<br/>
 		<ul id="shop"></ul>
 	</main>
@@ -40,14 +40,14 @@
 		</ul>
 	</footer>
 
-	<script type="text/javascript" src = "js/oils.js"></script>
+	<script type="text/javascript" src = "js/snares.js"></script>
 	<script type="text/javascript" src = "js/functions.js"></script>
 	<script type="text/javascript">
 
-		var potions = createOils();
+		var potions = createSnares();
 		var rarityNames = ["Common","Uncommon","Rare","Very Rare","Legendary"];
 
-		function randomizeOils(){
+		function randomizeSnares(){
 			var maxRarity = document.getElementById("rarityOption").value;
 			var budget;
 			switch(maxRarity){
@@ -57,10 +57,10 @@
 					break;
 				case "1":
 					budget = 20;
-					rarityLimit = 1;
+					rarityLimit = 0;
 					break;
 				case "3":
-					budget = 50;
+					budget = 30;
 					rarityLimit = 2;
 					break;
 			}
@@ -91,7 +91,7 @@
 			}
 		}
 		
-		randomizeOils();
+		randomizeSnares();
 
 		var date = new Date();
 		const YEAR = date.getFullYear();
