@@ -20,18 +20,11 @@
 		</nav>
 	</header>
 	<main class = "main-shop">
-		<p>Prices of potions are based on <a href="https://forums.giantitp.com/showthread.php?424243-Sane-Magic-Item-Prices" style="text-decoration: underline;">Sane Magic Item Prices</a>, with minor changes for the potions of giant strength. Poison rarity was decided by price with standard rules.</p>
 		<br/>
 		<select id="rarityOption">
 			<option value=0>Village</option>
 			<option value=1>Town</option>
 			<option value=3>City</option>
-		</select>
-		<select id="storeType">
-			<option value=3>All</option>
-			<option value=0>Potions</option>
-			<option value=1>Poisons</option>
-			<option value=2>Other</option>
 		</select>
 		<input type="button" onclick="randomizePotions()" value="RANDOMIZE">
 		<br/>
@@ -54,17 +47,20 @@
 
 		function randomizePotions(){
 			var maxRarity = document.getElementById("rarityOption").value;
-			var type = document.getElementById("storeType").value;
 			var budget;
 			switch(maxRarity){
 				case "0":
 					budget = 10;
+					rarityLimit = 0;
 					break;
 				case "1":
 					budget = 20;
+					rarityLimit = 1;
 					break;
 				case "3":
 					budget = 50;
+					rarityLimit = 2;
+					break;
 			}
 			var potionChoice;
 
@@ -76,14 +72,10 @@
 			}
 			
 			while (budget > 0){
-				var rarityLimit;
-				do{
-					rarityLimit = iRandomRangeBell((maxRarity*(-1)),maxRarity,5);
-				}while(rarityLimit < 0)
-				potionIndex = iRandomRange(0,potions.length-1)
-				if (potions[potionIndex][3] <= rarityLimit && (potions[potionIndex][4] == type || type == 3)) {
+				potionIndex = iRandomRange(0,potions.length-1);
+				if (potions[potionIndex][4] <= rarityLimit) {
 					potionCounter[potionIndex] = potionCounter[potionIndex] + 1;
-					budget -= potions[potionIndex][3]+1;
+					budget -= (potions[potionIndex][4]*2)+1;
 				}
 			}
 
@@ -92,7 +84,7 @@
 			//Finally putting the potions on the page
 			for(let i = 0; i < potions.length; i++){
 				for(let n = 0; n < potionCounter[i]; n++){
-					document.getElementById("shop").innerHTML += '<li class="listPotion"><a href="' + potions[i][0] + '" target="_blank">' + potions[i][1] + " | " + potions[i][2]+"gp | " + rarityNames[potions[i][3]] + " | " + potions[i][0] + "</a></li>";
+					document.getElementById("shop").innerHTML += '<li class="listPotion"><a href="' + potions[i][0] + '" target="_blank">' + potions[i][1] + " | " + potions[i][3]+"gp | " + rarityNames[potions[i][4]] + " | " + potions[i][0] + "</a></li>";
 				}
 			}
 		}
