@@ -24,6 +24,7 @@
 	</header>
 	<main class = "main-shop">
 		<p>Prices of oils are based on <a href="https://2e.aonprd.com/Equipment.aspx?Category=15&Subcategory=17" style="text-decoration: underline;">oil prices</a>.</p>
+		<input type="button" onclick="showList()" value="SHOW LIST">
 		<br/>
 		<select id="rarityOption">
 			<option value=0>Village</option>
@@ -48,6 +49,14 @@
 
 		var potions = createOils();
 		var rarityNames = ["Common","Uncommon","Rare","Very Rare","Legendary"];
+
+		function showList(){
+			let items = potions
+			document.getElementById("shop").innerHTML = "";
+			for(let i = 0; i < items.length; i++){
+				document.getElementById("shop").innerHTML += '<li class="listPotion"><a href="' + items[i][0] + '" target="_blank">' + items[i][1] + " | " + items[i][3]+"gp | " + rarityNames[items[i][4]] + " | " + items[i][0] + "</a></li>";
+			}
+		}
 
 		function randomizeOils(){
 			var maxRarity = document.getElementById("rarityOption").value;

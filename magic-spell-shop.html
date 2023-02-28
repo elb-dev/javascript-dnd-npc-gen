@@ -24,6 +24,7 @@
 	</header>
 	<main class = "main-shop">
 		<p>Prices of spells are based on <a href="https://2e.aonprd.com/Equipment.aspx?Category=15&Subcategory=52" style="text-decoration: underline;">spell scroll prices</a> multiplied by 10.</p>
+		<input type="button" onclick="showList()" value="SHOW LIST">
 		<br/>
 		<select id="budgetOption">
 			<option value=3>Village</option>
@@ -56,6 +57,17 @@
 		var spellCosts = [1, 4, 12, 30, 70, 150, 300, 600, 1300, 3000, 8000];
 		var spells = createSpells();
 		var rarityNames = ["Common","Uncommon","Rare","Unique"];
+
+		function showList(){
+			let items = spells;
+			document.getElementById("shop").innerHTML = "";
+			for(let i = 0; i < items.length; i++){
+				subItems = items[i]
+				for(let n = 0; n < subItems.length; n++){
+					document.getElementById("shop").innerHTML += '<li class="listSpell"><a href="' + subItems[n][0] + '" target="_blank">' + subItems[n][1] + " | " + spellCosts[i]*10 + "gp | " + rarityNames[subItems[n][2]] + " | " + subItems[n][0] + "</a></li>";
+				}
+			}
+		}
 
 		function randomizeSpells(){
 			var budget = document.getElementById("budgetOption").value;
