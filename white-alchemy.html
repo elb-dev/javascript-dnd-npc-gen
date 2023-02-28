@@ -23,14 +23,14 @@
 		</nav>
 	</header>
 	<main class = "main-shop">
-		<p>Prices of snares are based on <a href="https://2e.aonprd.com/Equipment.aspx?Category=31&include-pfs=standard&include-sources=Advanced%20Player%27s%20Guide%3BCore%20Rulebook&sort=level-asc%2Cprice-asc%2Cname-asc&display=table&columns=pfs%2Csource%2Crarity%2Ctrait%2Clevel%2Cprice%2Cbulk%2Cusage%2Cspoilers" style="text-decoration: underline;">snare prices</a>.</p>
+		<p>Prices of alchemical items are based on <a href="https://2e.aonprd.com/Equipment.aspx?Category=6" style="text-decoration: underline;">these prices</a>.</p>
 		<br/>
 		<select id="rarityOption">
 			<option value=0>Village</option>
 			<option value=1>Town</option>
 			<option value=3>City</option>
 		</select>
-		<input type="button" onclick="randomizeSnares()" value="RANDOMIZE">
+		<input type="button" onclick="randomizeAlchemy()" value="RANDOMIZE">
 		<br/>
 		<ul id="shop"></ul>
 	</main>
@@ -42,28 +42,31 @@
 		</ul>
 	</footer>
 
-	<script type="text/javascript" src = "js/snares.js"></script>
+	<script type="text/javascript" src = "js/alchemy.js"></script>
 	<script type="text/javascript" src = "js/functions.js"></script>
 	<script type="text/javascript">
 
-		var potions = createSnares();
+		var potions = createWhiteAlchemy();
 		var rarityNames = ["Common","Uncommon","Rare","Very Rare","Legendary"];
 
-		function randomizeSnares(){
+		function randomizeAlchemy(){
 			var maxRarity = document.getElementById("rarityOption").value;
 			var budget;
 			switch(maxRarity){
 				case "0":
-					budget = 5;
+					budget = 500;
+					priceLimit = 100;
 					rarityLimit = 0;
 					break;
 				case "1":
-					budget = 20;
-					rarityLimit = 0;
+					budget = 10000;
+					priceLimit = 500;
+					rarityLimit = 1;
 					break;
 				case "3":
-					budget = 30;
-					rarityLimit = 2;
+					budget = 100000;
+					priceLimit = 10000;
+					rarityLimit = 3;
 					break;
 			}
 			var potionChoice;
@@ -77,9 +80,9 @@
 			
 			while (budget > 0){
 				potionIndex = iRandomRange(0,potions.length-1);
-				if (potions[potionIndex][4] <= rarityLimit) {
+				if (potions[potionIndex][3] <= priceLimit && potions[potionIndex][4] <= rarityLimit) {
 					potionCounter[potionIndex] = potionCounter[potionIndex] + 1;
-					budget -= (potions[potionIndex][4]*2)+1;
+					budget -= (potions[potionIndex][3])+1;
 				}
 			}
 
@@ -93,7 +96,7 @@
 			}
 		}
 		
-		randomizeSnares();
+		randomizeAlchemy();
 
 		var date = new Date();
 		const YEAR = date.getFullYear();
