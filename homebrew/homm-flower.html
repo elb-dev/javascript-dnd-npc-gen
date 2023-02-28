@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+	<title>ELB's Pathfinder Tools</title>
+</head>
+<body>
+	<main class = "main">
+		<p>This will be the page for the homm flower.</p>
+	</main>
+	<footer class="bookend" id="footer">
+		<ul id="footerul">
+			<li id="copyright">&copy; 2018-YEAR ELB</li>
+			<li><a href="https://github.com/elb-dev/javascript-dnd-npc-gen">Github</a></li>
+			<li><a href="https://github.com/elb-dev/javascript-dnd-npc-gen/blob/master/LICENSE">License</a></li>
+		</ul>
+	</footer>
+	<script type="text/javascript">
+		var date = new Date();
+		const YEAR = date.getFullYear();
+		//Things in the footer
+		document.querySelector("#copyright").innerHTML = '&copy; 2018-' + YEAR + ' ELB';
+		console.log('&copy; 2018-\${YEAR} ELB')
+
+	</script>
+</body>
+</html>
