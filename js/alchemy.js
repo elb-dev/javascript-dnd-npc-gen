@@ -413,7 +413,7 @@ function createBlackAlchemy(){
 	blackAlchemy.push(['https://2e.aonprd.com/Equipment.aspx?ID=626','Psilocybe Mushroom (Refined Pesh)',1,2,0]);
 	blackAlchemy.push(['https://2e.aonprd.com/Equipment.aspx?ID=625','Cocaine (Blood Sap)',1,4,0]);
 	blackAlchemy.push(['https://2e.aonprd.com/Equipment.aspx?ID=627','Heroin (Shiver)',3,10,0]);
-	blackAlchemy.push(['../homebrew/homm-flower.html','Homm Flower',3,250,2]);
+	blackAlchemy.push(['https://elb-dev.github.io/javascript-dnd-npc-gen/homebrew/homm-flower.html','Homm Flower',3,250,2]);
 	blackAlchemy.push(['https://2e.aonprd.com/Equipment.aspx?ID=629','Zerk',4,20,0]);
 	blackAlchemy.push(['https://2e.aonprd.com/Equipment.aspx?ID=631','Absinthe (Elven Absinthe)',5,25,0]);
 	blackAlchemy.push(['https://2e.aonprd.com/Equipment.aspx?ID=630','Opium (Cytillesh)',5,30,1]);
