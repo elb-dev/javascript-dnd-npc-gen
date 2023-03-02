@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+	<title>ELB's Pathfinder Tools</title>
+</head>
+<body>
+	<header class="bookend" id="header">
+		<h1><a href="/javascript-dnd-npc-gen">ELB's Pathfinder Tools</a></h1>
+		<nav>
+			<ul>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/npc-gen-upgraded">NPC Gen</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/npc-gen-ex-granlund">NPC Gen: Ex-Granlund</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/magic-spell-shop">Magic Spell Shop</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/potion-shop">Potion Shop</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/oil-shop">Oils Shop</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/snare-shop">Snare Shop</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/white-alchemy">Legal Alchemy</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/black-alchemy">Illegal Alchemy</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main class = "main-shop">
+		<p>Biome</p>
+		<select id="biome">
+			<option value=0>Tropical Rainforest</option>
+			<option value=1>Temperate Rainforest</option>
+			<option value=2>Tropical Seasonal Forest/Savanna</option>
+			<option value=3>Temperate Seasonal Forest</option>
+			<option value=4>Woodland/Shrubland</option>
+			<option value=5>Boreal Forest</option>
+			<option value=6>Tundra</option>
+			<option value=7>Temperate Grassland/Cold Desert</option>
+			<option value=8>Subtropical Desert</option>
+		</select>
+		<p>Elevation</p>
+		<select id="elevation">
+			<option value=0>Sea Level</option>
+			<option value=1>High Lands</option>
+			<option value=2>Mountains</option>
+			<option value=3>Mountain Tops</option>
+			<option value=4>Tallest Mountain Tops</option>
+			<option value=5>Mt Everest Peak</option>
+		</select>
+		<p>Roughness</p>
+		<select id="roughness">
+			<option value=0>Flat</option>
+			<option value=1>Hilly</option>
+			<option value=2>Mountains</option>
+			<option value=3>Huge Mountain</option>
+		</select>
+		<p>Coastal</p>
+		<select id="coastal">
+			<option value=false>No</option>
+			<option value=true>Yes</option>
+		</select>
+		<p>Rain Shadow</p>
+		<select id="rainShadow">
+			<option value=false>No</option>
+			<option value=true>Yes</option>
+		</select>
+		<p>Date</p>
+		<input id="date" type="date" value="0049-01-01" />
+		<br>
+		<input type="button" onclick="generateWeather()" value="GENERATE WEATHER">
+		<p id="weatherOutput"></p>
+	</main>
+	<footer class="bookend" id="footer">
+		<ul id="footerul">
+			<li id="copyright">&copy; 2018-YEAR ELB</li>
+			<li><a href="https://github.com/elb-dev/javascript-dnd-npc-gen">Github</a></li>
+			<li><a href="https://github.com/elb-dev/javascript-dnd-npc-gen/blob/master/LICENSE">License</a></li>
+		</ul>
+	</footer>
+
+	<script type="text/javascript" src = "js/functions.js"></script>
+	<script type="text/javascript">
+
+		function dateToDay(myDate){
+			let monthLengths = [31,28,31,30,31,30,31,31,30,31,30,31];
+			let currentDate = myDate.split("-")
+			currentDay = 0;
+
+			let n = 1
+			while(n < currentDate[1]){
+				currentDay += monthLengths[n-1];
+				n += 1;
+			}
+			currentDay += Number(currentDate[2]);
+			return currentDay
+		}
+
+
+		function generateWeather(){
+
+			//Main variables
+			let currentDate = document.getElementById("date").value;
+			let currentDay = dateToDay(currentDate);
+			let currentBiome = document.getElementById("biome").value;
+
+			//Other Factors
+			let elevation = document.getElementById("elevation").value;
+			let roughness = document.getElementById("roughness").value;
+			let coastal = document.getElementById("coastal").value;
+			if (coastal == "false"){
+				coastal = false;
+			} else {
+				coastal = true;
+			}
+			let rainShadow = document.getElementById("rainShadow").value;
+			if (rainShadow == "false"){
+				rainShadow = false;
+			} else {
+				rainShadow = true;
+			}
+
+			//Offsets
+			let radians = (2*(22/7))*((currentDay-1)/364);
+			let seasonalOffset = Math.cos(radians)*(-1);
+			let tempRandomOffset = iRandomRangeBell(-100,100,5);
+
+			//Temperatures	-2 to -34
+			let biomeDayTempMean = [82,61,90,57,64,44,41,66,80];
+			let biomeNightTempMean = [72,46,72,44,51,31,33,47,60];
+			let currentDayTempMean = biomeDayTempMean[currentBiome];
+			let currentNightTempMean = biomeNightTempMean[currentBiome];
+			let biomeSeasonalTempRange = [5,17,5,16,13,22,15,24,24];
+			let biomeRandomTempRange = [15,30,10,30,20,20,40,25,15];
+			let everestDayTempMean = -18;
+			let everestNightTempMean = -34;
+			let everestRandomTempRange = 40;
+			let everestSeasonalTempRange = 16;
+			let tempRandom = (biomeSeasonalTempRange[currentBiome]*seasonalOffset)+((tempRandomOffset/100)*biomeRandomTempRange[currentBiome]);
+			let everestRandom = (everestSeasonalTempRange*seasonalOffset)+((tempRandomOffset/100)*everestRandomTempRange);
+			let elevationTempOffset = elevation*20*Math.pow(0.95,elevation);
+			let elevationLerp = (elevation/5)
+			let currentDayTemp = Math.round(lerp(tempRandom+currentDayTempMean-elevationTempOffset,everestRandom+everestDayTempMean,elevation/5));
+			let currentNightTemp = Math.round(lerp(tempRandom+currentNightTempMean-elevationTempOffset,everestRandom+everestNightTempMean,elevation/5));
+
+			//Rainfall
+			let biomeWinterRainfallChance = [0.95,0.70,0.10,0.45,0.25,0.20,0.30,0.30,0.01];
+			let biomeSummerRainfallChance = [0.48,0.20,0.55,0.10,0.05,0.40,0.30,0.35,0.02];
+			let rainfallTypes = ["light","medium","heavy"];
+			let biomeRainfallTypePreference = [2,0,1,1,1,0,0,1,0];
+			let rainfallTimes = ["morning","after noon","evening","late night","all day","all night","24 hours"];
+			let rainfallLengths = ["quick burst","on and off","constant",];
+			let biomeRainfallLengthPreference = [1,2,1,-1,-1,2,2,2,0];
+			let biomeRainChance = lerp(biomeWinterRainfallChance[currentBiome],biomeSummerRainfallChance[currentBiome],(seasonalOffset+1)/2);
+			let everestWinterRainfallChance = 0.01;
+			let everestSummerRainfallChance = 0.61;
+			let everestRainChance = lerp(everestWinterRainfallChance,everestSummerRainfallChance,(seasonalOffset+1)/2);
+			let rainChance = lerp(biomeRainChance,everestRainChance,elevation/5);
+			if (coastal == true) {rainChance = Math.pow(rainChance,1-rainChance);}
+			if (rainShadow == true) (rainChance = rainChance*0.25);
+			let rainRandom = randomRange(0,1);
+			let raining = false;
+			if (rainRandom <= rainChance){
+				raining = true;
+			}
+			if (raining == true){
+				var i = 0;
+				var randomRainfallTime = iRandomRange(0,rainfallTimes.length-1);
+				var randomRainfallType = iRandomRange(0,rainfallTypes.length-1);
+				var randomRainfallLength = iRandomRange(0,rainfallLengths.length-1);
+				if (elevation <= 1){
+					do{
+						i += 1;
+						if (randomRainfallType != biomeRainfallTypePreference[currentBiome])
+							{var randomRainfallType = iRandomRange(0,rainfallTypes.length-1);}
+						if (randomRainfallLength != biomeRainfallLengthPreference[currentBiome])
+							{var randomRainfallLength = iRandomRange(0,rainfallLengths.length-1);}
+					} while(i < 2)
+				}
+			}
+
+			//Wind
+			let roughnessWindOffset = iRandomRange(0,10*roughness);
+			let coastalWindOffset = 0;
+			if (coastal == true) {coastalWindOffset = iRandomRange(0,10);}
+			let avgWindSummer = 6;
+			let avgWindWinter = 15;
+			let maxWindSummer = 90;
+			let maxWindWinter = 90;
+			let avgWind = Math.round(lerp(avgWindWinter,avgWindSummer,(seasonalOffset+1)/2));
+			let maxWind = Math.round(lerp(maxWindWinter,maxWindSummer,(seasonalOffset+1)/2));
+			let minWind = avgWind-(maxWind-avgWind);
+			let randomWind = iRandomRangeBell(minWind,maxWind,6);
+			randomWind = clamp(0,maxWind,randomWind);
+			let everestAvgWindSummer = 50;
+			let everestAvgWindWinter = 100;
+			let everestMaxWindSummer = 75;
+			let everestMaxWindWinter = 200;
+			let everestAvgWind = Math.round(lerp(everestAvgWindWinter,everestAvgWindSummer,(seasonalOffset+1)/2));
+			let everestMaxWind = Math.round(lerp(everestMaxWindWinter,everestMaxWindSummer,(seasonalOffset+1)/2));
+			let everestMinWind = everestAvgWind-(everestMaxWind-everestAvgWind);
+			let everestRandomWind = iRandomRangeBell(everestMinWind,everestMaxWind,8);
+			everestRandomWind = clamp(0,everestMaxWind,everestRandomWind);
+			randomWind = lerp(randomWind,everestRandomWind,Math.pow(elevation/5,2))+roughnessWindOffset+coastalWindOffset;
+			if (rainShadow){
+				randomWind *= 0.25;
+			}
+			randomWind = Math.round(randomWind);
+
+			//Weather Events
+			let weatherType = "Clear";
+			if (raining == true){
+				weatherType = "Rain"
+				if (rainfallTimes[randomRainfallTime] == 0 || rainfallTimes[randomRainfallTime] == 3 || rainfallTimes[randomRainfallTime] == 5){	//Night
+					if (currentNightTemp == clamp(35,33,currentNightTemp)){
+						weatherType = "Slush";
+					} else if (currentNightTemp <= 32) {
+						weatherType = "Snow";
+					}
+				} else if (rainfallTimes[randomRainfallTime] == 1 || rainfallTimes[randomRainfallTime] == 2 || rainfallTimes[randomRainfallTime] == 4){	//Day
+					if (currentDayTemp == clamp(35,33,currentDayTemp)){
+						weatherType = "Slush";
+					} else if (currentDayTemp <= 32) {
+						weatherType = "Snow";
+					}
+				} else {	//24 Hours
+					let tempTwentyFourAvg = (currentNightTemp+currentDayTemp)/2;
+					if (tempTwentyFourAvg == clamp(35,33,tempTwentyFourAvg)){
+						weatherType = "Slush";
+					} else if (tempTwentyFourAvg <= 32) {
+						weatherType = "Snow";
+					}
+				}
+			}
+
+			let cloudChance = Math.pow(rainChance,Math.pow(1-rainChance,rainChance));
+			let fogChance = rainChance;
+			if (weatherType == "Clear"){
+				if (randomRange(0,1) <= cloudChance){
+					weatherType = "Cloudy"
+				}
+				if (randomWind <= 5 && randomRange(0,1) <= fogChance){
+					weatherType = "Foggy";
+				}
+			}
+			let stormSpeed = 47;
+			if (weatherType == "Cloudy" || weatherType == "Rain"){
+				if (randomWind >= stormSpeed){
+					if (randomRange(0,1) <= (1-rainChance)){
+						if (weatherType == "Cloudy"){
+							weatherType = "Wind and Thunder Storm";
+						} else if (weatherType == "Rain"){
+							weatherType = "Rain, Wind, and Thunder Storm";
+							if (randomRange(0,1) <= rainChance/2) {
+								weatherType = "Hail, Wind, and Thunder Storm";
+							}
+						}
+					} else {
+						if (weatherType == "Cloudy"){
+							weatherType = "Wind and Storm Clouds";
+						} else if (weatherType == "Rain") {
+							weatherType = "Rain and Wind Storm";
+							if (randomRange(0,1) <= rainChance/2) {
+								weatherType = "Hail and Wind Storm";
+							}
+						}
+					}
+				}
+			}
+			if (weatherType == "Clear" && randomWind >= stormSpeed) {
+				weatherType = "Windy"
+			} 
+			if (weatherType == "Snow" && randomWind >= stormSpeed){
+				weatherType = "Blizzard";
+			}
+
+			document.getElementById("weatherOutput").innerHTML = currentDay;
+			if (raining == true){
+				document.getElementById("weatherOutput").innerHTML += " | "+weatherType+", "+rainfallTypes[randomRainfallType]+", "+rainfallLengths[randomRainfallLength]+", "+rainfallTimes[randomRainfallTime];
+			} else {
+				document.getElementById("weatherOutput").innerHTML += " | "+weatherType;
+			}
+			document.getElementById("weatherOutput").innerHTML += " | High:"+currentDayTemp+" f"
+			document.getElementById("weatherOutput").innerHTML += " | Low:"+currentNightTemp+" f"
+			document.getElementById("weatherOutput").innerHTML += " | "+randomWind+" mph"
+		}
+
+
+		var date = new Date();
+		const YEAR = date.getFullYear();
+
+		//Things in the footer
+		document.querySelector("#copyright").innerHTML = '&copy; 2018-' + YEAR + ' ELB';
+
+	</script>
+</body>
+</html>
