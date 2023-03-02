@@ -26,6 +26,15 @@ function diceRoll(diceCount, sides){
     return diceAdded;
 }
 
+//This is like a normal dice roll, but its sides are more dynamic, and go from a range of numbers.
+function diceRollRange(min, max, diceCount){
+    diceList = [];
+    for(var n = 0; n < diceCount; n++){
+        diceList[diceList.length] = iRandomRange(min,max);
+    }
+    return diceList;
+}
+
 function diceRollDrop(diceCount, sides, highOrLow, dropCount){
     //true for dropping high, false for dropping low
     diceList = diceLister(diceCount, sides);
@@ -79,6 +88,12 @@ function iRandomRange(min,max){
     return num;
 }
 
+function randomRange(min,max){
+    var range = max-min;
+    var num = (Math.random()*range)+min
+    return num;
+}
+
 //This returns an integer from min to max, on a bell curve.
 function iRandomRangeBell(min,max,v){
     //v is the number of time random is summed and should be >= 1
@@ -90,6 +105,18 @@ function iRandomRangeBell(min,max,v){
     var range = max-min+1;
     num = Math.floor(num*range)+min;
     return num;
+}
+
+//Returns a value between a and b using alpha, aka a number between 0.0 and 1.0
+function lerp( a, b, alpha ) {
+    return (a+alpha*(b-a));
+}
+
+//Returns a value between the stated min and max
+function clamp(min,max,value){
+    if (value < min){ return min; }
+    if (value > max){ return max; }
+    return value;
 }
 
 
