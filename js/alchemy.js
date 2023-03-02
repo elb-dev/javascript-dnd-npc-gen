@@ -432,4 +432,6 @@ function createDrugs(){
 	drugs.push(['https://2e.aonprd.com/Equipment.aspx?ID=630','Opium (Cytillesh)',5,30,1]);
 	drugs.push(['https://2e.aonprd.com/Equipment.aspx?ID=632','Scour',8,80,1]);
 	drugs.push(['https://elb-dev.github.io/javascript-dnd-npc-gen/homebrew/homm-flower.html','Homm Flower',10,300,2]);
+
+	return drugs;
 }
