@@ -408,16 +408,28 @@ function createBlackAlchemy(){
 	blackAlchemy.push(['https://2e.aonprd.com/Equipment.aspx?ID=1988','Achaekek\'s Kiss',20,13000,2]);
 	blackAlchemy.push(['https://2e.aonprd.com/Equipment.aspx?ID=2009','Nightmare Salt',20,14000,2]);
 
-	blackAlchemy.push(['https://2e.aonprd.com/Equipment.aspx?ID=623','Methamphetamine (Bloodeye Coffee)',0,5,0]);
-	blackAlchemy.push(['https://2e.aonprd.com/Equipment.aspx?ID=624','Marijuana (Flayleaf)',0,1,0]);
-	blackAlchemy.push(['https://2e.aonprd.com/Equipment.aspx?ID=626','Psilocybe Mushroom (Refined Pesh)',1,2,0]);
-	blackAlchemy.push(['https://2e.aonprd.com/Equipment.aspx?ID=625','Cocaine (Blood Sap)',1,4,0]);
-	blackAlchemy.push(['https://2e.aonprd.com/Equipment.aspx?ID=627','Heroin (Shiver)',3,10,0]);
-	blackAlchemy.push(['https://2e.aonprd.com/Equipment.aspx?ID=629','Zerk',4,20,0]);
-	blackAlchemy.push(['https://2e.aonprd.com/Equipment.aspx?ID=631','Absinthe (Elven Absinthe)',5,25,0]);
-	blackAlchemy.push(['https://2e.aonprd.com/Equipment.aspx?ID=630','Opium (Cytillesh)',5,30,1]);
-	blackAlchemy.push(['https://2e.aonprd.com/Equipment.aspx?ID=632','Scour',8,80,1]);
-	blackAlchemy.push(['https://elb-dev.github.io/javascript-dnd-npc-gen/homebrew/homm-flower.html','Homm Flower',10,300,2]);
-
 	return blackAlchemy;
+}
+
+function createDrugs(){
+	var drugs = [];
+
+	//0: link
+	//1: name
+	//2: level
+	//3: price
+	//4: rarity
+
+	//drugs.push([link,name,level,price,rarity]);
+
+	drugs.push(['https://2e.aonprd.com/Equipment.aspx?ID=623','Methamphetamine (Bloodeye Coffee)',0,5,0]);
+	drugs.push(['https://2e.aonprd.com/Equipment.aspx?ID=624','Marijuana (Flayleaf)',0,1,0]);
+	drugs.push(['https://2e.aonprd.com/Equipment.aspx?ID=626','Psilocybe Mushroom (Refined Pesh)',1,2,0]);
+	drugs.push(['https://2e.aonprd.com/Equipment.aspx?ID=625','Cocaine (Blood Sap)',1,4,0]);
+	drugs.push(['https://2e.aonprd.com/Equipment.aspx?ID=627','Heroin (Shiver)',3,10,0]);
+	drugs.push(['https://2e.aonprd.com/Equipment.aspx?ID=629','Zerk',4,20,0]);
+	drugs.push(['https://2e.aonprd.com/Equipment.aspx?ID=631','Absinthe (Elven Absinthe)',5,25,0]);
+	drugs.push(['https://2e.aonprd.com/Equipment.aspx?ID=630','Opium (Cytillesh)',5,30,1]);
+	drugs.push(['https://2e.aonprd.com/Equipment.aspx?ID=632','Scour',8,80,1]);
+	drugs.push(['https://elb-dev.github.io/javascript-dnd-npc-gen/homebrew/homm-flower.html','Homm Flower',10,300,2]);
 }
