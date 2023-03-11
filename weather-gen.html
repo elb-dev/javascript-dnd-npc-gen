@@ -99,6 +99,7 @@
 
 		function determineTempEffectRange(temp,humidity){
 			temp -= lerp(0,15,humidity);
+			temp = Math.round(temp);
 			if (temp <= -80){return -4;}
 			else if (temp == clamp(-79,-21,temp)){return -3;}
 			else if (temp == clamp(-20,12,temp)){return -2;}
