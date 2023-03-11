@@ -335,10 +335,56 @@
 			}
 
 			//Weather Event Power
-			let tempTwentyFourAvg = (currentNightTemp+currentDayTemp)/2
-			let weatherEventPowerTemp = 3;
 			let weatherEventPowerWind = clamp(-1,10,Math.floor((randomWind-stormSpeed)/12));
 			let weatherEventPowerRain = randomRainfallType;
+			let rainSoakTime = ["10 minutes","1 minute","1 round"]
+			let weatherEffectDescription = "HAH";
+			if (weatherType == "Clear"){
+				weatherEffectDescription = "The clear weather causes no other effects.";
+			}
+			else if (weatherType == "Cloudy"){
+				weatherEffectDescription = "Clouds hang in the sky.";
+			}
+			else if (weatherType == "Rain" || weatherType == "Slush"){
+				if(weatherEventPowerRain == 0){
+					weatherEffectDescription = "The "+weatherType.toLowerCase()+" imposes no ill effects, but it may have soaked a black powder weapon and made it unfirable if left out for "+rainSoakTime[weatherEventPowerRain]+".";
+				} else {
+					weatherEffectDescription = "The "+weatherType.toLowerCase()+" imposes a -"+(weatherEventPowerRain)+" circumstance penalty to visual and auditory perception checks. Overland travel becomes exhausting in 4 hours. Black powder weapons will be soaked and unfirable if left out for "+rainSoakTime[weatherEventPowerRain]+".";
+				}
+			} else if (weatherType == "Rain and Wind Storm" || weatherType == "Rain, Wind, and Thunder Storm"){
+				let maxPenalty = Math.max(weatherEventPowerWind,weatherEventPowerRain)
+				weatherEffectDescription = "The weather imposes a -"+(maxPenalty+1)+" circumstance penalty to visual and auditory perception checks, and a -"+(weatherEventPowerWind+1)+" circumstance penalty to the ranged weapon attacks of non black powder weapons. Black powder weapons will be soaked and unfirable if left out for "+rainSoakTime[weatherEventPowerRain]+". Overland travel becomes exhausting in 4 hours, if not fewer based on the temperature.";
+			} else if (weatherType == "Windy" || weatherType == "Wind and Storm Clouds" || weatherType == "Wind and Thunder Storm") {
+				weatherEffectDescription = "The wind imposes a -"+(weatherEventPowerWind+1)+" circumstance penalty to auditory perception checks and to the ranged weapon attacks of non black powder weapons."
+			} else if (weatherType == "Foggy"){
+				let fogHeavy = Math.min(iRandomRange(1,6),iRandomRange(1,6));
+				let visionRanges = ["1 mile (5280 feet)","1/2 mile (2640 feet)","1/4 mile (1320 feet)","1/8 mile (660 feet)","1/16 mile (330 feet)","1/32 mile (165 feet)","1/64 mile (80 feet)"]
+				weatherEffectDescription = "The fog imposes a -"+Math.ceil(fogHeavy/2)+" circumstance penalty to visual perception checks. You can only see up to "+visionRanges[fogHeavy-1]+" and creatures at "+visionRanges[fogHeavy]+" or more are obscured."
+			} else if (weatherType == "Snow"){
+				if(weatherEventPowerRain == 0){
+					weatherEffectDescription = "The snow imposes no ill effects.";
+				} else {
+					weatherEffectDescription = "The snow imposes a -"+(weatherEventPowerRain)+" circumstance penalty to visual perception checks and a +"+(weatherEventPowerRain)+" circumstance bonus to auditory perception checks. Overland travel becomes exhausting in 4 hours, if not fewer based on the temperature.";
+				}
+			} else if (weatherType == "Blizzard"){
+				let maxPenalty = Math.max(weatherEventPowerWind,weatherEventPowerRain)
+				weatherEffectDescription = "The weather imposes a -"+(maxPenalty+1)+" circumstance penalty to visual and auditory perception checks, and a -"+(weatherEventPowerWind+1)+" circumstance penalty to the ranged weapon attacks of non black powder weapons. Overland travel becomes exhausting in 4 hours, if not fewer based on the temperature.";
+			} else if (weatherType == "Hail and Wind Storm" || weatherType == "Hail, Wind, and Thunder Storm"){
+				let totalSoundPower = Math.min(weatherEventPowerWind,weatherEventPowerRain);
+				let totalHitPower = Math.min(weatherEventPowerWind,weatherEventPowerRain);
+				if (totalHitPower == 0){
+					weatherEffectDescription = "The wind imposes a -"+(totalSoundPower+1)+" circumstance penalty to auditory perception checks and to the ranged weapon attacks of non black powder weapons."
+				} else {
+					weatherEffectDescription = "The wind imposes a -"+(totalSoundPower+1)+" circumstance penalty to auditory perception checks and to the ranged weapon attacks of non black powder weapons. The hail inflicts "+totalHitPower+"d6 bludgeoning damage to you at the start of your turn."
+				}
+			} else if (weatherType == "Sand Storm"){
+				let sandStormDCs = [15,20,30,40];
+				let visionRanges = ["1/2 mile (2640 feet)","1/4 mile (1320 feet)","1/8 mile (660 feet)","1/16 mile (330 feet)","1/32 mile (165 feet)","1/64 mile (80 feet)"]
+				weatherEffectDescription = "The wind imposes a -"+(weatherEventPowerWind+1)+" circumstance penalty to auditory perception checks and to the ranged weapon attacks of non black powder weapons. Without eye protection or closing your eyes, you require passing a "+sandStormDCs[weatherEventPowerWind]+" DC Fortitude saving throw or become blinded for one round, becoming blinded for 2 rounds on a critical failure. You can only see up to "+visionRanges[weatherEventPowerWind]+" and creatures at "+visionRanges[weatherEventPowerWind+1]+" or more are obscured.";
+				if (weatherEventPowerWind >= 2) {
+					weatherEffectDescription += " Due to the heavy sandstorm it becomes impossible to breathe and you take 1d6 slashing damage at the start of your turn."
+				}
+			}
 
 			//Putting it on the page
 			document.getElementById("weatherOutput").innerHTML = document.getElementById("date").value;
@@ -355,7 +401,8 @@
 			document.getElementById("weatherTempDay").innerHTML = "Day: "+determineTempEffectDescription(determineTempEffectRange(currentDayTemp,humidity));
 			document.getElementById("weatherTempNight").innerHTML = "Night: "+determineTempEffectDescription(determineTempEffectRange(currentNightTemp,humidity));
 
-			document.getElementById("weatherEffect").innerHTML = weatherEventPowerWind+", "+weatherEventPowerRain;
+			//document.getElementById("weatherEffect").innerHTML = weatherEventPowerWind+", "+weatherEventPowerRain;
+			document.getElementById("weatherEffect").innerHTML = weatherEffectDescription;
 		}
 
 
