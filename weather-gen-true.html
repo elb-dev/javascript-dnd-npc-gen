@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+	<title>ELB's Pathfinder Tools</title>
+</head>
+<body>
+	<header class="bookend" id="header">
+		<h1><a href="/javascript-dnd-npc-gen">ELB's Pathfinder Tools</a></h1>
+		<nav>
+			<ul>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/npc-gen-upgraded">NPC Gen</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/npc-gen-ex-granlund">NPC Gen: Ex-Granlund</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/magic-spell-shop">Magic Spell Shop</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/potion-shop">Potion Shop</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/oil-shop">Oils Shop</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/snare-shop">Snare Shop</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/white-alchemy">Legal Alchemy</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/black-alchemy">Illegal Alchemy</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/drug-shop">Drug Shop</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/weather-gen">Weather Generator</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main class = "main-shop">
+		<p>Biome</p>
+		<select id="biome">
+			<option value=0>Tropical Rainforest</option>
+			<option value=1>Temperate Rainforest</option>
+			<option value=2>Tropical Seasonal Forest/Savanna</option>
+			<option value=3>Temperate Seasonal Forest</option>
+			<option value=4>Woodland/Shrubland</option>
+			<option value=5>Boreal Forest</option>
+			<option value=6>Tundra</option>
+			<option value=7>Temperate Grassland/Cold Desert</option>
+			<option value=8>Subtropical Desert</option>
+		</select>
+		<p>Elevation</p>
+		<select id="elevation">
+			<option value=0>Sea Level</option>
+			<option value=1>High Lands</option>
+			<option value=2>Mountains</option>
+			<option value=3>Mountain Tops</option>
+			<option value=4>Tallest Mountain Tops</option>
+			<option value=5>Mt Everest Peak</option>
+		</select>
+		<p>Roughness</p>
+		<select id="roughness">
+			<option value=0>Flat</option>
+			<option value=1>Hilly</option>
+			<option value=2>Mountains</option>
+			<option value=3>Huge Mountain</option>
+		</select>
+		<p>Coastal</p>
+		<select id="coastal">
+			<option value=false>No</option>
+			<option value=true>Yes</option>
+		</select>
+		<p>Rain Shadow</p>
+		<select id="rainShadow">
+			<option value=false>No</option>
+			<option value=true>Yes</option>
+		</select>
+		<p>Date</p>
+		<input id="date" type="date" value="0049-01-01" />
+		<br>
+		<input type="button" onclick="generateWeather()" value="GENERATE WEATHER">
+		<p id="weatherOutput"></p>
+		<p id="weatherTempDay"></p>
+		<p id="weatherTempNight"></p>
+		<p id="weatherEffect"></p>
+		<p id="blackout"></p>
+	</main>
+	<footer class="bookend" id="footer">
+		<ul id="footerul">
+			<li id="copyright">&copy; 2018-YEAR ELB</li>
+			<li><a href="https://github.com/elb-dev/javascript-dnd-npc-gen">Github</a></li>
+			<li><a href="https://github.com/elb-dev/javascript-dnd-npc-gen/blob/master/LICENSE">License</a></li>
+		</ul>
+	</footer>
+
+	<script type="text/javascript" src = "js/blackouts-and-earthquakes.js"></script>
+	<script type="text/javascript" src = "js/functions.js"></script>
+	<script type="text/javascript">
+
+		var blackouts = createBlackouts();
+
+		function dateToDay(myDate){
+			let monthLengths = [31,28,31,30,31,30,31,31,30,31,30,31];
+			let currentDate = myDate.split("-")
+			currentDay = 0;
+
+			let n = 1
+			while(n < currentDate[1]){
+				currentDay += monthLengths[n-1];
+				n += 1;
+			}
+			currentDay += Number(currentDate[2]);
+			return currentDay
+		}
+
+		function determineTempEffectRange(temp,humidity){
+			temp -= lerp(0,15,humidity);
+			temp = Math.round(temp);
+			if (temp <= -80){return -4;}
+			else if (temp == clamp(-79,-21,temp)){return -3;}
+			else if (temp == clamp(-20,12,temp)){return -2;}
+			else if (temp == clamp(13,32,temp)){return -1;}
+			else if (temp == clamp(33,94,temp)){return 0;}
+			else if (temp == clamp(95,104,temp)){return 1;}
+			else if (temp == clamp(105,114,temp)){return 2;}
+			else if (temp == clamp(115,139,temp)){return 3;}
+			else if (temp >= 140){return 4;}
+		}
+
+		function determineTempEffectDescription(range){
+			if (range < 0){
+				var tempDescriptor = "cold";
+				var damageDescriptor = "cold";
+			}
+			if (range > 0){
+				var tempDescriptor = "heat";
+				var damageDescriptor = "fire";
+			}
+
+			let returnedFatigueDescription = "";
+			if(range == 0){
+				returnedFatigueDescription = "The temperature produces no adverse effects.";
+			} else if(Math.abs(range) == 4){
+				returnedFatigueDescription = "Due to the incredible "+tempDescriptor+", you fatigue in 2 hours instead of 8.";
+			} else {
+				returnedFatigueDescription = "Due to the "+tempDescriptor+", you fatigue in 4 hours instead of 8.";
+			}
+
+			let returnedDamageDescription = "";
+			if(Math.abs(range) == 2){
+				returnedDamageDescription = "The severe "+tempDescriptor+" causes you to take 1d6-2d6 "+damageDescriptor+" damage every hour.";
+				if(range < 0){
+					returnedDamageDescription += " If you're wearing winter clothing, you negate this damage.";
+				}
+			} else if(Math.abs(range) == 3){
+				returnedDamageDescription = "The extreme "+tempDescriptor+" causes you to take 1d6-2d6 "+damageDescriptor+" damage every 10 minutes.";
+				if(range < 0){
+					returnedDamageDescription += " If you're wearing winter clothing, you take 1d6-2d6 "+damageDescriptor+" damage every hour.";
+				}
+			} else if(Math.abs(range) == 4){
+				returnedDamageDescription = "The incredible "+tempDescriptor+" causes you to take 4d6-6d6 "+damageDescriptor+" damage every minute.";
+			}
+
+			return returnedFatigueDescription+" "+returnedDamageDescription;
+		}
+
+		function generateWeather(){
+
+			//Main variables
+			let currentDate = document.getElementById("date").value;
+			let currentDay = dateToDay(currentDate);
+			let currentBiome = document.getElementById("biome").value;
+
+			//Other Factors
+			let elevation = document.getElementById("elevation").value;
+			let roughness = document.getElementById("roughness").value;
+			let coastal = document.getElementById("coastal").value;
+			if (coastal == "false"){
+				coastal = false;
+			} else {
+				coastal = true;
+			}
+			let rainShadow = document.getElementById("rainShadow").value;
+			if (rainShadow == "false"){
+				rainShadow = false;
+			} else {
+				rainShadow = true;
+			}
+
+			//Offsets
+			let radians = (2*(22/7))*((currentDay-1)/364);
+			let seasonalOffset = Math.cos(radians)*(-1);
+			let tempRandomOffset = iRandomRangeBell(-100,100,5);
+
+			//Temperatures	-2 to -34
+			let biomeDayTempMean = [82,61,90,57,64,44,41,66,90];
+			let biomeNightTempMean = [72,46,72,44,51,31,33,47,60];
+			let currentDayTempMean = biomeDayTempMean[currentBiome];
+			let currentNightTempMean = biomeNightTempMean[currentBiome];
+			let biomeSeasonalTempRange = [5,17,5,16,13,22,15,24,14];
+			let biomeRandomTempRange = [15,30,10,30,20,20,40,25,15];
+			let everestDayTempMean = -18;
+			let everestNightTempMean = -34;
+			let everestRandomTempRange = 40;
+			let everestSeasonalTempRange = 16;
+			let tempRandom = (biomeSeasonalTempRange[currentBiome]*seasonalOffset)+((tempRandomOffset/100)*biomeRandomTempRange[currentBiome]);
+			let everestRandom = (everestSeasonalTempRange*seasonalOffset)+((tempRandomOffset/100)*everestRandomTempRange);
+			let elevationTempOffset = elevation*20*Math.pow(0.95,elevation);
+			let elevationLerp = (elevation/5)
+			let currentDayTemp = Math.round(lerp(tempRandom+currentDayTempMean-elevationTempOffset,everestRandom+everestDayTempMean,elevation/5));
+			let currentNightTemp = Math.round(lerp(tempRandom+currentNightTempMean-elevationTempOffset,everestRandom+everestNightTempMean,elevation/5));
+			let currentAvg
+
+			//Rainfall
+			let biomeWinterRainfallChance = [0.95,0.70,0.10,0.45,0.25,0.20,0.30,0.30,0.01];
+			let biomeSummerRainfallChance = [0.48,0.20,0.55,0.10,0.05,0.40,0.30,0.35,0.02];
+			let rainfallTypes = ["light","medium","heavy"];
+			let biomeRainfallTypePreference = [2,0,1,1,1,0,0,1,0];
+			let rainfallTimes = ["morning","after noon","evening","late night","all day","all night","24 hours"];
+			let rainfallLengths = ["quick burst","on and off","constant",];
+			let biomeRainfallLengthPreference = [1,2,1,-1,-1,2,2,2,0];
+			let biomeRainChance = lerp(biomeWinterRainfallChance[currentBiome],biomeSummerRainfallChance[currentBiome],(seasonalOffset+1)/2);
+			let everestWinterRainfallChance = 0.01;
+			let everestSummerRainfallChance = 0.61;
+			let everestRainChance = lerp(everestWinterRainfallChance,everestSummerRainfallChance,(seasonalOffset+1)/2);
+			let rainChance = lerp(biomeRainChance,everestRainChance,elevation/5);
+			if (coastal == true) {rainChance = Math.pow(rainChance,1-rainChance);}
+			if (rainShadow == true) (rainChance = rainChance*0.25);
+			let rainRandom = randomRange(0,1);
+			let raining = false;
+			if (rainRandom <= rainChance){
+				raining = true;
+			}
+			var randomRainfallType = -1;
+			if (raining == true){
+				var i = 0;
+				var randomRainfallTime = iRandomRange(0,rainfallTimes.length-1);
+				var randomRainfallType = iRandomRange(0,rainfallTypes.length-1);
+				var randomRainfallLength = iRandomRange(0,rainfallLengths.length-1);
+				if (elevation <= 1){
+					do{
+						i += 1;
+						if (randomRainfallType != biomeRainfallTypePreference[currentBiome])
+							{var randomRainfallType = iRandomRange(0,rainfallTypes.length-1);}
+						if (randomRainfallLength != biomeRainfallLengthPreference[currentBiome])
+							{var randomRainfallLength = iRandomRange(0,rainfallLengths.length-1);}
+					} while(i < 2)
+				}
+			}
+			let humidity = rainChance;
+			if(raining == true){
+				humidity += ((randomRainfallType+1)*0.05)+(randomRainfallLength*0.05);
+			}
+
+			//Wind
+			let roughnessWindOffset = iRandomRange(0,10*roughness);
+			let coastalWindOffset = 0;
+			if (coastal == true) {coastalWindOffset = iRandomRange(0,10);}
+			let avgWindSummer = 6;
+			let avgWindWinter = 15;
+			let maxWindSummer = 90;
+			let maxWindWinter = 90;
+			let avgWind = Math.round(lerp(avgWindWinter,avgWindSummer,(seasonalOffset+1)/2));
+			let maxWind = Math.round(lerp(maxWindWinter,maxWindSummer,(seasonalOffset+1)/2));
+			let minWind = avgWind-(maxWind-avgWind);
+			let randomWind = iRandomRangeBell(minWind,maxWind,6);
+			randomWind = clamp(0,maxWind,randomWind);
+			let everestAvgWindSummer = 50;
+			let everestAvgWindWinter = 100;
+			let everestMaxWindSummer = 75;
+			let everestMaxWindWinter = 200;
+			let everestAvgWind = Math.round(lerp(everestAvgWindWinter,everestAvgWindSummer,(seasonalOffset+1)/2));
+			let everestMaxWind = Math.round(lerp(everestMaxWindWinter,everestMaxWindSummer,(seasonalOffset+1)/2));
+			let everestMinWind = everestAvgWind-(everestMaxWind-everestAvgWind);
+			let everestRandomWind = iRandomRangeBell(everestMinWind,everestMaxWind,8);
+			everestRandomWind = clamp(0,everestMaxWind,everestRandomWind);
+			randomWind = lerp(randomWind,everestRandomWind,Math.pow(elevation/5,2))+roughnessWindOffset+coastalWindOffset;
+			if (rainShadow){
+				randomWind *= 0.25;
+			}
+			randomWind = Math.round(randomWind);
+
+			//Weather Events
+			let weatherType = "Clear";
+			if (raining == true){
+				weatherType = "Rain"
+				if (rainfallTimes[randomRainfallTime] == 0 || rainfallTimes[randomRainfallTime] == 3 || rainfallTimes[randomRainfallTime] == 5){	//Night
+					if (currentNightTemp == clamp(35,33,currentNightTemp)){
+						weatherType = "Slush";
+					} else if (currentNightTemp <= 32) {
+						weatherType = "Snow";
+					}
+				} else if (rainfallTimes[randomRainfallTime] == 1 || rainfallTimes[randomRainfallTime] == 2 || rainfallTimes[randomRainfallTime] == 4){	//Day
+					if (currentDayTemp == clamp(35,33,currentDayTemp)){
+						weatherType = "Slush";
+					} else if (currentDayTemp <= 32) {
+						weatherType = "Snow";
+					}
+				} else {	//24 Hours
+					let tempTwentyFourAvg = (currentNightTemp+currentDayTemp)/2;
+					if (tempTwentyFourAvg == clamp(35,33,tempTwentyFourAvg)){
+						weatherType = "Slush";
+					} else if (tempTwentyFourAvg <= 32) {
+						weatherType = "Snow";
+					}
+				}
+			}
+
+			let cloudChance = Math.pow(rainChance,Math.pow(1-rainChance,rainChance));
+			let fogChance = rainChance;
+			if (weatherType == "Clear"){
+				if (randomRange(0,1) <= cloudChance){
+					weatherType = "Cloudy"
+				}
+				if (randomWind <= 5 && randomRange(0,1) <= fogChance){
+					weatherType = "Foggy";
+				}
+			}
+			let stormSpeed = 42;
+			if (weatherType == "Cloudy" || weatherType == "Rain"){
+				if (randomWind >= stormSpeed){
+					if (randomRange(0,1) <= (1-rainChance)){
+						if (weatherType == "Cloudy"){
+							weatherType = "Wind and Thunder Storm";
+						} else if (weatherType == "Rain"){
+							weatherType = "Rain, Wind, and Thunder Storm";
+							if (randomRange(0,1) <= rainChance/2) {
+								weatherType = "Hail, Wind, and Thunder Storm";
+							}
+						}
+					} else {
+						if (weatherType == "Cloudy"){
+							weatherType = "Wind and Storm Clouds";
+						} else if (weatherType == "Rain") {
+							weatherType = "Rain and Wind Storm";
+							if (randomRange(0,1) <= rainChance/2) {
+								weatherType = "Hail and Wind Storm";
+							}
+						}
+					}
+				}
+			}
+			if (weatherType == "Clear" && randomWind >= stormSpeed) {
+				weatherType = "Windy"
+			} 
+			if (weatherType == "Windy" && currentBiome == 8){
+				weatherType = "Sand Storm";
+			}
+			if (weatherType == "Snow" && randomWind >= stormSpeed){
+				weatherType = "Blizzard";
+			}
+
+			//Weather Event Power
+			let weatherEventPowerWind = clamp(-1,10,Math.floor((randomWind-stormSpeed)/12));
+			let weatherEventPowerRain = randomRainfallType;
+			let rainSoakTime = ["10 minutes","1 minute","1 round"]
+			let weatherEffectDescription = "HAH";
+			if (weatherType == "Clear"){
+				weatherEffectDescription = "The clear weather causes no other effects.";
+			}
+			else if (weatherType == "Cloudy"){
+				weatherEffectDescription = "Clouds hang in the sky.";
+			}
+			else if (weatherType == "Rain" || weatherType == "Slush"){
+				if(weatherEventPowerRain == 0){
+					weatherEffectDescription = "The "+weatherType.toLowerCase()+" imposes no ill effects, but it may have soaked a black powder weapon and made it unfirable if left out for "+rainSoakTime[weatherEventPowerRain]+".";
+				} else {
+					weatherEffectDescription = "The "+weatherType.toLowerCase()+" imposes a -"+(weatherEventPowerRain)+" circumstance penalty to visual and auditory perception checks. Overland travel becomes exhausting in 4 hours. Black powder weapons will be soaked and unfirable if left out for "+rainSoakTime[weatherEventPowerRain]+".";
+				}
+			} else if (weatherType == "Rain and Wind Storm" || weatherType == "Rain, Wind, and Thunder Storm"){
+				let maxPenalty = Math.max(weatherEventPowerWind,weatherEventPowerRain)
+				weatherEffectDescription = "The weather imposes a -"+(maxPenalty+1)+" circumstance penalty to visual and auditory perception checks, and a -"+(weatherEventPowerWind+1)+" circumstance penalty to the ranged weapon attacks of non black powder weapons. Black powder weapons will be soaked and unfirable if left out for "+rainSoakTime[weatherEventPowerRain]+". Overland travel becomes exhausting in 4 hours, if not fewer based on the temperature.";
+			} else if (weatherType == "Windy" || weatherType == "Wind and Storm Clouds" || weatherType == "Wind and Thunder Storm") {
+				weatherEffectDescription = "The wind imposes a -"+(weatherEventPowerWind+1)+" circumstance penalty to auditory perception checks and to the ranged weapon attacks of non black powder weapons."
+			} else if (weatherType == "Foggy"){
+				let fogHeavy = Math.min(iRandomRange(1,6),iRandomRange(1,6));
+				let visionRanges = ["1 mile (5280 feet)","1/2 mile (2640 feet)","1/4 mile (1320 feet)","1/8 mile (660 feet)","1/16 mile (330 feet)","1/32 mile (165 feet)","1/64 mile (80 feet)"]
+				weatherEffectDescription = "The fog imposes a -"+Math.ceil(fogHeavy/2)+" circumstance penalty to visual perception checks. You can only see up to "+visionRanges[fogHeavy-1]+" and creatures at "+visionRanges[fogHeavy]+" or more are obscured."
+			} else if (weatherType == "Snow"){
+				if(weatherEventPowerRain == 0){
+					weatherEffectDescription = "The snow imposes no ill effects.";
+				} else {
+					weatherEffectDescription = "The snow imposes a -"+(weatherEventPowerRain)+" circumstance penalty to visual perception checks and a +"+(weatherEventPowerRain)+" circumstance bonus to auditory perception checks. Overland travel becomes exhausting in 4 hours, if not fewer based on the temperature.";
+				}
+			} else if (weatherType == "Blizzard"){
+				let maxPenalty = Math.max(weatherEventPowerWind,weatherEventPowerRain)
+				weatherEffectDescription = "The weather imposes a -"+(maxPenalty+1)+" circumstance penalty to visual and auditory perception checks, and a -"+(weatherEventPowerWind+1)+" circumstance penalty to the ranged weapon attacks of non black powder weapons. Overland travel becomes exhausting in 4 hours, if not fewer based on the temperature.";
+			} else if (weatherType == "Hail and Wind Storm" || weatherType == "Hail, Wind, and Thunder Storm"){
+				let totalSoundPower = Math.min(weatherEventPowerWind,weatherEventPowerRain);
+				let totalHitPower = Math.min(weatherEventPowerWind,weatherEventPowerRain);
+				if (totalHitPower == 0){
+					weatherEffectDescription = "The wind imposes a -"+(totalSoundPower+1)+" circumstance penalty to auditory perception checks and to the ranged weapon attacks of non black powder weapons."
+				} else {
+					weatherEffectDescription = "The wind imposes a -"+(totalSoundPower+1)+" circumstance penalty to auditory perception checks and to the ranged weapon attacks of non black powder weapons. The hail inflicts "+totalHitPower+"d6 bludgeoning damage to you at the start of your turn."
+				}
+			} else if (weatherType == "Sand Storm"){
+				let sandStormDCs = [15,20,30,40];
+				let visionRanges = ["1/2 mile (2640 feet)","1/4 mile (1320 feet)","1/8 mile (660 feet)","1/16 mile (330 feet)","1/32 mile (165 feet)","1/64 mile (80 feet)"]
+				weatherEffectDescription = "The wind imposes a -"+(weatherEventPowerWind+1)+" circumstance penalty to auditory perception checks and to the ranged weapon attacks of non black powder weapons. Without eye protection or closing your eyes, you require passing a "+sandStormDCs[weatherEventPowerWind]+" DC Fortitude saving throw or become blinded for one round, becoming blinded for 2 rounds on a critical failure. You can only see up to "+visionRanges[weatherEventPowerWind]+" and creatures at "+visionRanges[weatherEventPowerWind+1]+" or more are obscured.";
+				if (weatherEventPowerWind >= 2) {
+					weatherEffectDescription += " Due to the heavy sandstorm it becomes impossible to breathe and you take 1d6 slashing damage at the start of your turn."
+				}
+			}
+
+			//Blackouts
+			let chosenBlackout = -1;
+			for(let n = 0; n < blackouts.length; n++){
+				if(blackouts[n][0] == document.getElementById("date").value){
+					chosenBlackout = n;
+					break;
+				}
+			}
+
+			//Putting it on the page
+			document.getElementById("weatherOutput").innerHTML = document.getElementById("date").value;
+			if (raining == true){
+				document.getElementById("weatherOutput").innerHTML += " | "+weatherType+", "+rainfallTypes[randomRainfallType]+", "+rainfallLengths[randomRainfallLength]+", "+rainfallTimes[randomRainfallTime];
+			} else {
+				document.getElementById("weatherOutput").innerHTML += " | "+weatherType;
+			}
+			document.getElementById("weatherOutput").innerHTML += " | High:"+currentDayTemp+" f";
+			document.getElementById("weatherOutput").innerHTML += " | Low:"+currentNightTemp+" f";
+			document.getElementById("weatherOutput").innerHTML += " | "+randomWind+" mph";
+			document.getElementById("weatherOutput").innerHTML += " | Humidity:"+clamp(0,100,Math.round(humidity*100))+"%";
+
+			document.getElementById("weatherTempDay").innerHTML = "Day: "+determineTempEffectDescription(determineTempEffectRange(currentDayTemp,humidity));
+			document.getElementById("weatherTempNight").innerHTML = "Night: "+determineTempEffectDescription(determineTempEffectRange(currentNightTemp,humidity));
+
+			//document.getElementById("weatherEffect").innerHTML = weatherEventPowerWind+", "+weatherEventPowerRain;
+			document.getElementById("weatherEffect").innerHTML = weatherEffectDescription;
+
+			if(chosenBlackout != -1){
+				document.getElementById("blackout").innerHTML = "Blackout at "+blackouts[chosenBlackout][1]+" for "+blackouts[chosenBlackout][2]+"/"+blackouts[chosenBlackout][3]+" rounds";
+			} else {
+				document.getElementById("blackout").innerHTML = "";
+			}
+		}
+
+
+		var date = new Date();
+		const YEAR = date.getFullYear();
+
+		//Things in the footer
+		document.querySelector("#copyright").innerHTML = '&copy; 2018-' + YEAR + ' ELB';
+
+	</script>
+</body>
+</html>
