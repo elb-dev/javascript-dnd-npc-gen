@@ -72,6 +72,7 @@
 		<p id="weatherTempNight"></p>
 		<p id="weatherEffect"></p>
 		<p id="blackout"></p>
+		<p id="earthquake"></p>
 	</main>
 	<footer class="bookend" id="footer">
 		<ul id="footerul">
@@ -86,6 +87,7 @@
 	<script type="text/javascript">
 
 		var blackouts = createBlackouts();
+		var earthquakes = createEarthquakes();
 
 		function dateToDay(myDate){
 			let monthLengths = [31,28,31,30,31,30,31,31,30,31,30,31];
@@ -399,6 +401,25 @@
 				}
 			}
 
+			//Earthquakes
+			let earthquakeDescriptions = [
+				"The earthquake is not felt.",
+				"It only causes minor damage to buildings. Creatures are flat footed and need to succeed on a DC 10 Reflex save every round or fall prone.",
+				"It only causes minor damage to buildings. Creatures are flat footed and need to succeed on a DC 10 Reflex save every round or fall prone. They have a -1 penalty to all skill checks.",
+				"Causes some damage to buildings. Creatures are flat footed and need to succeed on a DC 15 Reflex save every round or fall prone. They have a -1 penalty to all skill checks.",
+				"Causes a lot of damage in populated areas. Creatures are flat footed and need to succeed on a DC 20 Reflex save every round or fall prone, taking 1d6 bludgeoning damage. They are Slowed 1 and have a -2 penalty to all skill checks.",
+				"Causes serious damage. Creatures are flat footed and need to succeed on a DC 30 Reflex save every round or fall prone, taking 2d6 bludgeoning damage. They are Slowed 2 and have a -3 penalty to all skill checks.",
+				"Causes massive damage, which can totally destroy communities. Creatures are flat footed and need to succeed on a DC 40 Reflex save every round or fall prone, taking 3d6 bludgeon damage. They are slowed 2 and have a -4 penalty to all skill checks.",
+				"Causes massive damage, which can totally destroy communities. Creatures are flat footed and need to succeed on a DC 40 Reflex save every round or fall prone, taking 3d6 bludgeon damage. They are slowed 2 and have a -4 penalty to all skill checks.",
+				];
+			let chosenEarthquake = -1;
+			for(let n = 0; n < earthquakes.length; n++){
+				if(earthquakes[n][0] == document.getElementById("date").value){
+					chosenEarthquake = n;
+					break;
+				}
+			}
+
 			//Putting it on the page
 			document.getElementById("weatherOutput").innerHTML = document.getElementById("date").value;
 			if (raining == true){
@@ -421,6 +442,12 @@
 				document.getElementById("blackout").innerHTML = "Blackout at "+blackouts[chosenBlackout][1]+" for "+blackouts[chosenBlackout][2]+"/"+blackouts[chosenBlackout][3]+" rounds";
 			} else {
 				document.getElementById("blackout").innerHTML = "";
+			}
+
+			if(chosenEarthquake != -1){
+				document.getElementById("earthquake").innerHTML = "Magnitude "+earthquakes[chosenEarthquake][5]+" earthquake at "+earthquakes[chosenEarthquake][1]+" for "+earthquakes[chosenEarthquake][2]+"/"+earthquakes[chosenEarthquake][3]+" rounds in the "+earthquakes[chosenEarthquake][4]+" region. "+earthquakeDescriptions[earthquakes[chosenEarthquake][5]-2]+" "+earthquakes[chosenEarthquake][6];
+			} else {
+				document.getElementById("earthquake").innerHTML = "";
 			}
 		}
 
