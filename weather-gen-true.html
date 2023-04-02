@@ -160,6 +160,9 @@
 			let currentDate = document.getElementById("date").value;
 			let currentDay = dateToDay(currentDate);
 			let currentBiome = document.getElementById("biome").value;
+			let currentYear = currentDate.split("-")[0];
+			console.log(currentYear);
+			console.log(currentDay);
 
 			//Other Factors
 			let elevation = document.getElementById("elevation").value;
@@ -182,6 +185,12 @@
 			let seasonalOffset = Math.cos(radians)*(-1);
 			let tempRandomOffset = iRandomRangeBell(-100,100,5);
 
+			//Blackouts Offsets
+			let yearMin = 52;
+			let blackoutWeatherLerpMax = (57-yearMin)*365;
+			let blackoutWeatherLerpValue = ((currentYear-yearMin)*365)+currentDay;
+			let blackoutWeatherLerp = blackoutWeatherLerpValue/blackoutWeatherLerpMax;
+
 			//Temperatures	-2 to -34
 			let biomeDayTempMean = [82,61,90,57,64,44,41,66,90];
 			let biomeNightTempMean = [72,46,72,44,51,31,33,47,60];
@@ -199,7 +208,10 @@
 			let elevationLerp = (elevation/5)
 			let currentDayTemp = Math.round(lerp(tempRandom+currentDayTempMean-elevationTempOffset,everestRandom+everestDayTempMean,elevation/5));
 			let currentNightTemp = Math.round(lerp(tempRandom+currentNightTempMean-elevationTempOffset,everestRandom+everestNightTempMean,elevation/5));
-			let currentAvg
+			if(currentYear >= yearMin){
+				currentDayTemp = Math.round(lerp(currentDayTemp,everestRandom+everestDayTempMean,blackoutWeatherLerp));
+				currentNightTemp = Math.round(lerp(currentNightTemp,everestRandom+everestNightTempMean,blackoutWeatherLerp));
+			}
 
 			//Rainfall
 			let biomeWinterRainfallChance = [0.95,0.70,0.10,0.45,0.25,0.20,0.30,0.30,0.01];
@@ -214,6 +226,9 @@
 			let everestSummerRainfallChance = 0.61;
 			let everestRainChance = lerp(everestWinterRainfallChance,everestSummerRainfallChance,(seasonalOffset+1)/2);
 			let rainChance = lerp(biomeRainChance,everestRainChance,elevation/5);
+			if(currentYear >= yearMin){
+				rainChance = lerp(rainChance,everestRainChance,blackoutWeatherLerp);
+			}
 			if (coastal == true) {rainChance = Math.pow(rainChance,1-rainChance);}
 			if (rainShadow == true) (rainChance = rainChance*0.25);
 			let rainRandom = randomRange(0,1);
@@ -264,7 +279,11 @@
 			let everestMinWind = everestAvgWind-(everestMaxWind-everestAvgWind);
 			let everestRandomWind = iRandomRangeBell(everestMinWind,everestMaxWind,8);
 			everestRandomWind = clamp(0,everestMaxWind,everestRandomWind);
-			randomWind = lerp(randomWind,everestRandomWind,Math.pow(elevation/5,2))+roughnessWindOffset+coastalWindOffset;
+			randomWind = lerp(randomWind,everestRandomWind,Math.pow(elevation/5,2));
+			if(currentYear >= yearMin){
+				randomWind = lerp(randomWind,everestRandomWind,blackoutWeatherLerp);
+			}
+			randomWind = randomWind+roughnessWindOffset+coastalWindOffset;
 			if (rainShadow){
 				randomWind *= 0.25;
 			}
