@@ -65,6 +65,12 @@ Use biome?
 			<option value=2>Bodlan</option>
 			<option value=3>Ebrom</option>
 		</select>
+		<p>Ability 1</p>
+		<select id="selectAbility1">
+			<option value=0>Artists' Haven</option>
+			<option value=1>Settlement of Artisans</option>
+			<option value=2>Magical Academy</option>
+		</select>
 		<!--<p>Threats</p>
 		Monsters <input type="checkbox" id="threat1">
 		War <input type="checkbox" id="threat2">
@@ -81,7 +87,7 @@ Use biome?
 		<p id="languages"></p>
 		<p id="gods"></p>
 		<p id="threats"></p>
-		<p id="abilities"></p>
+		<p id="ability1"></p>
 	</main>
 	<footer class="bookend" id="footer">
 		<ul id="footerul">
@@ -101,6 +107,8 @@ Use biome?
 			let capital = document.getElementById("capitalBox").checked;
 			let languages = ["Grandian", "Cordit", "Bodlan", "Ebrom"];
 			let gods = ["Ajebyu","Nexma","Dinion","Trosmu","Congra","Etmen","Evnoch","Ilo"];
+			let magicalSchools = ["Abjuration","Necromancy","Divination","Transmutation","Conjuration","Enchantment","Evocation","Illusion"];
+			let chosenAbility1 = document.getElementById("selectAbility1").value;
 
 			//Level
 			if(size == 0){
@@ -144,6 +152,13 @@ Use biome?
 				}
 			}
 
+			//Abilities
+			let abilityDescriptions = [
+				"Artists' Haven: Art jobs can be up to +"+(Number(size)+1)+" levels higher than settlement level. Buyers will pay "+(5+(Number(size)*5))+"% more for art objects.",
+				"Settlement of Artisans: Items of up to "+(Number(size)+1)+" levels higher are available from certain vendors.",
+				"Magical Academy: When paying NPCs to teach a spell of the "+magicalSchools[godsChosen[iRandomRange(0,(godsChosen.length)-1)]]+" school, the NPC provides a +2 circumstance bonus to the check."
+				];
+
 			//Page
 			document.getElementById("nameAndLevel").innerHTML = document.getElementById("name").value+" - Settlement "+level;
 			document.getElementById("description").innerHTML = "Insert description here."
@@ -152,7 +167,7 @@ Use biome?
 			document.getElementById("languages").innerHTML = "LANGUAGE: "+languages[document.getElementById("language").value];
 			document.getElementById("gods").innerHTML = "GODS: "+godsText;
 			document.getElementById("threats").innerHTML = "THREATS: Add 3 threats here";
-			document.getElementById("abilities").innerHTML = "ABILITIES: Extreme mean bean machining";
+			document.getElementById("ability1").innerHTML = "ABILITY 1: " + abilityDescriptions[chosenAbility1];
 		}
 
 		var date = new Date();
