@@ -67,9 +67,13 @@ Use biome?
 		</select>
 		<p>Ability 1</p>
 		<select id="selectAbility1">
-			<option value=0>Artists' Haven</option>
-			<option value=1>Settlement of Artisans</option>
-			<option value=2>Magical Academy</option>
+			<option value=0>Random</option>
+			<option value=1>Artists' Haven</option>
+			<option value=2>Settlement of Artisans</option>
+			<option value=3>Magical Academy</option>
+			<option value=4>Religious Bias</option>
+			<option value=5>Scholarly</option>
+			<option value=6>Bountiful Harvests</option>
 		</select>
 		<!--<p>Threats</p>
 		Monsters <input type="checkbox" id="threat1">
@@ -154,9 +158,13 @@ Use biome?
 
 			//Abilities
 			let abilityDescriptions = [
+				"Random: You should never see this text.",
 				"Artists' Haven: Art jobs can be up to +"+(Number(size)+1)+" levels higher than settlement level. Buyers will pay "+(5+(Number(size)*5))+"% more for art objects.",
 				"Settlement of Artisans: Items of up to "+(Number(size)+1)+" levels higher are available from certain vendors.",
-				"Magical Academy: When paying NPCs to teach a spell of the "+magicalSchools[godsChosen[iRandomRange(0,(godsChosen.length)-1)]]+" school, the NPC provides a +2 circumstance bonus to the check."
+				"Magical Academy: When paying NPCs to teach a spell of the "+magicalSchools[godsChosen[iRandomRange(0,(godsChosen.length)-1)]]+" school, the NPC provides a +2 circumstance bonus to the check.",
+				"Religious Bias: While in the settlement, anyone who visibly worships one of the gods gets a +1 circumstance bonus to Diplomacy checks, while anyone who visibly does not worship one of the gods gets a -1 circumstance penaly to Diplomacy checks.",
+				"Scholarly: Public access to knowledge means that with 1d4 hours, a character can access a scholarly journal on a relevant common subject before attempting to recall knowledge.",
+				"Bountiful Harvests: Food costs less here than elsehwere. Daily three meals costs 2 cp for poor, 6 cp for square, and 2 gp for fine."
 				];
 
 			//Page
