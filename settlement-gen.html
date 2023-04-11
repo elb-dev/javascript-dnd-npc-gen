@@ -77,14 +77,16 @@ Use biome?
 		<select id="selectAbility1">
 			<option value=0>Random</option>
 			<option value=1>Artists' Haven</option>
-			<option value=2>Settlement of Artisans</option>
-			<option value=3>Magical Academy</option>
-			<option value=4>Religious Bias</option>
-			<option value=5>Scholarly</option>
-			<option value=6>Bountiful Harvests</option>
-			<option value=7>Black Market Town</option>
-			<option value=8>Food Banks</option>
-			<option value=9>Insular</option>
+			<option value=2>Settlement of Artisans 1</option>
+			<option value=3>Settlement of Artisans 2</option>
+			<option value=4>Settlement of Artisans 3</option>
+			<option value=5>Magical Academy</option>
+			<option value=6>Religious Bias</option>
+			<option value=7>Scholarly</option>
+			<option value=8>Bountiful Harvests</option>
+			<option value=9>Black Market Town</option>
+			<option value=10>Food Banks</option>
+			<option value=11>Insular</option>
 		</select>
 		<!--<p>Threats</p>
 		Monsters <input type="checkbox" id="threat1">
@@ -101,6 +103,7 @@ Use biome?
 		<p id="population"></p>
 		<p id="languages"></p>
 		<p id="gods"></p>
+		<p id="faction1"></p>
 		<p id="threats"></p>
 		<p id="ability1"></p>
 	</main>
@@ -146,6 +149,9 @@ Use biome?
 
 			//Government
 			let governments = ["Random","Mayor","Feudal Lord","Baron","Elder Committee"];
+			if(chosenGovernment == 0){
+				chosenGovernment = iRandomRange(1,governments.length-1);
+			}
 
 			//Gods
 			let godsChosen = [];
@@ -172,28 +178,42 @@ Use biome?
 			}
 
 			//Abilities
+			let artisanTypes = ["Potions","Oils","Snares","Ammo","Elixers","Plants","Tools","Bombs","Poisons","Runes"];
+			let chosenArtisanTypes = [0,0,0];
+			while(chosenArtisanTypes[0] == chosenArtisanTypes[1] || chosenArtisanTypes[0] == chosenArtisanTypes[2] || chosenArtisanTypes[2] == chosenArtisanTypes[1]){
+				chosenArtisanTypes = [iRandomRange(0,artisanTypes.length-1),iRandomRange(0,artisanTypes.length-1),iRandomRange(0,artisanTypes.length-1)];
+			}
 			let abilityDescriptions = [
 				"Random: You should never see this text.",
 				"Artists' Haven: Art jobs can be up to +"+(Number(size)+1)+" levels higher than settlement level. Buyers will pay "+(5+(Number(size)*5))+"% more for art objects.",
-				"Settlement of Artisans: Items of up to "+(Number(size)+1)+" levels higher are available from certain vendors.",
+				"Settlement of Artisans ("+artisanTypes[chosenArtisanTypes[0]]+"): Items of up to "+(Number(size)+1)+" levels higher are available from certain vendors.",
+				"Settlement of Artisans ("+artisanTypes[chosenArtisanTypes[1]]+"): Items of up to "+(Number(size)+1)+" levels higher are available from certain vendors.",
+				"Settlement of Artisans ("+artisanTypes[chosenArtisanTypes[2]]+"): Items of up to "+(Number(size)+1)+" levels higher are available from certain vendors.",
 				"Magical Academy: When paying NPCs to teach a spell of the "+magicalSchools[godsChosen[iRandomRange(0,(godsChosen.length)-1)]]+" school, the NPC provides a +2 circumstance bonus to the check.",
 				"Religious Bias: While in the settlement, anyone who visibly worships one of the gods gets a +1 circumstance bonus to Diplomacy checks, while anyone who visibly does not worship one of the gods gets a -1 circumstance penalty to Diplomacy checks.",
+				"Secular Bias: While in the settlement, anyone who visibly does not worship one of the gods gets a +1 circumstance bonus to Diplomacy checks, while anyone who visibly does worship one of the gods gets a -1 circumstance penalty to Diplomacy checks.",
 				"Scholarly: Public access to knowledge means that with 1d4 hours, a character can access a scholarly journal on a relevant common subject before attempting to recall knowledge.",
 				"Bountiful Harvests: Food costs less here than elsewhere. Daily three meals costs 2 cp for poor, 6 cp for square, and 2 gp for fine.",
 				"Black Market Town: Illegal goods are easier to buy and sell here. NPCs begin with one step attitude worse to those who visibly display insigina of lawful agencies or countries.",
 				"Food Banks: Stronger social programs mean subsisting is easy here. Creatures have a +4 bonus to subsisting in this settlement.",
 				"Insular: Townsfolk don't trust outsiders. Characters start with a -1 circumstance penalty to Diplomacy checks, and NPCs begin with one step attitude worse to them. If the town can be helped in a quest, the townsfolk will become trusting, and characters will take a +1 circumstance bonus to Diplomacy checks, and NPCs will begin with one step attitude better to them."
 				];
+			if (chosenAbility1 == 0){
+				chosenAbility1 = iRandomRange(1,abilityDescriptions.length-1);
+			}
 
 			//Page
 			document.getElementById("nameAndLevel").innerHTML = document.getElementById("name").value+" - Settlement "+level;
+			if(capital == true){
+				document.getElementById("nameAndLevel").innerHTML +=" - Capital"
+			}
 			document.getElementById("description").innerHTML = "Insert description here."
-			document.getElementById("government").innerHTML = "GOVERNMENT: Insert description here."
+			document.getElementById("government").innerHTML = "GOVERNMENT: "+governments[chosenGovernment];
 			document.getElementById("population").innerHTML = "POPULATION: "+population;
 			document.getElementById("languages").innerHTML = "LANGUAGE: "+languages[document.getElementById("language").value];
 			document.getElementById("gods").innerHTML = "GODS: "+godsText;
 			document.getElementById("threats").innerHTML = "THREATS: Add 3 threats here";
-			document.getElementById("ability1").innerHTML = "ABILITY 1: " + abilityDescriptions[chosenAbility1];
+			document.getElementById("ability1").innerHTML = "ABILITY: " + abilityDescriptions[chosenAbility1];
 		}
 
 		var date = new Date();
