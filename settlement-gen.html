@@ -58,6 +58,14 @@ Use biome?
 		</select>
 		<p>Capital?</p>
 		<input type="checkbox" id="capitalBox">
+		<p>Government</p>
+		<select id="selectGovernment">
+			<option value=0>Random</option>
+			<option value=1>Mayor</option>
+			<option value=2>Feudal Lord</option>
+			<option value=3>Baron</option>
+			<option value=4>Elder Committee</option>
+		</select>
 		<p>Main Language</p>
 		<select id="language">
 			<option value=0>Grandian</option>
@@ -74,6 +82,9 @@ Use biome?
 			<option value=4>Religious Bias</option>
 			<option value=5>Scholarly</option>
 			<option value=6>Bountiful Harvests</option>
+			<option value=7>Black Market Town</option>
+			<option value=8>Food Banks</option>
+			<option value=9>Insular</option>
 		</select>
 		<!--<p>Threats</p>
 		Monsters <input type="checkbox" id="threat1">
@@ -113,6 +124,7 @@ Use biome?
 			let gods = ["Ajebyu","Nexma","Dinion","Trosmu","Congra","Etmen","Evnoch","Ilo"];
 			let magicalSchools = ["Abjuration","Necromancy","Divination","Transmutation","Conjuration","Enchantment","Evocation","Illusion"];
 			let chosenAbility1 = document.getElementById("selectAbility1").value;
+			let chosenGovernment = document.getElementById("selectGovernment").value;
 
 			//Level
 			if(size == 0){
@@ -131,6 +143,9 @@ Use biome?
 			//Capital?
 			if(capital == true)
 				{level += 1;}
+
+			//Government
+			let governments = ["Random","Mayor","Feudal Lord","Baron","Elder Committee"];
 
 			//Gods
 			let godsChosen = [];
