@@ -1,8 +1,5 @@
 Rules:
-Level - Village 0-1, Town 2-4, City 5-7, Metropolis 8-10
-Government Type - Dictated by country?
 Law
-Law Enforcement - Villages usually have nothing
 Factions - Villages have none, towns have one, cities have two, metropolis have three
 Corruption Level ?
 Use biome?
@@ -73,7 +70,46 @@ Use biome?
 			<option value=2>Bodlan</option>
 			<option value=3>Ebrom</option>
 		</select>
-		<p>Ability 1</p>
+		<p>Faction 1</p>
+		<select id="selectFaction1">
+			<option value=0>Random</option>
+			<option value=1>Merchant Guild</option>
+			<option value=2>Mercenary Band</option>
+			<option value=3>Sports Club</option>
+			<option value=4>Secret Society</option>
+			<option value=5>Church</option>
+			<option value=6>Crime Syndicate</option>
+			<option value=7>Government Body</option>
+			<option value=8>Influential Family</option>
+			<option value=9>Respected Business</option>
+		</select>
+		<p>Faction 2</p>
+		<select id="selectFaction2">
+			<option value=0>Random</option>
+			<option value=1>Merchant Guild</option>
+			<option value=2>Mercenary Band</option>
+			<option value=3>Sports Club</option>
+			<option value=4>Secret Society</option>
+			<option value=5>Church</option>
+			<option value=6>Crime Syndicate</option>
+			<option value=7>Government Body</option>
+			<option value=8>Influential Family</option>
+			<option value=9>Respected Business</option>
+		</select>
+		<p>Faction 3</p>
+		<select id="selectFaction3">
+			<option value=0>Random</option>
+			<option value=1>Merchant Guild</option>
+			<option value=2>Mercenary Band</option>
+			<option value=3>Sports Club</option>
+			<option value=4>Secret Society</option>
+			<option value=5>Church</option>
+			<option value=6>Crime Syndicate</option>
+			<option value=7>Government Body</option>
+			<option value=8>Influential Family</option>
+			<option value=9>Respected Business</option>
+		</select>
+		<p>Ability</p>
 		<select id="selectAbility1">
 			<option value=0>Random</option>
 			<option value=1>Artists' Haven</option>
@@ -102,6 +138,9 @@ Use biome?
 		<p id="government"></p>
 		<p id="population"></p>
 		<p id="languages"></p>
+		<p id="faction1"></p>
+		<p id="faction2"></p>
+		<p id="faction3"></p>
 		<p id="gods"></p>
 		<p id="faction1"></p>
 		<p id="threats"></p>
@@ -127,6 +166,9 @@ Use biome?
 			let gods = ["Ajebyu","Nexma","Dinion","Trosmu","Congra","Etmen","Evnoch","Ilo"];
 			let magicalSchools = ["Abjuration","Necromancy","Divination","Transmutation","Conjuration","Enchantment","Evocation","Illusion"];
 			let chosenAbility1 = document.getElementById("selectAbility1").value;
+			let chosenFaction1 = document.getElementById("selectFaction1").value;
+			let chosenFaction2 = document.getElementById("selectFaction2").value;
+			let chosenFaction3 = document.getElementById("selectFaction3").value;
 			let chosenGovernment = document.getElementById("selectGovernment").value;
 
 			//Level
@@ -202,6 +244,18 @@ Use biome?
 				chosenAbility1 = iRandomRange(1,abilityDescriptions.length-1);
 			}
 
+			//Factions
+			let factions = ["Random","Merchant Guild","Mercenary Band","Sports Club","Secret Society","Church","Crime Syndicate","Government Body","Influential Family","Respected Business"];
+			if (chosenFaction1 == 0){
+				chosenFaction1 = iRandomRange(1,factions.length-1);
+			}
+			if (chosenFaction2 == 0){
+				chosenFaction2 = iRandomRange(1,factions.length-1);
+			}
+			if (chosenFaction3 == 0){
+				chosenFaction3 = iRandomRange(1,factions.length-1);
+			}
+
 			//Page
 			document.getElementById("nameAndLevel").innerHTML = document.getElementById("name").value+" - Settlement "+level;
 			if(capital == true){
@@ -211,6 +265,21 @@ Use biome?
 			document.getElementById("government").innerHTML = "GOVERNMENT: "+governments[chosenGovernment];
 			document.getElementById("population").innerHTML = "POPULATION: "+population;
 			document.getElementById("languages").innerHTML = "LANGUAGE: "+languages[document.getElementById("language").value];
+			if (size > 0){
+				document.getElementById("faction1").innerHTML = "Faction 1: "+factions[chosenFaction1];
+			} else {
+				document.getElementById("faction1").innerHTML = "";
+			}
+			if (size > 1){
+				document.getElementById("faction2").innerHTML = "Faction 2: "+factions[chosenFaction2];
+			} else {
+				document.getElementById("faction2").innerHTML = "";
+			}
+			if (size > 2){
+				document.getElementById("faction3").innerHTML = "Faction 3: "+factions[chosenFaction3];
+			} else {
+				document.getElementById("faction3").innerHTML = "";
+			}
 			document.getElementById("gods").innerHTML = "GODS: "+godsText;
 			document.getElementById("threats").innerHTML = "THREATS: Add 3 threats here";
 			document.getElementById("ability1").innerHTML = "ABILITY: " + abilityDescriptions[chosenAbility1];
