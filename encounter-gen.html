@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+	<title>ELB's Pathfinder Tools</title>
+</head>
+<body>
+	<header class="bookend" id="header">
+		<h1><a href="/javascript-dnd-npc-gen">ELB's Pathfinder Tools</a></h1>
+		<nav>
+			<ul>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/npc-gen-upgraded">NPC Gen</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/npc-gen-ex-granlund">NPC Gen: Ex-Granlund</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/weather-gen">Weather Generator</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/settlement-gen">Settlement Generator</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main class = "main-gen">
+		<p>Biome/Settlement</p>
+		<select id="biome">
+			<option value=0>Tropical Rainforest</option>
+			<option value=1>Temperate Rainforest</option>
+			<option value=2>Tropical Seasonal Forest/Savanna</option>
+			<option value=3>Temperate Seasonal Forest</option>
+			<option value=4>Woodland/Shrubland</option>
+			<option value=5>Boreal Forest</option>
+			<option value=6>Temperate Grassland/Cold Desert</option>
+			<option value=7>Tundra</option>
+			<option value=8>Subtropical Desert</option>
+			<option value=9>Ocean</option>
+			<option value=10>Miasma</option>
+		</select>
+		<br>
+		<input type="button" onclick="generateEncounter()" value="GENERATE ENCOUNTER">
+		<p id="encounterOutput"></p>
+	</main>
+	<footer class="bookend" id="footer">
+		<ul id="footerul">
+			<li id="copyright">&copy; 2018-YEAR ELB</li>
+			<li><a href="https://github.com/elb-dev/javascript-dnd-npc-gen">Github</a></li>
+			<li><a href="https://github.com/elb-dev/javascript-dnd-npc-gen/blob/master/LICENSE">License</a></li>
+		</ul>
+	</footer>
+
+	<script type="text/javascript" src = "js/functions.js"></script>
+	<script type="text/javascript">
+
+		function generateEncounter(){
+
+			//Main Variables
+			var currentBiome = document.getElementById("biome").value;
+
+			if (currentBiome >= 0 && currentBiome <= 6){
+				var monsterAttack = 2;
+				var banditAttack = 1;
+				var monsterJob = 2;
+				var hazard = 5;
+				var harmless = 5;
+				var nothing = 20;
+			} else if (currentBiome >= 7 && currentBiome <= 8){
+				var monsterAttack = 4;
+				var banditAttack = 2;
+				var monsterJob = 4;
+				var hazard = 10;
+				var harmless = 5;
+				var nothing = 10;
+			} else if (currentBiome == 9){
+				var monsterAttack = 1;
+				var banditAttack = 4;
+				var monsterJob = 0;
+				var hazard = 1;
+				var harmless = 5;
+				var nothing = 60;
+			} else if (currentBiome == 10){
+				var monsterAttack = 20;
+				var banditAttack = 0;
+				var monsterJob = 0;
+				var hazard = 5;
+				var harmless = 0;
+				var nothing = 10;
+			}
+
+			var totalValues = [monsterAttack,banditAttack,monsterJob,hazard,harmless,nothing];
+			var choiceNames = ["Monster Attack", "Bandit Attack", "Monster Job", "Hazard", "Harmless", "Nothing"]
+			var chanceRolls = [];
+			for (var i = 0; i < totalValues.length; i++){
+				var n = 0;
+				while (n < totalValues[i]){
+					n++;
+					chanceRolls[chanceRolls.length] = i;
+				}
+			}
+			var encounterChoice = chanceRolls[iRandomRange(0,chanceRolls.length-1)];
+
+			document.getElementById("encounterOutput").innerHTML = choiceNames[encounterChoice];
+		}
+
+	</script>
+</body>
+</html>
