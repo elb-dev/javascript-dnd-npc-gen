@@ -35,7 +35,8 @@
 		</select>
 		<br>
 		<input type="button" onclick="generateEncounter()" value="GENERATE ENCOUNTER">
-		<p id="encounterOutput"></p>
+		<p id="encounterTitle"></p>
+		<p id="encounterDescription"></p>
 	</main>
 	<footer class="bookend" id="footer">
 		<ul id="footerul">
@@ -52,7 +53,9 @@
 
 			//Main Variables
 			var currentBiome = document.getElementById("biome").value;
+			var jobValues = [10,25,40,70,120,200,320,500,720,1000,1400,2000,2800,4000,6000,9000,13000,20000,30000,48000,80000,140000];
 
+			//Chances For Each Encounter Type
 			if (currentBiome >= 0 && currentBiome <= 6){
 				var monsterAttack = 2;
 				var banditAttack = 1;
@@ -83,6 +86,7 @@
 				var nothing = 10;
 			}
 
+			//Rolling Encounter Type
 			var totalValues = [monsterAttack,banditAttack,monsterJob,hazard,harmless,nothing];
 			var choiceNames = ["Monster Attack", "Bandit Attack", "Monster Job", "Hazard", "Harmless", "Nothing"]
 			var chanceRolls = [];
@@ -95,7 +99,45 @@
 			}
 			var encounterChoice = chanceRolls[iRandomRange(0,chanceRolls.length-1)];
 
-			document.getElementById("encounterOutput").innerHTML = choiceNames[encounterChoice];
+			//Monster Difficulty
+			do {
+				var monsterLevel = iRandomRangeBell(-4,12,3);
+			} while (monsterLevel < -1)
+
+			do {
+				var monsterCount = iRandomRangeBell(-2,8,3);
+			} while (monsterCount < 1)
+
+			//Bandit Difficulty
+			do {
+				var banditCount = iRandomRange(-3,15,4);
+			} while (banditCount < 1)
+			var banditRuse = iRandomRange(1,10);
+
+			//Hazard Difficulty
+			do {
+				var hazardLevel = iRandomRangeBell(-7,5,3)
+			} while (hazardLevel < -1)
+
+			//Description
+			document.getElementById("encounterTitle").innerHTML = choiceNames[encounterChoice];
+			if (encounterChoice == 0){
+				document.getElementById("encounterDescription").innerHTML = "Level: "+monsterLevel+" Count: "+monsterCount;
+			} else if (encounterChoice == 1) {
+				if (banditRuse != 1){
+					document.getElementById("encounterDescription").innerHTML = "Bandit Count: "+banditCount+" They will only attack if their numbers are larger than the party.";
+				} else {
+					document.getElementById("encounterDescription").innerHTML = "Bandit Count: "+banditCount+" They will attempt a ruse of some kind to steal something.";
+				}
+			} else if (encounterChoice == 2) {
+				document.getElementById("encounterDescription").innerHTML = "Level: "+monsterLevel+" Count: "+monsterCount+" Pay: "+(jobValues[monsterLevel+1]*0.1*monsterCount);
+			} else if (encounterChoice == 3) {
+				document.getElementById("encounterDescription").innerHTML = "Level: "+hazardLevel;
+			} else if (encounterChoice == 4) {
+				document.getElementById("encounterDescription").innerHTML = "The encounter is harmless. Focus on RP.";
+			} else if (encounterChoice == 5) {
+				document.getElementById("encounterDescription").innerHTML = "Nothing happens. Travel proceeds as normal.";
+			}
 		}
 
 	</script>
