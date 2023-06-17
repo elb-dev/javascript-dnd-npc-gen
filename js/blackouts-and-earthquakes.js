@@ -114,6 +114,41 @@ function arrayFix(argArray){
 	return argArray;
 }
 
+function createHolidays(){
+	var holidays = [];
+
+	//0: Date
+	//1: Description
+
+	//holidays.push(["",""]);
+
+	holidays.push(["12-21","Winter Solstice: A celebration of hunkering down for the winter. Families will get together and feast, often with hot cider, mulled wine, and roasted meats. This tradition has been around since seemingly the dawn of time."]);
+	holidays.push(["06-21","Summer Solstice: Celebration of the summer solstice varies from place to place, but usually it involves some sort of trickery. People will go door to door with buckets of water and request a drink in song. If the person beyond the door doesn’t offer any, they’ll have the water tossed on them."]);
+	holidays.push(["09-22","Fall Solstice: Though not celebrated in all regions, places with a strong drinking culture often celebrate the fall harvest by sharing barrels of ale and wine between settlements. Surprisingly, few people get drunk because the focus is on trying new drinks instead of drinking heavily."]);
+	holidays.push(["03-20","Spring Solstice: Traditionally people will admit to crushes, make proposals, or even hold romantic mixers in higher society during the spring solstice. It’s seen as the season of blooming love."]);
+	holidays.push(["01-01","New Year: The first day of the year. People will stay up until sunrise to celebrate the dawn of the new year, before passing out drunk. In more rural areas, they often party around a bonfire."]);
+	holidays.push(["01-01","This is a test holiday and should be removed."]);
+	holidays.push(["01-28","Day of the Great Flame: Before the Great War, when worship of the Gods was much more commonplace, where the worship of Ajebyu was plentiful, a great bonfire would be set aflame outdoors in a controlled environment, any and all people welcome to engage as an Ajebyu priest would speak a hymn before a great celebration was to take place after, accompanied by food, music, dance (and a lot of alcohol)."]);
+	holidays.push(["08-29","Stone Day: 3600 years ago, a nobleman hired a vagrant to secret his son, Horacio Vas Baringer, away during the night to avoid death in a coup. Discovered on the road, the vagrant protected Horacio with his own body while a group of conspirators attacked. They pierced the vagrant’s back with spears and swords, leaving him like a pin cushion, then left before checking whether or not Horacio had survived. Horacio went on to become a priest of Ajebyu and canonized the vagrant into legend. Now Stone Day, people remember those who have protected them and lost their lives. Churches of Ajebyu will hold vigils for soldiers lost in war."]);
+	holidays.push(["12-12","Day of Last Words: Priests and clerics would go around offering people a chance to speak with their loved ones who had died in the previous year, while those who could not afford such services would often just pray for their dearly departed. These days the services offered by priests and clerics are usually only available in cities, and are prohibitively expensive."]);
+	holidays.push(["02-13","Loftensay: Over 6000 years ago, a woman named Umbrana Kossining attempted to flee the ancient war torn city of Luso Da with a group of 22 street children. Though the attacking city state of Gordroni’i was allowing refugees to leave, street children were being rounded up as slaves. Through a miracle of Dinion, Umbrana was able to produce a document proving her blood ties to all 22 children, despite those blood ties going back over 10 generations at times, and was able to leave the city with the children. Though history is unsure whether this story is fact or folk tale, followers of Dinion will celebrate their mothers and found mothers through gestures of gift and song."]);
+	holidays.push(["04-05","Seedling Day: To commemorate one of the oldest Trosmu hymns, a story in which a poor man named Kezekiah prayed to Trosmu, and a tree grew to destroy the palace of a corrupt king, families will often go and plant a tree. Sometimes it will be on their own land, but most often out in the forests. Many people claim Seedling Day has been co-opted by the lumber industry and no longer celebrate it."]);
+	holidays.push(["11-17","The Hallowed Hunger: 1700 years ago when the Hatrion empire saw extreme food shortages due to a multi-year long drought, a priestess of Congra named Loia Pernicus devised the spell Create Food, taught it to many a mage, and managed to help the empire weather the decade long famine. In honor of her work, followers of Congra will fast on November 17th, then feast on November 18th, often opening their doors to the poor and hungry. It’s not uncommon for large swaths of people to flock to certain wealthy houses on November 18th for festivities and free food and drink."]);
+	holidays.push(["11-18","The Hallowed Hunger: 1700 years ago when the Hatrion empire saw extreme food shortages due to a multi-year long drought, a priestess of Congra named Loia Pernicus devised the spell Create Food, taught it to many a mage, and managed to help the empire weather the decade long famine. In honor of her work, followers of Congra will fast on November 17th, then feast on November 18th, often opening their doors to the poor and hungry. It’s not uncommon for large swaths of people to flock to certain wealthy houses on November 18th for festivities and free food and drink."]);
+	holidays.push(["12-28","The Long Sleep: With many animals going into hibernation for the winter, followers of Etmen will often spend time at home with their families. During this quiet holiday, traditional family recipes will be cooked, stories will be passed down from generation to generation, and people will simply rest."]);
+	holidays.push(["10-24","Memoria: A tradition steeped in the old Evnochian saying, “I speak my sword to memory so its edge never dulls,” involves children spending the week prior memorizing hymns of Evnoch and reciting them for congregations on the day of Memoria. These hymns are typically chosen as a lesson for the child, or hymns that hold great truths and power. It’s not uncommon for a kid to discover a magical aptitude during one of these ceremonies due to reciting a spell, though this has become much more rare since the divine war."]);
+	holidays.push(["03-27","Day of Riddles: A tradition started by Saint Meriwether Mac Domhnaill over 500 years ago, people will challenge each other with riddles, often as a form of bet, where everyone throws in some coin, and the riddler gives a riddle. Whoever can figure out the riddle first gets the pot. If no one solves it within five minutes, the riddler gets the pot. It’s not uncommon for someone to get egged for giving a seemingly impossible riddle."]);
+	holidays.push(["07-02","Rites of Conveyance: An all-day celebration of the artistic endeavors that those that follow Ilo have accomplished within the last year. Musical festivals, poetry readings, and art exhibitions hosted by the faithful are commonplace from morning, through night, and until the light of the following sunrise."]);
+	holidays.push(["10-15","Day of Remembrance: The anniversary of the divine war. Although most places use it for quiet vigils, some areas use it as an excuse to party, though these parties tend to end up highly drunken. It’s not uncommon for cities to hold candle light parades in the evening, acting as one large funeral."]);
+	holidays.push(["05-09","Liberation Day: 900 years ago, after 203 years of war with the Mocc Empire from North Cycin, the Mocc Empire finally relinquished their false claim over Granlund and retreated, liberating the many people and places from slavery and domination. Although many years later the Mocc Empire is no more, on May 9th people will celebrate Granlund’s strength. Not all places celebrate this holiday after the divine war."]);
+	holidays.push(["11-05","Marty Lou Batallia's Birthday, born November 5th, 23 AW"]);
+	holidays.push(["08-01","Nicholyde Armund's Birthday, born August 1st, 21 AW"]);
+	holidays.push(["08-07","Ungrim Oakheart's Birthday, born August 7th, 15 AW"]);
+	holidays.push(["04-07","Daumantas Frinz's Birthday, born April 7th, 10 AW"]);
+
+	return holidays;
+}
+
 function createBlackouts(){
 	var blackouts = [];
 

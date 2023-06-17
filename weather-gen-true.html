@@ -62,11 +62,16 @@
 		<input id="date" type="date" value="0049-01-01" />
 		<br>
 		<input type="button" onclick="generateWeather()" value="GENERATE WEATHER">
+		<h2>Weather</h2>
 		<p id="weatherOutput"></p>
 		<p id="weatherTempDay"></p>
 		<p id="weatherTempNight"></p>
 		<p id="weatherEffect"></p>
+		<h2>Holidays</h2>
+		<div id="holiday"></div>
+		<h2>Blackout</h2>
 		<p id="blackout"></p>
+		<h2>Earthquake</h2>
 		<p id="earthquake"></p>
 	</main>
 	<footer class="bookend" id="footer">
@@ -83,6 +88,7 @@
 
 		var blackouts = createBlackouts();
 		var earthquakes = createEarthquakes();
+		var holidays = createHolidays();
 
 		function dateToDay(myDate){
 			let monthLengths = [31,28,31,30,31,30,31,31,30,31,30,31];
@@ -432,6 +438,17 @@
 				}
 			}
 
+			//Holidays 
+			let chosenHolidays = [];
+			let dateNoYear = document.getElementById("date").value;
+			dateNoYear = dateNoYear.split("-")[1]+"-"+dateNoYear.split("-")[2]
+			for(let n = 0; n < holidays.length; n++){
+				if (holidays[n][0] == dateNoYear){
+					chosenHolidays.push(n);
+				}
+			}
+			console.log(chosenHolidays.length);
+
 			//Putting it on the page
 			document.getElementById("weatherOutput").innerHTML = document.getElementById("date").value;
 			if (raining == true){
@@ -453,13 +470,22 @@
 			if(chosenBlackout != -1){
 				document.getElementById("blackout").innerHTML = "Blackout at "+blackouts[chosenBlackout][1]+" for "+blackouts[chosenBlackout][2]+"/"+blackouts[chosenBlackout][3]+" rounds";
 			} else {
-				document.getElementById("blackout").innerHTML = "";
+				document.getElementById("blackout").innerHTML = "Nothing";
 			}
 
 			if(chosenEarthquake != -1){
 				document.getElementById("earthquake").innerHTML = "Magnitude "+earthquakes[chosenEarthquake][5]+" earthquake at "+earthquakes[chosenEarthquake][1]+" for "+earthquakes[chosenEarthquake][2]+"/"+earthquakes[chosenEarthquake][3]+" rounds in the "+earthquakes[chosenEarthquake][4]+" region. "+earthquakeDescriptions[earthquakes[chosenEarthquake][5]-2]+" "+earthquakes[chosenEarthquake][6];
 			} else {
-				document.getElementById("earthquake").innerHTML = "";
+				document.getElementById("earthquake").innerHTML = "Nothing";
+			}
+
+			document.getElementById("holiday").innerHTML = ""
+			if(chosenHolidays.length > 0){
+				for(let n = 0; n < chosenHolidays.length; n++){
+					document.getElementById("holiday").innerHTML += "<p>"+holidays[chosenHolidays[n]][1]+"</p>";
+				}
+			} else {
+				document.getElementById("holiday").innerHTML += "<p>Nothing</p>";
 			}
 		}
 
