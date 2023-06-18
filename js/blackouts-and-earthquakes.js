@@ -144,6 +144,21 @@ function createHolidays(){
 	holidays.push(["08-01","Nicholyde Armund's Birthday, born August 1st, 21 AW"]);
 	holidays.push(["08-07","Ungrim Oakheart's Birthday, born August 7th, 15 AW"]);
 	holidays.push(["04-07","Daumantas Frinz's Birthday, born April 7th, 10 AW"]);
+	holidays.push(["02-16","Darian Frinz's Birthday, born February 16th, 34 AW"]);
+	holidays.push(["03-09","Mina Frinz's Birthday, born March 9th, 32 AW"]);
+	holidays.push(["07-30","Ralph Frinz's Birthday, born July 30th, 38 AW"]);
+	holidays.push(["11-15","Sybella Frinz's Birthday, born November 15th, 11 AW"]);
+	holidays.push(["09-25","Bartholomew Batallia's Birthday, born September 25th, 3 AW"]);
+	holidays.push(["03-04","Loletta Batallia's Birthday, born March 4th, 5 AW"]);
+	holidays.push(["07-31","Halimath Batallia's Birthday, born July 31st, 21 AW"]);
+	holidays.push(["12-19","Baelitae Batallia's Birthday, born December 19th, 26 AW"]);
+	holidays.push(["05-26","Enoka Batallia's Birthday, born May 26, 22 AW"]);
+	holidays.push(["02-25","Odezza Batallia's Birthday, born February 25th, 26 AW"]);
+	holidays.push(["12-26","Charlotte Bakker's Birthday, born December 26th, 10 BW"]);
+	holidays.push(["02-17","Maedrew Faloria's Birthday, born February 17th, 45 BW"]);
+	holidays.push(["04-23","Rhoda Meinhardt's Birthday, born April 23rd, 19 AW"]);
+	holidays.push(["05-22","Lianna Oakheart's Birthday, born May 22nd, 8 BW"]);
+	holidays.push(["06-23","??? Oakheart's Birthday, born June 23rd, 7 BW"]);
 
 	return holidays;
 }
