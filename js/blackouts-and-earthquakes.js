@@ -154,6 +154,7 @@ function createHolidays(){
 	holidays.push(["12-19","Baelitae Batallia's Birthday, born December 19th, 26 AW"]);
 	holidays.push(["05-26","Enoka Batallia's Birthday, born May 26, 22 AW"]);
 	holidays.push(["02-25","Odezza Batallia's Birthday, born February 25th, 26 AW"]);
+	holidays.push(["03-20","Fiona Baowitz's Birthday, born March 20th, 21 AW"]);
 	holidays.push(["12-26","Charlotte Bakker's Birthday, born December 26th, 10 BW"]);
 	holidays.push(["02-17","Maedrew Faloria's Birthday, born February 17th, 45 BW"]);
 	holidays.push(["04-23","Rhoda Meinhardt's Birthday, born April 23rd, 19 AW"]);
