@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+	<title>ELB's Pathfinder Tools</title>
+</head>
+<body>
+	<header class="bookend" id="header">
+		<h1><a href="/javascript-dnd-npc-gen">ELB's Pathfinder Tools</a></h1>
+		<nav>
+			<ul>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/npc-gen-upgraded">NPC Gen</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/npc-gen-ex-granlund">NPC Gen: Ex-Granlund</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/weather-gen">Weather Generator</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/settlement-gen">Settlement Generator</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/encounter-gen">Encounter Generator</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/dice-roller">Dice Roller</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main class = "main">
+		<div>
+			<input type="text" placeholder="Dice Name" class="diceName">
+			<input type="text" placeholder="multiplier (default 1)" class="diceCount">
+			<input type="text" placeholder="count (default 1)" class="diceMultiplier">
+			d
+			<input type="text" placeholder="d# (default d20)" class="diceFaces">
+			+
+			<input type="text" placeholder="modifier 1 (default 0)" class="diceMod1">
+			+
+			<input type="text" placeholder="modifier 2 (default 0)" class="diceMod2">
+			+
+			<input type="text" placeholder="modifier 3 (default 0)" class="diceMod3">
+			VS DC
+			<input type="text" placeholder="DC value (default 10)" class="diceDc">
+			<input type="button" value="ROLL" onclick="rollTheDice('0')">
+			<p class="diceOutput">Total: 0 | Critical Failure: 0, Failure: 0, Success: 0, Critical Success: 0</p>
+		</div>
+		<div style="background-color: #e6cea5">
+			<input type="text" placeholder="Dice Name" class="diceName">
+			<input type="text" placeholder="multiplier (default 1)" class="diceCount">
+			<input type="text" placeholder="count (default 1)" class="diceMultiplier">
+			d
+			<input type="text" placeholder="d# (default d20)" class="diceFaces">
+			+
+			<input type="text" placeholder="modifier 1 (default 0)" class="diceMod1">
+			+
+			<input type="text" placeholder="modifier 2 (default 0)" class="diceMod2">
+			+
+			<input type="text" placeholder="modifier 3 (default 0)" class="diceMod3">
+			VS DC
+			<input type="text" placeholder="DC value (default 10)" class="diceDc">
+			<input type="button" value="ROLL" onclick="rollTheDice('1')">
+			<p class="diceOutput">Total: 0 | Critical Failure: 0, Failure: 0, Success: 0, Critical Success: 0</p>
+		</div>
+		<div>
+			<input type="text" placeholder="Dice Name" class="diceName">
+			<input type="text" placeholder="multiplier (default 1)" class="diceCount">
+			<input type="text" placeholder="count (default 1)" class="diceMultiplier">
+			d
+			<input type="text" placeholder="d# (default d20)" class="diceFaces">
+			+
+			<input type="text" placeholder="modifier 1 (default 0)" class="diceMod1">
+			+
+			<input type="text" placeholder="modifier 2 (default 0)" class="diceMod2">
+			+
+			<input type="text" placeholder="modifier 3 (default 0)" class="diceMod3">
+			VS DC
+			<input type="text" placeholder="DC value (default 10)" class="diceDc">
+			<input type="button" value="ROLL" onclick="rollTheDice('2')">
+			<p class="diceOutput">Total: 0 | Critical Failure: 0, Failure: 0, Success: 0, Critical Success: 0</p>
+		</div>
+		<div style="background-color: #e6cea5">
+			<input type="text" placeholder="Dice Name" class="diceName">
+			<input type="text" placeholder="multiplier (default 1)" class="diceCount">
+			<input type="text" placeholder="count (default 1)" class="diceMultiplier">
+			d
+			<input type="text" placeholder="d# (default d20)" class="diceFaces">
+			+
+			<input type="text" placeholder="modifier 1 (default 0)" class="diceMod1">
+			+
+			<input type="text" placeholder="modifier 2 (default 0)" class="diceMod2">
+			+
+			<input type="text" placeholder="modifier 3 (default 0)" class="diceMod3">
+			VS DC
+			<input type="text" placeholder="DC value (default 10)" class="diceDc">
+			<input type="button" value="ROLL" onclick="rollTheDice('3')">
+			<p class="diceOutput">Total: 0 | Critical Failure: 0, Failure: 0, Success: 0, Critical Success: 0</p>
+		</div>
+		<div>
+			<input type="text" placeholder="Dice Name" class="diceName">
+			<input type="text" placeholder="multiplier (default 1)" class="diceCount">
+			<input type="text" placeholder="count (default 1)" class="diceMultiplier">
+			d
+			<input type="text" placeholder="d# (default d20)" class="diceFaces">
+			+
+			<input type="text" placeholder="modifier 1 (default 0)" class="diceMod1">
+			+
+			<input type="text" placeholder="modifier 2 (default 0)" class="diceMod2">
+			+
+			<input type="text" placeholder="modifier 3 (default 0)" class="diceMod3">
+			VS DC
+			<input type="text" placeholder="DC value (default 10)" class="diceDc">
+			<input type="button" value="ROLL" onclick="rollTheDice('4')">
+			<p class="diceOutput">Total: 0 | Critical Failure: 0, Failure: 0, Success: 0, Critical Success: 0</p>
+		</div>
+		<div style="background-color: #e6cea5">
+			<input type="text" placeholder="Dice Name" class="diceName">
+			<input type="text" placeholder="multiplier (default 1)" class="diceCount">
+			<input type="text" placeholder="count (default 1)" class="diceMultiplier">
+			d
+			<input type="text" placeholder="d# (default d20)" class="diceFaces">
+			+
+			<input type="text" placeholder="modifier 1 (default 0)" class="diceMod1">
+			+
+			<input type="text" placeholder="modifier 2 (default 0)" class="diceMod2">
+			+
+			<input type="text" placeholder="modifier 3 (default 0)" class="diceMod3">
+			VS DC
+			<input type="text" placeholder="DC value (default 10)" class="diceDc">
+			<input type="button" value="ROLL" onclick="rollTheDice('5')">
+			<p class="diceOutput">Total: 0 | Critical Failure: 0, Failure: 0, Success: 0, Critical Success: 0</p>
+		</div>
+		<div>
+			<input type="text" placeholder="Dice Name" class="diceName">
+			<input type="text" placeholder="multiplier (default 1)" class="diceCount">
+			<input type="text" placeholder="count (default 1)" class="diceMultiplier">
+			d
+			<input type="text" placeholder="d# (default d20)" class="diceFaces">
+			+
+			<input type="text" placeholder="modifier 1 (default 0)" class="diceMod1">
+			+
+			<input type="text" placeholder="modifier 2 (default 0)" class="diceMod2">
+			+
+			<input type="text" placeholder="modifier 3 (default 0)" class="diceMod3">
+			VS DC
+			<input type="text" placeholder="DC value (default 10)" class="diceDc">
+			<input type="button" value="ROLL" onclick="rollTheDice('6')">
+			<p class="diceOutput">Total: 0 | Critical Failure: 0, Failure: 0, Success: 0, Critical Success: 0</p>
+		</div>
+		<div style="background-color: #e6cea5">
+			<input type="text" placeholder="Dice Name" class="diceName">
+			<input type="text" placeholder="multiplier (default 1)" class="diceCount">
+			<input type="text" placeholder="count (default 1)" class="diceMultiplier">
+			d
+			<input type="text" placeholder="d# (default d20)" class="diceFaces">
+			+
+			<input type="text" placeholder="modifier 1 (default 0)" class="diceMod1">
+			+
+			<input type="text" placeholder="modifier 2 (default 0)" class="diceMod2">
+			+
+			<input type="text" placeholder="modifier 3 (default 0)" class="diceMod3">
+			VS DC
+			<input type="text" placeholder="DC value (default 10)" class="diceDc">
+			<input type="button" value="ROLL" onclick="rollTheDice('7')">
+			<p class="diceOutput">Total: 0 | Critical Failure: 0, Failure: 0, Success: 0, Critical Success: 0</p>
+		</div>
+		<div>
+			<input type="text" placeholder="Dice Name" class="diceName">
+			<input type="text" placeholder="multiplier (default 1)" class="diceCount">
+			<input type="text" placeholder="count (default 1)" class="diceMultiplier">
+			d
+			<input type="text" placeholder="d# (default d20)" class="diceFaces">
+			+
+			<input type="text" placeholder="modifier 1 (default 0)" class="diceMod1">
+			+
+			<input type="text" placeholder="modifier 2 (default 0)" class="diceMod2">
+			+
+			<input type="text" placeholder="modifier 3 (default 0)" class="diceMod3">
+			VS DC
+			<input type="text" placeholder="DC value (default 10)" class="diceDc">
+			<input type="button" value="ROLL" onclick="rollTheDice('8')">
+			<p class="diceOutput">Total: 0 | Critical Failure: 0, Failure: 0, Success: 0, Critical Success: 0</p>
+		</div>
+		<div style="background-color: #e6cea5">
+			<input type="text" placeholder="Dice Name" class="diceName">
+			<input type="text" placeholder="multiplier (default 1)" class="diceCount">
+			<input type="text" placeholder="count (default 1)" class="diceMultiplier">
+			d
+			<input type="text" placeholder="d# (default d20)" class="diceFaces">
+			+
+			<input type="text" placeholder="modifier 1 (default 0)" class="diceMod1">
+			+
+			<input type="text" placeholder="modifier 2 (default 0)" class="diceMod2">
+			+
+			<input type="text" placeholder="modifier 3 (default 0)" class="diceMod3">
+			VS DC
+			<input type="text" placeholder="DC value (default 10)" class="diceDc">
+			<input type="button" value="ROLL" onclick="rollTheDice('9')">
+			<p class="diceOutput">Total: 0 | Critical Failure: 0, Failure: 0, Success: 0, Critical Success: 0</p>
+		</div>
+
+	</main>
+	<footer class="bookend" id="footer">
+		<ul id="footerul">
+			<li id="copyright">&copy; 2018-YEAR ELB</li>
+			<li><a href="https://github.com/elb-dev/javascript-dnd-npc-gen">Github</a></li>
+			<li><a href="https://github.com/elb-dev/javascript-dnd-npc-gen/blob/master/LICENSE">License</a></li>
+		</ul>
+	</footer>
+
+	<script type="text/javascript" src = "js/functions.js"></script>
+	<script type="text/javascript">
+
+		function duplicateDice(){
+
+		}
+
+		function rollTheDice(argDie){
+			var count = 1;
+			var multiplier = 1;
+			var faces = 20;
+			var modifier1 = 0;
+			var modifier2 = 0;
+			var modifier3 = 0;
+			var dc = 10;
+			var successTypes = ["Critical Failure","Failure","Success","Critical Success"];
+
+			var myCount = document.getElementsByClassName("diceCount")[argDie].value;
+			var myMultiplier = document.getElementsByClassName("diceMultiplier")[argDie].value;
+			var myFaces = document.getElementsByClassName("diceFaces")[argDie].value;
+			var myModifier1 = document.getElementsByClassName("diceMod1")[argDie].value;
+			var myModifier2 = document.getElementsByClassName("diceMod2")[argDie].value;
+			var myModifier3 = document.getElementsByClassName("diceMod3")[argDie].value;
+			var myDc = document.getElementsByClassName("diceDc")[argDie].value;
+
+			if(Number.isInteger(Number(myCount)) && myCount != ""){
+				count = Number(myCount);
+			}
+			if(Number.isInteger(Number(myMultiplier)) && myMultiplier != ""){
+				multiplier = Number(myMultiplier);
+			}
+			if(Number.isInteger(Number(myFaces)) && myFaces != ""){
+				faces = Number(myFaces);
+			}
+			if(Number.isInteger(Number(myModifier1)) && myModifier1 != ""){
+				modifier1 = Number(myModifier1);
+			}
+			if(Number.isInteger(Number(myModifier2)) && myModifier2 != ""){
+				modifier2 = Number(myModifier2);
+			}
+			if(Number.isInteger(Number(myModifier3)) && myModifier3 != ""){
+				modifier3 = Number(myModifier3);
+			}
+			if(Number.isInteger(Number(myDc)) && myDc != ""){
+				dc = Number(myDc);
+			}
+
+			var diceMessages = [];
+			var successCounts = [0,0,0,0];
+			var diceAbsoluteTotal = 0;
+			for(let i = 0; i < count; i++){
+				let diceValue = diceRoll(multiplier, faces);
+				let diceTotal = diceValue+modifier1+modifier2+modifier3;
+				diceAbsoluteTotal += diceTotal;
+
+				let difference = diceTotal-dc;
+				let successRate = 0;
+				if(difference < -10){
+					successRate = 0;
+				}else if(difference == clamp(-10,-1,difference)){
+					successRate = 1;
+				}else if(difference == clamp(0,9,difference)){
+					successRate = 2;
+				}else if(difference > 9){
+					successRate = 3;
+				}
+				if(diceValue == 1){
+					successRate = clamp(0,3,successRate-1);
+				}
+				if(diceValue == 20){
+					successRate = clamp(0,3,successRate+1);
+				}
+
+				diceMessages[i] = diceValue;
+				if(modifier1 != 0){
+					diceMessages[i] += " + "+modifier1;
+				}
+				if(modifier2 != 0){
+					diceMessages[i] += " + "+modifier2;
+				}
+				if(modifier3 != 0){
+					diceMessages[i] += " + "+modifier3;
+				}
+				if(diceValue != diceTotal){
+					diceMessages[i] += " = "+diceTotal
+				}
+				diceMessages[i] += ": "+successTypes[successRate];
+				successCounts[successRate] += 1;
+			}
+			document.getElementsByClassName("diceOutput")[argDie].innerHTML = "Total: "+diceAbsoluteTotal+" | Critical Failure: "+successCounts[0]+", Failure: "+successCounts[1]+", Success: "+successCounts[2]+", Critical Success: "+successCounts[3];
+
+			console.log("ROLLS START");
+			console.log("DC:"+dc);
+			console.log(diceAbsoluteTotal);
+			console.log(successCounts);
+			console.log(diceMessages);
+			console.log("ROLLS END");
+			
+		}
+
+		var date = new Date();
+		const YEAR = date.getFullYear();
+		//Things in the footer
+		document.querySelector("#copyright").innerHTML = '&copy; 2018-' + YEAR + ' ELB';
+		console.log('&copy; 2018-\${YEAR} ELB')
+
+	</script>
+
+</body>
+</html>
