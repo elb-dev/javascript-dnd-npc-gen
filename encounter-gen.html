@@ -21,6 +21,7 @@
 		</nav>
 	</header>
 	<main class = "main-gen">
+		<h1>Generator</h1>
 		<p>Biome/Settlement</p>
 		<select id="biome">
 			<option value=0>Tropical Rainforest</option>
@@ -35,10 +36,55 @@
 			<option value=9>Ocean</option>
 			<option value=10>Miasma</option>
 		</select>
+		<select id="road">
+			<option value=0>On Road</option>
+			<option value=1>Off Road</option>
+		</select>
+		<select id="jobs">
+			<option value=0>Seeking Jobs</option>
+			<option value=1>Not Seeking Jobs</option>
+		</select>
 		<br>
 		<input type="button" onclick="generateEncounter()" value="GENERATE ENCOUNTER">
 		<p id="encounterTitle"></p>
 		<p id="encounterDescription"></p>
+		<p id="senseDirection"></p>
+		<p id="senseDirectionNormal"></p>
+		<p id="senseDirectionHard"></p>
+		<p id="senseDirectionVery"></p>
+		<p id="senseDirectionExtreme"></p>
+		<br>
+		<h1>Travel Activities</h1>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=511" target="_blank"><p>Avoid Notice</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=65" target="_blank"><p>Cover Tracks</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=512" target="_blank"><p>Defend</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=513" target="_blank"><p>Detect Magic</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=515" target="_blank"><p>Hustle</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=516" target="_blank"><p>Investigate</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=518" target="_blank"><p>Scout</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=519" target="_blank"><p>Search</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=64" target="_blank"><p>Sense Direction</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=66" target="_blank"><p>Track</p></a>
+		<br>
+		<h1>Other Exploration Activities</h1>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=520" target="_blank"><p>Affix a Talisman</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=32" target="_blank"><p>Borrow an Arcane Spell</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=601" target="_blank"><p>Call Companion</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=52" target="_blank"><p>Coerce</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=22" target="_blank"><p>Decipher Writing</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=514" target="_blank"><p>Follow the Expert</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=49" target="_blank"><p>Gather Information</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=44" target="_blank"><p>Identify Alchemy</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=24" target="_blank"><p>Identify Magic</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=46" target="_blank"><p>Impersonate</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=25" target="_blank"><p>Learn a Spell</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=50" target="_blank"><p>Make an Impression</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=544" target="_blank"><p>Pursue a Lead</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=71" target="_blank"><p>Refocus</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=42" target="_blank"><p>Repair</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=517" target="_blank"><p>Repeat a Spell</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=31" target="_blank"><p>Squeeze</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=57" target="_blank"><p>Treat Wounds</p></a>
 	</main>
 	<footer class="bookend" id="footer">
 		<ul id="footerul">
@@ -55,37 +101,50 @@
 
 			//Main Variables
 			var currentBiome = document.getElementById("biome").value;
+			var road = document.getElementById("road").value;
+			var jobs = document.getElementById("jobs").value;
 			var jobValues = [10,25,40,70,120,200,320,500,720,1000,1400,2000,2800,4000,6000,9000,13000,20000,30000,48000,80000,140000];
 
-			//Chances For Each Encounter Type
+			//Chances For Each Encounter Type, assumes both road and seeking jobs
 			if (currentBiome >= 0 && currentBiome <= 6){
-				var monsterAttack = 2;
-				var banditAttack = 1;
-				var monsterJob = 2;
-				var hazard = 5;
-				var harmless = 5;
-				var nothing = 20;
+				var monsterAttack = 6;
+				var banditAttack = 3;
+				var monsterJob = 12;
+				var hazard = 14;
+				var harmless = 14;
+				var nothing = 51;
 			} else if (currentBiome >= 7 && currentBiome <= 8){
-				var monsterAttack = 4;
-				var banditAttack = 2;
-				var monsterJob = 4;
-				var hazard = 10;
-				var harmless = 5;
-				var nothing = 10;
+				var monsterAttack = 11;
+				var banditAttack = 6;
+				var monsterJob = 12;
+				var hazard = 29;
+				var harmless = 14;
+				var nothing = 28;
 			} else if (currentBiome == 9){
 				var monsterAttack = 1;
-				var banditAttack = 4;
+				var banditAttack = 6;
 				var monsterJob = 0;
 				var hazard = 1;
-				var harmless = 5;
-				var nothing = 60;
+				var harmless = 7;
+				var nothing = 85;
 			} else if (currentBiome == 10){
-				var monsterAttack = 20;
+				var monsterAttack = 50;
 				var banditAttack = 0;
 				var monsterJob = 0;
-				var hazard = 5;
-				var harmless = 0;
-				var nothing = 10;
+				var hazard = 14;
+				var harmless = 5;
+				var nothing = 31;
+			}
+
+			if (road == 1 && currentBiome != 9 && currentBiome != 10){
+				nothing -= monsterAttack;
+				monsterAttack *= 2;
+				monsterJob *= 0.5;
+				nothing += monsterJob;
+			}
+			if (jobs == 1){
+				nothing += monsterJob;
+				monsterJob = 0;
 			}
 
 			//Rolling Encounter Type
@@ -140,6 +199,34 @@
 			} else if (encounterChoice == 5) {
 				document.getElementById("encounterDescription").innerHTML = "Nothing happens. Travel proceeds as normal.";
 			}
+
+			var directionDc = [10,12,15,20];
+			var directionDifficulty = "Untrained Survival";
+			if (currentBiome == 0 || currentBiome == 1 || currentBiome == 3 || currentBiome == 5) {
+				directionDc = [15,17,20,25];
+				directionDifficulty = "Trained Survival";
+			} else if (currentBiome == 10) {
+				directionDc = [20,22,25,30];
+				directionDifficulty = "Expert Survival";
+			}
+			if (road == 0){
+				var directionString = "";
+				var directionStringNormal = "";
+				var directionStringHard = "";
+				var directionStringVery = "";
+				var directionStringExtreme = "";
+			} else if (road == 1){
+				var directionString = "Sense Direction DCs"
+				var directionStringNormal = "Clear Weather: "+directionDifficulty+" "+directionDc[0];
+				var directionStringHard = "Poor Weather: "+directionDifficulty+" "+directionDc[1];
+				var directionStringVery = "Stormy Weather: "+directionDifficulty+" "+directionDc[2];
+				var directionStringExtreme = "Extreme Weather: "+directionDifficulty+" "+directionDc[3];
+			}
+			document.getElementById("senseDirection").innerHTML = directionString;
+			document.getElementById("senseDirectionNormal").innerHTML = directionStringNormal;
+			document.getElementById("senseDirectionHard").innerHTML = directionStringHard;
+			document.getElementById("senseDirectionVery").innerHTML = directionStringVery;
+			document.getElementById("senseDirectionExtreme").innerHTML = directionStringExtreme;
 		}
 
 	</script>
