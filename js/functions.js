@@ -131,9 +131,24 @@ function centimetersToInches(centimeters) {
     return centimeters / 2.54;
 }
 
-converts inches to centimeters
+//converts inches to centimeters
 function inchesToCentimeters(inches) {
     return inches * 2.54;
+}
+
+//Gives a value based on a percentage, using a bellcurve
+function bellCurve(position, median, standardDeviation) {
+    if (position < 0 || position > 100) {
+        throw new Error("Position must be between 0 and 100");
+    }
+
+    // Convert the position to a value on the x-axis
+    const x = (position - median) / standardDeviation;
+
+    // Calculate the probability density function (PDF) value
+    const pdfValue = (1 / (standardDeviation * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * x * x);
+
+    return pdfValue;
 }
 
 
