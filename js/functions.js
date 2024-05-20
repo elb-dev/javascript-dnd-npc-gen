@@ -126,7 +126,15 @@ function isNumeric(str) {
         !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
 }
 
+//Converts centimeters to inches
+function centimetersToInches(centimeters) {
+    return centimeters / 2.54;
+}
 
+converts inches to centimeters
+function inchesToCentimeters(inches) {
+    return inches * 2.54;
+}
 
 
 
