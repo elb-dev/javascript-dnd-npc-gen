@@ -75,8 +75,8 @@ function statModCalc(stat){
 }
 
 function heightFormat(inches){
-    feet = Math.floor(inches/12);
-    inches = inches%12;
+    feet = Math.floor(Math.round(inches)/12);
+    inches = Math.round(inches)%12;
     output = feet + "'" + inches + '"';
     return output;
 }
@@ -136,19 +136,30 @@ function inchesToCentimeters(inches) {
     return inches * 2.54;
 }
 
-//Gives a value based on a percentage, using a bellcurve
-function bellCurve(position, median, standardDeviation) {
-    if (position < 0 || position > 100) {
-        throw new Error("Position must be between 0 and 100");
+//Gives a value based on a percentage from 0 to 1, using a bellcurve
+function bellCurveLerp(t, median, stdDev) {
+    // Ensure t is within the range [0, 1]
+    if (t < 0 || t > 1) {
+        throw new Error("The lerp value t must be between 0 and 1.");
     }
 
-    // Convert the position to a value on the x-axis
-    const x = (position - median) / standardDeviation;
+    // Calculate the z-score corresponding to the lerp value t
+    function inverseCDF(t, mean, stdDev) {
+        return mean + stdDev * Math.sqrt(2) * erfinv(2 * t - 1);
+    }
 
-    // Calculate the probability density function (PDF) value
-    const pdfValue = (1 / (standardDeviation * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * x * x);
+    // Approximation of the inverse error function
+    function erfinv(x) {
+        const a = 0.147; // Approximation constant
+        const sign = x < 0 ? -1 : 1;
+        const ln = Math.log(1 - x * x);
+        const part1 = 2 / (Math.PI * a) + ln / 2;
+        const part2 = 1 / a * ln;
 
-    return pdfValue;
+        return sign * Math.sqrt(Math.sqrt(part1 * part1 - part2) - part1);
+    }
+
+    return inverseCDF(t, median, stdDev);
 }
 
 
