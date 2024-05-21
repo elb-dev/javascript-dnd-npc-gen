@@ -20,8 +20,71 @@
 		</nav>
 	</header>
 	<main class = "main-npc">
-		<p>This character generator is specifically for my custom setting for D&D, Ex-Granlund. It will be updated over time as well to better fit the needs of my own D&D games.</p>
+		<p>This character generator is specifically for my custom setting, Ex-Granlund. It will be updated over time as well to better fit the needs of my own games.</p>
 		<p><a href="https://www.behindthename.com/random/random.php?number=1&sets=5&gender=both&surname=&randomsurname=yes&showextra=yes&usage_alb=1&usage_bas=1&usage_bre=1&usage_bul=1&usage_cat=1&usage_cro=1&usage_cze=1&usage_dan=1&usage_dut=1&usage_eng=1&usage_est=1&usage_fin=1&usage_fre=1&usage_fri=1&usage_gal=1&usage_geo=1&usage_ger=1&usage_gre=1&usage_hun=1&usage_iri=1&usage_ita=1&usage_lat=1&usage_lim=1&usage_lth=1&usage_mac=1&usage_nor=1&usage_pol=1&usage_por=1&usage_slk=1&usage_spa=1&usage_swe=1&usage_ukr=1&usage_wel=1" target="_blank">Name Generator</a></p>
+		<br>
+		<p>Age</p>
+  		<input type="text" id="age" name="age">
+  		<p>Gender</p>
+		<select id="gender">
+			<option value=-1>Random</option>
+			<option value=0>Man</option>
+			<option value=1>Woman</option>
+			<option value=2>Non-Binary</option>
+			<option value=3>Other</option>
+		</select>
+		<p>Wealth</p>
+		<select id="affluence">
+			<option value=-1>Random</option>
+			<option value=0>Poor</option>
+			<option value=1>Comfortable</option>
+			<option value=2>Fine</option>
+			<option value=3>Extravagant</option>
+		</select>
+		<p>Alignment</p>
+		<select id="lawful chaotic alignment">
+			<option value=-1>Random</option>
+			<option value=0>Lawful</option>
+			<option value=1>Neutral</option>
+			<option value=2>Chaotic</option>
+		</select>
+		<select id="good evil alignment">
+			<option value=-1>Random</option>
+			<option value=0>Good</option>
+			<option value=1>Neutral</option>
+			<option value=2>Evil</option>
+		</select>
+		<p>Ability Score Modifiers</p>
+		<select id="ability score tilt">
+			<option value=0>Normal</option>
+			<option value=1>Above Average</option>
+			<option value=2>Below Average</option>
+		</select>
+		<input type="text" id="ability score str" name="ability score str" placeholder="STR, -4 to 4">
+		<input type="text" id="ability score dex" name="ability score dex" placeholder="DEX, -4 to 4">
+		<input type="text" id="ability score con" name="ability score con" placeholder="CON, -4 to 4">
+		<input type="text" id="ability score int" name="ability score int" placeholder="INT, -4 to 4">
+		<input type="text" id="ability score wis" name="ability score wis" placeholder="WIS, -4 to 4">
+		<input type="text" id="ability score cha" name="ability score cha" placeholder="CHA, -4 to 4">
+		<p>Height</p>
+		<select id="sex">
+			<option value=-1>Calculate Height As Gender</option>
+			<option value=0>Calculate Height As Male</option>
+			<option value=1>Calculate Height As Female</option>
+			<option value=2>Calculate Height As Between</option>
+		</select>
+		<p>Fat</p>
+		<select id="fat">
+			<option value=-1>Random</option>
+			<option value=0>Extremely Low Fat</option>
+			<option value=1>Low Fat</option>
+			<option value=2>Average Fat</option>
+			<option value=3>High Fat</option>
+			<option value=4>Extremely High Fat</option>
+		</select>
+		<br>
+		<input type="button" onclick="generateNpc()" value="GENERATE NPC">
+		<br>
 		<textarea id="box" rows="21" cols="50"></textarea>
 	</main>
 	<footer class="bookend" id="footer">
@@ -37,282 +100,372 @@
 		var date = new Date();
 		const YEAR = date.getFullYear();
 
-		//Name
-		var fName = String.fromCharCode(iRandomRange(65,90));
-		var lName = String.fromCharCode(iRandomRange(65,90));
-		document.getElementById("box").innerHTML = "Name: " + fName + " " + lName;
+		function generateNpc(){
+			//Name
+			var fName = String.fromCharCode(iRandomRange(65,90));
+			var lName = String.fromCharCode(iRandomRange(65,90));
+			document.getElementById("box").innerHTML = "Name: " + fName + " " + lName;
 
-		//Age
-		var age;
-		do{
-			age = iRandomRangeBell(-36,90,4);
-		} while(age < 15)
-		document.getElementById("box").innerHTML += '\nAge: ' + age;
+			//Age
+			var age;
+			do{
+				age = iRandomRangeBell(-36,90,4);
+			} while(age < 15)
+			if (isNumeric(document.getElementById("age").value)){
+				age = document.getElementById("age").value;
+			}
+			document.getElementById("box").innerHTML += '\nAge: ' + age;
 
-		//Race
-		document.getElementById("box").innerHTML += '\nRace:';
+			//Race
+			document.getElementById("box").innerHTML += '\nRace:';
 
-		//Sex
-		var sexChoice = ["M", "F"];
-		var sex = iRandomRange(0,1);
-		document.getElementById("box").innerHTML += "\nSex: " + sexChoice[sex];
+			//Gender
+			var genderChoice = ["Man", "Woman", "Non-Binary", "Other"];
+			var gender = document.getElementById("gender").value;
+			if (gender == -1){
+				gender = iRandomRange(0,1);
+			}
+			document.getElementById("box").innerHTML += "\nGender: " + genderChoice[gender];
 
-		//Alignment
-		var alignGNE = ["Good","Neutral","Evil"];
-		var alignLNC = ["Lawful","Neutral","Chaotic"];
-		var alignGNEChoice = iRandomRange(0,2);
-		var alignLNCChoice = iRandomRange(0,2);
-		var alignment;
-		if(alignLNCChoice == 1 && alignGNEChoice == 1){
-			alignment = "True Neutral";
-		} else {
-			alignment = alignLNC[alignLNCChoice] + " " + alignGNE[alignGNEChoice];
+			//Affluence
+			let affluence = document.getElementById("affluence").value
+			if (affluence = -1){
+				affluence = diceRollDrop(2,4,true,1)-1;
+			}
+			let affluenceTypes = ["Poor", "Comfortable", "Fine", "Extravagant"];
+			document.getElementById("box").innerHTML += "\nWealth: " + affluenceTypes[affluence];
+
+			//Alignment
+			var alignGNE = ["Good","Neutral","Evil"];
+			var alignLNC = ["Lawful","Neutral","Chaotic"];
+			var alignGNEChoice = iRandomRange(0,2);
+			var alignLNCChoice = iRandomRange(0,2);
+			if (document.getElementById("good evil alignment").value != -1){
+				alignGNEChoice = document.getElementById("good evil alignment").value;
+			}
+			if (document.getElementById("lawful chaotic alignment").value != -1){
+				alignLNCChoice = document.getElementById("lawful chaotic alignment").value;
+			}
+			var alignment;
+			if(alignLNCChoice == 1 && alignGNEChoice == 1){
+				alignment = "True Neutral";
+			} else {
+				alignment = alignLNC[alignLNCChoice] + " " + alignGNE[alignGNEChoice];
+			}
+			document.getElementById("box").innerHTML += '\nAlignment: ' + alignment;
+
+			//Stats
+			if (document.getElementById("ability score tilt").value == 0){
+				var statStrength = diceRoll(3,6);
+				var statDexterity = diceRoll(3,6);
+				var statConstitution = diceRoll(3,6);
+				var statIntelligence = diceRoll(3,6);
+				var statWisdom = diceRoll(3,6);
+				var statCharisma = diceRoll(3,6);
+			} else if (document.getElementById("ability score tilt").value == 1){
+				var statStrength = diceRollDrop(4,6,false,1);
+				var statDexterity = diceRollDrop(4,6,false,1);
+				var statConstitution = diceRollDrop(4,6,false,1);
+				var statIntelligence = diceRollDrop(4,6,false,1);
+				var statWisdom = diceRollDrop(4,6,false,1);
+				var statCharisma = diceRollDrop(4,6,false,1);
+			} else if (document.getElementById("ability score tilt").value == 2){
+				var statStrength = diceRollDrop(4,6,true,1);
+				var statDexterity = diceRollDrop(4,6,true,1);
+				var statConstitution = diceRollDrop(4,6,true,1);
+				var statIntelligence = diceRollDrop(4,6,true,1);
+				var statWisdom = diceRollDrop(4,6,true,1);
+				var statCharisma = diceRollDrop(4,6,true,1);
+			}
+
+			statStrength = statModCalc(statStrength);
+			statDexterity = statModCalc(statDexterity);
+			statConstitution = statModCalc(statConstitution);
+			statIntelligence = statModCalc(statIntelligence);
+			statWisdom = statModCalc(statWisdom);
+			statCharisma = statModCalc(statCharisma);
+
+			if (isNumeric(document.getElementById("ability score str").value)){
+				statStrength = document.getElementById("ability score str").value;
+				statStrength = Math.round(statStrength);
+				statStrength = clamp(-4,4,statStrength);
+			}
+			if (isNumeric(document.getElementById("ability score dex").value)){
+				statDexterity = document.getElementById("ability score dex").value;
+				statDexterity = Math.round(statDexterity);
+				statDexterity = clamp(-4,4,statDexterity);
+			}
+			if (isNumeric(document.getElementById("ability score con").value)){
+				statConstitution = document.getElementById("ability score con").value;
+				statConstitution = Math.round(statConstitution);
+				statConstitution = clamp(-4,4,statConstitution);
+			}
+			if (isNumeric(document.getElementById("ability score int").value)){
+				statIntelligence = document.getElementById("ability score int").value;
+				statIntelligence = Math.round(statIntelligence);
+				statIntelligence = clamp(-4,4,statIntelligence);
+			}
+			if (isNumeric(document.getElementById("ability score wis").value)){
+				statWisdom = document.getElementById("ability score wis").value;
+				statWisdom = Math.round(statWisdom);
+				statWisdom = clamp(-4,4,statWisdom);
+			}
+			if (isNumeric(document.getElementById("ability score cha").value)){
+				statCharisma = document.getElementById("ability score cha").value;
+				statConstitution = Math.round(statConstitution);
+				statConstitution = clamp(-4,4,statConstitution);
+			}
+			document.getElementById("box").innerHTML += "\nSTR: " + statStrength + " DEX: " + statDexterity + " CON: " + statConstitution + " INT: " + statIntelligence + " WIS: " + statWisdom + " CHA: " + statCharisma;
+
+			//Class/Occupation
+			document.getElementById("box").innerHTML += "\nClass/Occupation: Doorknob Licker";
+
+			//True height range is 105 to 241
+
+			//Height
+			let sex = document.getElementById("sex").value;
+			if (sex == -1){
+				sex = gender;
+			}
+			if (sex == 3){
+				sex = 2;
+			}
+			let heightMedians = [178.4,164.7,171.55];
+			let heightDeviations = [7.59,7.07,7.33]
+			let heightPosition = randomRange(0,100)*0.01;
+			let heightCentimeters = bellCurveLerp(heightPosition,heightMedians[sex],heightDeviations[sex]);
+			let heightInches = centimetersToInches(heightCentimeters);
+			let heightFeetAndInches = heightFormat(heightInches);
+			document.getElementById("box").innerHTML += "\nHeight: " + heightFeetAndInches + " - " + Math.round(heightCentimeters) + " cm";
+
+			//Build
+			var buildMale = 
+			[["Malnourished","Boney","Boney","Gangly","Gangly","Athletic","Muscular","Buff","Body Builder"],
+			["Twig","Twig","Twig","Lithe","Lithe","Athletic","Muscular","Buff","Strong Man"],
+			["Chubby","Chubby","Chubby","Average","Average","Average","Athletic","Hardy","Strong Man"],
+			["Fat","Fat","Fat","Husky","Husky","Husky","Hardy","Hardy","Hardy"],
+			["Obese","Obese","Obese","Obese","Obese","Obese","Obese","Obese","Bear Wrestler"]];
+			var buildFemale = 
+			[["Malnourished","Boney","Boney","Gangly","Gangly","Athletic","Athletic","Built","Body Builder"],
+			["Twig","Twig","Twig","Lithe","Lithe","Athletic","Athletic","Built","Strong Woman"],
+			["Chubby","Chubby","Chubby","Curvy","Curvy","Curvy","Athletic","Built","Strong Woman"],
+			["Fat","Fat","Fat","Heavy Set","Thicc","Thicc","Thicc","Strong Woman","Strong Woman"],
+			["Obese","Obese","Obese","Obese","Obese","Obese","Obese","Obese","Bear Wrestler"]];
+			var buildNeutral = 
+			[["Malnourished","Boney","Boney","Gangly","Gangly","Athletic","Athletic","Built","Body Builder"],
+			["Twig","Twig","Twig","Lithe","Lithe","Athletic","Athletic","Built","Strong Person"],
+			["Chubby","Chubby","Chubby","Thicc","Thicc","Thicc","Athletic","Built","Strong Person"],
+			["Fat","Fat","Fat","Heavy Set","Thicc","Thicc","Thicc","Built","Strong Person"],
+			["Obese","Obese","Obese","Obese","Obese","Obese","Obese","Obese","Bear Wrestler"]];
+			var builds = [buildMale,buildFemale,buildNeutral];
+
+			let buildFat = document.getElementById("fat").value;
+			if (buildFat == -1){
+				buildFat = diceRollDrop(2,5,true,1)-1;
+			}
+			let buildStr = statStrength+4;
+			document.getElementById("box").innerHTML += "\nBuild: " + builds[sex][buildFat][buildStr];
+
+			//Appearance - Accessories
+			var appearanceAccessories = 
+			["Distinctive Jewelry",
+			"Piercings",
+			"Pocket watch",
+			"A nice ring",
+			"Several rings",
+			"A religious necklace",
+			"A hood",
+			"A small hat",
+			"A wide brimmed hat",
+			"A distinct hat",
+			"Body paint",
+			"A scarf"];
+			document.getElementById("box").innerHTML += "\nAppearance Accessories: " + appearanceAccessories[iRandomRange(0,appearanceAccessories.length-1)];
+
+			//Appearance - Fashion
+			var appearanceFashion = 
+			["Flamboyant or outlandish clothing",
+			"Formal, clean clothes",
+			"Ragged, dirty clothes",
+			"Old bad fashioned clothes",
+			"Modern professional fashion",
+			"Modern youth fashion",
+			"Functional clothing",
+			"Traditional clothing"];
+			document.getElementById("box").innerHTML += "\nAppearance Fashion: " + appearanceFashion[iRandomRange(0,appearanceFashion.length-1)];
+
+			//Appearance - Form
+			var appearanceForm = 
+			["Pronounced scar",
+			"Missing teeth",
+			"Missing fingers",
+			"Unusual eye color",
+			"Nervous eye twitch",
+			"Birthmark",
+			"Unusual skin color",
+			"Braided beard or hair",
+			"Unusual hair color",
+			"Distinctive nose",
+			"Distinctive posture"];
+			document.getElementById("box").innerHTML += "\nAppearance Form: " + appearanceForm[iRandomRange(0,appearanceForm.length-1)];
+
+			//Talent
+			var talent = 
+			["Plays a musical instrument",
+			"Speaks several languages fluently",
+			"Unbelieveably lucky",
+			"Perfect memory",
+			"Great with animals",
+			"Great with children",
+			"Great at solving puzzles",
+			"Great at one game",
+			"Great at impersonations",
+			"Draws beautifully",
+			"Paints beautifully",
+			"Sings beautifully",
+			"Drinks everyone under the table",
+			"Expert carpenter",
+			"Expert cook",
+			"Expert dart thrower and rock skipper",
+			"Expert juggler",
+			"Skilled actor and master of disguise",
+			"Skilled dancer",
+			"Knows thieves' cant"];
+			document.getElementById("box").innerHTML += "\nTalent: " + talent[iRandomRange(0,talent.length-1)];
+
+			//Mannerism
+			var mannerism = 
+			["Prone to singing, whistling, or humming quietly",
+			"Speaks in rhyme or some other peculiar way",
+			"Particularly low or high voice",
+			"Slurs words, lisps, or stutters",
+			"Enunciates overly clearly",
+			"Speaks loudly",
+			"Whispers",
+			"Uses flowery speech or long words",
+			"Frequently uses the wrong word",
+			"Uses colorful oaths and exclamations",
+			"Makes constant jokes or puns",
+			"Prone to predictions of doom",
+			"Fidgets",
+			"Squints",
+			"Stares into the distance",
+			"Chews something",
+			"Paces",
+			"Taps fingers",
+			"Bites fingernails",
+			"Twirls hair or tugs beard"];
+			document.getElementById("box").innerHTML += "\nMannerism: " + mannerism[iRandomRange(0,mannerism.length-1)];
+
+			//Interaction
+			var interaction = 
+			["Argumentative",
+			"Arrogant",
+			"Blustering",
+			"Rude",
+			"Curious",
+			"Friendly",
+			"Honest",
+			"Hot tempered",
+			"Irritable",
+			"Ponderous",
+			"Quiet",
+			"Suspicious"];
+			document.getElementById("box").innerHTML += "\nInteraction: " + interaction[iRandomRange(0,interaction.length-1)];
+
+			//Useful Knowledge
+			document.getElementById("box").innerHTML += "\nUseful Knowledge:";
+
+			//Ideal
+			var idealGood = 
+			["Beauty",
+			"Charity",
+			"Greater Good",
+			"Life",
+			"Respect",
+			"Self-Sacrifice"];
+			var idealNeutral = 
+			["Balance",
+			"Knowledge",
+			"Live and Let Live",
+			"Moderation",
+			"Neutrality",
+			"People (Sociability?)"];
+			var idealEvil = 
+			["Domination",
+			"Greed",
+			"Might",
+			"Pain",
+			"Retribution",
+			"Slaughter"];
+			var idealLawful = 
+			["Community",
+			"Fairness",
+			"Honor",
+			"Logic",
+			"Responsibility",
+			"Tradition"];
+			var idealChaotic = 
+			["Change",
+			"Creativity",
+			"Freedom",
+			"Independence",
+			"No Limits",
+			"Freedom"];
+			var idealAlternate = 
+			["Aspiration",
+			"Discovery",
+			"Glory",
+			"Nation",
+			"Redemption",
+			"Self-Knowledge"];
+			var idealGNE = [idealGood, idealNeutral, idealEvil];
+			var idealLNC = [idealLawful, idealNeutral, idealChaotic];
+			var ideal;
+			var normalOrAlternate = iRandomRange(1,10);
+			if(normalOrAlternate == 10){
+				ideal = idealAlternate[iRandomRange(0,idealAlternate.length-1)];
+			} else {
+				var fullIdeals = idealGNE[alignGNEChoice].concat(idealLNC[alignLNCChoice]);
+				ideal = fullIdeals[iRandomRange(0,fullIdeals.length-1)];
+			}
+			document.getElementById("box").innerHTML += "\nIdeal: " + ideal;
+
+			//Bond
+			var bond = 
+			["Dedicated to fulfilling a personal life goal",
+			"Protective of close family members",
+			"Protective of colleagues or compatriots",
+			"Loyal to a benefactor, patron, or employer",
+			"Captivated by a romantic interest",
+			"Drawn to a special place",
+			"Protective of a sentimental keepsake",
+			"Protective of a valuable possession",
+			"Out for revenge"];
+			document.getElementById("box").innerHTML += "\nBond: " + bond[iRandomRange(0,bond.length-1)];
+
+			//Flaw or Secret
+			var flaw = 
+			["Forbidden love or susceptibility to romance",
+			"Enjoys decadent pleasures",
+			"Arrogance",
+			"Envies another creature's possessions or station",
+			"Overpowering greed",
+			"Prone to rage",
+			"Has a powerful enemy",
+			"Specific phobia",
+			"Shameful or scandalous history",
+			"Secret crime or misdeed",
+			"Possession of forbidden lore",
+			"Foolhardy bravery"];
+			document.getElementById("box").innerHTML += "\nFlaw or Secret: " + flaw[iRandomRange(0,flaw.length-1)];
+
+			//Language
+			document.getElementById("box").innerHTML += "\nLanguages: "
+
+			//Description
+			document.getElementById("box").innerHTML += "\nDescription:";
 		}
-		document.getElementById("box").innerHTML += '\nAlignment: ' + alignment;
-
-		//Stats
-		var statStrength = diceRoll(3,6);
-		statStrength = statModCalc(statStrength);
-		var statDexterity = diceRoll(3,6);
-		statDexterity = statModCalc(statDexterity);
-		var statConstitution = diceRoll(3,6);
-		statConstitution = statModCalc(statConstitution);
-		var statIntelligence = diceRoll(3,6);
-		statIntelligence = statModCalc(statIntelligence);
-		var statWisdom = diceRoll(3,6);
-		statWisdom = statModCalc(statWisdom);
-		var statCharisma = diceRoll(3,6);
-		statCharisma = statModCalc(statCharisma);
-		document.getElementById("box").innerHTML += "\nSTR: " + statStrength + " DEX: " + statDexterity + " CON: " + statConstitution + " INT: " + statIntelligence + " WIS: " + statWisdom + " CHA: " + statCharisma;
-
-		//Class/Occupation
-		document.getElementById("box").innerHTML += "\nClass/Occupation: Doorknob Licker";
-
-		//Height
-		var heightInches = 56+diceRoll(2,10);
-		heightInches = heightFormat(heightInches);
-		document.getElementById("box").innerHTML += "\nHeight: " + heightInches;
-
-		//Build
-		var buildMale = 
-		[["Malnourished","Boney","Boney","Gangly","Gangly","Athletic","Muscular","Buff","Body Builder"],
-		["Twig","Twig","Twig","Lithe","Lithe","Athletic","Muscular","Buff","Strong Man"],
-		["Chubby","Chubby","Chubby","Average","Average","Average","Athletic","Hardy","Strong Man"],
-		["Fat","Fat","Fat","Husky","Husky","Husky","Hardy","Hardy","Hardy"],
-		["Obese","Obese","Obese","Obese","Obese","Obese","Obese","Bear Wrestler"]];
-		var buildFemale = 
-		[["Malnourished","Boney","Boney","Gangly","Gangly","Athletic","Athletic","Built","Body Builder"],
-		["Twig","Twig","Twig","Lithe","Lithe","Athletic","Athletic","Built","Strong Woman"],
-		["Chubby","Chubby","Chubby","Curvy","Curvy","Curvy","Athletic","Built","Strong Woman"],
-		["Fat","Fat","Fat","Heavy Set","Thicc","Thicc","Thicc","Strong Woman","Strong Woman"],
-		["Obese","Obese","Obese","Obese","Obese","Obese","Obese","Obese","Bear Tamer"]];
-		var buildFat = diceRollDrop(2,5,true,1)-1;
-		var buildStr = statStrength+4;
-		if(sex == 0) {
-			document.getElementById("box").innerHTML += "\nBuild: " + buildMale[buildFat][buildStr];
-		} else {
-			document.getElementById("box").innerHTML += "\nBuild: " + buildFemale[buildFat][buildStr];
-		}
-
-		//Appearance - Accessories
-		var appearanceAccessories = 
-		["Distinctive Jewelry",
-		"Piercings",
-		"Pocket watch",
-		"A nice ring",
-		"Several rings",
-		"A religious necklace",
-		"A hood",
-		"A small hat",
-		"A wide brimmed hat",
-		"A distinct hat",
-		"Body paint",
-		"A scarf"];
-		document.getElementById("box").innerHTML += "\nAppearance Accessories: " + appearanceAccessories[iRandomRange(0,appearanceAccessories.length-1)];
-
-		//Appearance - Fashion
-		var appearanceFashion = 
-		["Flamboyant or outlandish clothing",
-		"Formal, clean clothes",
-		"Ragged, dirty clothes",
-		"Old bad fashioned clothes",
-		"Modern professional fashion",
-		"Modern youth fashion",
-		"Functional clothing",
-		"Traditional clothing"];
-		document.getElementById("box").innerHTML += "\nAppearance Fashion: " + appearanceFashion[iRandomRange(0,appearanceFashion.length-1)];
-
-		//Appearance - Form
-		var appearanceForm = 
-		["Pronounced scar",
-		"Missing teeth",
-		"Missing fingers",
-		"Unusual eye color",
-		"Nervous eye twitch",
-		"Birthmark",
-		"Unusual skin color",
-		"Braided beard or hair",
-		"Unusual hair color",
-		"Distinctive nose",
-		"Distinctive posture"];
-		document.getElementById("box").innerHTML += "\nAppearance Form: " + appearanceForm[iRandomRange(0,appearanceForm.length-1)];
-
-		//Talent
-		var talent = 
-		["Plays a musical instrument",
-		"Speaks several languages fluently",
-		"Unbelieveably lucky",
-		"Perfect memory",
-		"Great with animals",
-		"Great with children",
-		"Great at solving puzzles",
-		"Great at one game",
-		"Great at impersonations",
-		"Draws beautifully",
-		"Paints beautifully",
-		"Sings beautifully",
-		"Drinks everyone under the table",
-		"Expert carpenter",
-		"Expert cook",
-		"Expert dart thrower and rock skipper",
-		"Expert juggler",
-		"Skilled actor and master of disguise",
-		"Skilled dancer",
-		"Knows thieves' cant"];
-		document.getElementById("box").innerHTML += "\nTalent: " + talent[iRandomRange(0,talent.length-1)];
-
-		//Mannerism
-		var mannerism = 
-		["Prone to singing, whistling, or humming quietly",
-		"Speaks in rhyme or some other peculiar way",
-		"Particularly low or high voice",
-		"Slurs words, lisps, or stutters",
-		"Enunciates overly clearly",
-		"Speaks loudly",
-		"Whispers",
-		"Uses flowery speech or long words",
-		"Frequently uses the wrong word",
-		"Uses colorful oaths and exclamations",
-		"Makes constant jokes or puns",
-		"Prone to predictions of doom",
-		"Fidgets",
-		"Squints",
-		"Stares into the distance",
-		"Chews something",
-		"Paces",
-		"Taps fingers",
-		"Bites fingernails",
-		"Twirls hair or tugs beard"];
-		document.getElementById("box").innerHTML += "\nMannerism: " + mannerism[iRandomRange(0,mannerism.length-1)];
-
-		//Interaction
-		var interaction = 
-		["Argumentative",
-		"Arrogant",
-		"Blustering",
-		"Rude",
-		"Curious",
-		"Friendly",
-		"Honest",
-		"Hot tempered",
-		"Irritable",
-		"Ponderous",
-		"Quiet",
-		"Suspicious"];
-		document.getElementById("box").innerHTML += "\nInteraction: " + interaction[iRandomRange(0,interaction.length-1)];
-
-		//Useful Knowledge
-		document.getElementById("box").innerHTML += "\nUseful Knowledge:";
-
-		//Ideal
-		var idealGood = 
-		["Beauty",
-		"Charity",
-		"Greater Good",
-		"Life",
-		"Respect",
-		"Self-Sacrifice"];
-		var idealNeutral = 
-		["Balance",
-		"Knowledge",
-		"Live and Let Live",
-		"Moderation",
-		"Neutrality",
-		"People (Sociability?)"];
-		var idealEvil = 
-		["Domination",
-		"Greed",
-		"Might",
-		"Pain",
-		"Retribution",
-		"Slaughter"];
-		var idealLawful = 
-		["Community",
-		"Fairness",
-		"Honor",
-		"Logic",
-		"Responsibility",
-		"Tradition"];
-		var idealChaotic = 
-		["Change",
-		"Creativity",
-		"Freedom",
-		"Independence",
-		"No Limits",
-		"Freedom"];
-		var idealAlternate = 
-		["Aspiration",
-		"Discovery",
-		"Glory",
-		"Nation",
-		"Redemption",
-		"Self-Knowledge"];
-		var idealGNE = [idealGood, idealNeutral, idealEvil];
-		var idealLNC = [idealLawful, idealNeutral, idealChaotic];
-		var ideal;
-		var normalOrAlternate = iRandomRange(1,10);
-		if(normalOrAlternate == 10){
-			ideal = idealAlternate[iRandomRange(0,idealAlternate.length-1)];
-		} else {
-			var fullIdeals = idealGNE[alignGNEChoice].concat(idealLNC[alignLNCChoice]);
-			ideal = fullIdeals[iRandomRange(0,fullIdeals.length-1)];
-		}
-		document.getElementById("box").innerHTML += "\nIdeal: " + ideal;
-
-		//Bond
-		var bond = 
-		["Dedicated to fulfilling a personal life goal",
-		"Protective of close family members",
-		"Protective of colleagues or compatriots",
-		"Loyal to a benefactor, patron, or employer",
-		"Captivated by a romantic interest",
-		"Drawn to a special place",
-		"Protective of a sentimental keepsake",
-		"Protective of a valuable possession",
-		"Out for revenge"];
-		document.getElementById("box").innerHTML += "\nBond: " + bond[iRandomRange(0,bond.length-1)];
-
-		//Flaw or Secret
-		var flaw = 
-		["Forbidden love or susceptibility to romance",
-		"Enjoys decadent pleasures",
-		"Arrogance",
-		"Envies another creature's possessions or station",
-		"Overpowering greed",
-		"Prone to rage",
-		"Has a powerful enemy",
-		"Specific phobia",
-		"Shameful or scandalous history",
-		"Secret crime or misdeed",
-		"Possession of forbidden lore",
-		"Foolhardy bravery"];
-		document.getElementById("box").innerHTML += "\nFlaw or Secret: " + flaw[iRandomRange(0,flaw.length-1)];
-
-		//Language
-		document.getElementById("box").innerHTML += "\nLanguages: "
-
-		//Description
-		document.getElementById("box").innerHTML += "\nDescription:";
 
 		//Things in the footer
 		document.querySelector("#copyright").innerHTML = '&copy; 2018-' + YEAR + ' ELB';
