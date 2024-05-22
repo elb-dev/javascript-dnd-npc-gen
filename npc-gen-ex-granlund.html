@@ -22,6 +22,7 @@
 	<main class = "main-npc">
 		<p>This character generator is specifically for my custom setting, Ex-Granlund. It will be updated over time as well to better fit the needs of my own games.</p>
 		<p><a href="https://www.behindthename.com/random/random.php?number=1&sets=5&gender=both&surname=&randomsurname=yes&showextra=yes&usage_alb=1&usage_bas=1&usage_bre=1&usage_bul=1&usage_cat=1&usage_cro=1&usage_cze=1&usage_dan=1&usage_dut=1&usage_eng=1&usage_est=1&usage_fin=1&usage_fre=1&usage_fri=1&usage_gal=1&usage_geo=1&usage_ger=1&usage_gre=1&usage_hun=1&usage_iri=1&usage_ita=1&usage_lat=1&usage_lim=1&usage_lth=1&usage_mac=1&usage_nor=1&usage_pol=1&usage_por=1&usage_slk=1&usage_spa=1&usage_swe=1&usage_ukr=1&usage_wel=1" target="_blank">Name Generator</a></p>
+		<p><a href="https://www.16personalities.com/personality-types" target="_blank">Personality Types</a></p>
 		<br>
 		<p>Age</p>
   		<input type="text" id="age" name="age">
@@ -81,6 +82,32 @@
 			<option value=2>Average Fat</option>
 			<option value=3>High Fat</option>
 			<option value=4>Extremely High Fat</option>
+		</select>
+		<p>Personality</p>
+		<select id="personality i or e">
+			<option value=-1>Random Introvert/Extrovert</option>
+			<option value=0>Introvert</option>
+			<option value=1>Extrovert</option>
+		</select>
+		<select id="personality s or n">
+			<option value=-1>Random Observant/Intuitive</option>
+			<option value=0>Observant</option>
+			<option value=1>Intuitive</option>
+		</select>
+		<select id="personality t or f">
+			<option value=-1>Random Thinking/Feeling</option>
+			<option value=0>Thinking</option>
+			<option value=1>Feeling</option>
+		</select>
+		<select id="personality j or p">
+			<option value=-1>Random Judging/Prospecting</option>
+			<option value=0>Judging</option>
+			<option value=1>Prospecting</option>
+		</select>
+		<select id="personality a or t">
+			<option value=-1>Random Assertive/Turbulent</option>
+			<option value=0>Assertive</option>
+			<option value=1>Turbulent</option>
 		</select>
 		<br>
 		<input type="button" onclick="generateNpc()" value="GENERATE NPC">
@@ -266,33 +293,50 @@
 			let buildStr = statStrength+4;
 			document.getElementById("box").innerHTML += "\nBuild: " + builds[sex][buildFat][buildStr];
 
-			//Appearance - Accessories
-			var appearanceAccessories = 
-			["Distinctive Jewelry",
-			"Piercings",
-			"Pocket watch",
-			"A nice ring",
-			"Several rings",
-			"A religious necklace",
-			"A hood",
-			"A small hat",
-			"A wide brimmed hat",
-			"A distinct hat",
-			"Body paint",
-			"A scarf"];
-			document.getElementById("box").innerHTML += "\nAppearance Accessories: " + appearanceAccessories[iRandomRange(0,appearanceAccessories.length-1)];
+			//Personality
+			let personalityIE = document.getElementById("personality i or e").value;
+			let personalitySN = document.getElementById("personality s or n").value;
+			let personalityTF = document.getElementById("personality t or f").value;
+			let personalityJP = document.getElementById("personality j or p").value;
+			let personalityAT = document.getElementById("personality a or t").value;
 
-			//Appearance - Fashion
-			var appearanceFashion = 
-			["Flamboyant or outlandish clothing",
-			"Formal, clean clothes",
-			"Ragged, dirty clothes",
-			"Old bad fashioned clothes",
-			"Modern professional fashion",
-			"Modern youth fashion",
-			"Functional clothing",
-			"Traditional clothing"];
-			document.getElementById("box").innerHTML += "\nAppearance Fashion: " + appearanceFashion[iRandomRange(0,appearanceFashion.length-1)];
+			let personalityArray = [personalityJP, personalityTF, personalitySN, personalityIE];
+			let personalityValue = 0;
+
+			for (let p = 0; p < personalityArray.length; p++){
+				if (personalityArray[p] == -1){
+					personalityArray[p] = iRandomRange(0,1);
+				}
+				personalityValue += (personalityArray[p] * (2 ** p))
+			}
+			if (personalityAT == -1){
+				personalityAT = iRandomRange(0,1);
+			}
+
+			//somethingtypetyp = ["00000", "00001", "00010", "00011", "00100", "00101", "00110", "00111", "01000", "01001", "01010", "01011", "01100", "01101", "01110", "01111", "10000", "10001", "10010", "10011", "10100", "10101", "10110", "10111", "11000", "11001", "11010", "11011", "11100", "11101", "11110", "11111"]
+			let personalityTypes = ["ISTJ", "ISTP", "ISFJ", "ISFP", "INTJ", "INTP", "INFJ", "INFP", "ESTJ", "ESTP", "ESFJ", "ESFP", "ENTJ", "ENTP", "ENFJ", "ENFP"];
+			let personalityNames = ["Logistician", "Virtuoso", "Defender", "Adventurer", "Architect", "Logician", "Advocate", "Mediator", "Executive", "Entrepreneur", "Consul", "Entertainer", "Commander", "Debater", "Protagonist", "Campaigner"];
+			let personalityDescriptions = [
+				"A practical and fact-minded individual, whose reliability cannot be doubted.",
+				"A bold and practical experimenter, master of many kinds of tools.",
+				"A very dedicated and warm protector, always ready to defend their loved ones.",
+				"A flexible and charming artist, always ready to explore and experience something new.",
+				"An imaginative and strategic thinker with a plan for everything.",
+				"An innovative inventor with an unquenchable thirst for knowledge.",
+				"Quiet and mystical, yet a very inspiring and tireless idealist.",
+				"A poetic, kind, and altruistic person, always eager to help a good cause.",
+				"An excellent administrator, unspurpassed at managing things - or people.",
+				"A smart, energetic, and very perceptive person who truly enjoys living on the edge.",
+				"An extraordinarily caring, social, and popular person, always eager to help.",
+				"A spontaneous, energetic, and enthusiastic person - life is never boring around them.",
+				"A bold, imaginative, and strong-willed leader, always finding a way - or making one.",
+				"A smart and curious thinker who cannot resist an intellectual challenge.",
+				"A charismatic and inspiring leader, able to mesmerize their listeners.",
+				"An enthusiastic, creative, and sociable free spirt who can always find a reason to smile."
+				];
+			let personalityAdditionalAT = ["A","T"];
+			document.getElementById("box").innerHTML += "\nPersonality: " + personalityNames[personalityValue] + " - " + personalityTypes[personalityValue] + "-" + personalityAdditionalAT[personalityAT];
+			document.getElementById("box").innerHTML += "\n" + personalityDescriptions[personalityValue];
 
 			//Appearance - Form
 			var appearanceForm = 
@@ -306,35 +350,15 @@
 			"Braided beard or hair",
 			"Unusual hair color",
 			"Distinctive nose",
-			"Distinctive posture"];
+			"Distinctive posture",
+			"Beautiful hair",
+			"Assymetrical Face",
+			"Piercing Eyes",
+			"Normal","Normal","Normal","Normal","Normal","Normal","Normal","Normal","Normal","Normal","Normal","Normal","Normal","Normal","Normal","Normal","Normal"];
 			document.getElementById("box").innerHTML += "\nAppearance Form: " + appearanceForm[iRandomRange(0,appearanceForm.length-1)];
 
-			//Talent
-			var talent = 
-			["Plays a musical instrument",
-			"Speaks several languages fluently",
-			"Unbelieveably lucky",
-			"Perfect memory",
-			"Great with animals",
-			"Great with children",
-			"Great at solving puzzles",
-			"Great at one game",
-			"Great at impersonations",
-			"Draws beautifully",
-			"Paints beautifully",
-			"Sings beautifully",
-			"Drinks everyone under the table",
-			"Expert carpenter",
-			"Expert cook",
-			"Expert dart thrower and rock skipper",
-			"Expert juggler",
-			"Skilled actor and master of disguise",
-			"Skilled dancer",
-			"Knows thieves' cant"];
-			document.getElementById("box").innerHTML += "\nTalent: " + talent[iRandomRange(0,talent.length-1)];
-
 			//Mannerism
-			var mannerism = 
+			var quirk = 
 			["Prone to singing, whistling, or humming quietly",
 			"Speaks in rhyme or some other peculiar way",
 			"Particularly low or high voice",
@@ -355,94 +379,7 @@
 			"Taps fingers",
 			"Bites fingernails",
 			"Twirls hair or tugs beard"];
-			document.getElementById("box").innerHTML += "\nMannerism: " + mannerism[iRandomRange(0,mannerism.length-1)];
-
-			//Interaction
-			var interaction = 
-			["Argumentative",
-			"Arrogant",
-			"Blustering",
-			"Rude",
-			"Curious",
-			"Friendly",
-			"Honest",
-			"Hot tempered",
-			"Irritable",
-			"Ponderous",
-			"Quiet",
-			"Suspicious"];
-			document.getElementById("box").innerHTML += "\nInteraction: " + interaction[iRandomRange(0,interaction.length-1)];
-
-			//Useful Knowledge
-			document.getElementById("box").innerHTML += "\nUseful Knowledge:";
-
-			//Ideal
-			var idealGood = 
-			["Beauty",
-			"Charity",
-			"Greater Good",
-			"Life",
-			"Respect",
-			"Self-Sacrifice"];
-			var idealNeutral = 
-			["Balance",
-			"Knowledge",
-			"Live and Let Live",
-			"Moderation",
-			"Neutrality",
-			"People (Sociability?)"];
-			var idealEvil = 
-			["Domination",
-			"Greed",
-			"Might",
-			"Pain",
-			"Retribution",
-			"Slaughter"];
-			var idealLawful = 
-			["Community",
-			"Fairness",
-			"Honor",
-			"Logic",
-			"Responsibility",
-			"Tradition"];
-			var idealChaotic = 
-			["Change",
-			"Creativity",
-			"Freedom",
-			"Independence",
-			"No Limits",
-			"Freedom"];
-			var idealAlternate = 
-			["Aspiration",
-			"Discovery",
-			"Glory",
-			"Nation",
-			"Redemption",
-			"Self-Knowledge"];
-			var idealGNE = [idealGood, idealNeutral, idealEvil];
-			var idealLNC = [idealLawful, idealNeutral, idealChaotic];
-			var ideal;
-			var normalOrAlternate = iRandomRange(1,10);
-			if(normalOrAlternate == 10){
-				ideal = idealAlternate[iRandomRange(0,idealAlternate.length-1)];
-			} else {
-				var fullIdeals = idealGNE[alignGNEChoice].concat(idealLNC[alignLNCChoice]);
-				ideal = fullIdeals[iRandomRange(0,fullIdeals.length-1)];
-			}
-			document.getElementById("box").innerHTML += "\nIdeal: " + ideal;
-
-			//Bond
-			var bond = 
-			["Dedicated to fulfilling a personal life goal",
-			"Protective of close family members",
-			"Protective of colleagues or compatriots",
-			"Loyal to a benefactor, patron, or employer",
-			"Captivated by a romantic interest",
-			"Drawn to a special place",
-			"Protective of a sentimental keepsake",
-			"Protective of a valuable possession",
-			"Out for revenge"];
-			document.getElementById("box").innerHTML += "\nBond: " + bond[iRandomRange(0,bond.length-1)];
+			document.getElementById("box").innerHTML += "\Quirk: " + quirk[iRandomRange(0,quirk.length-1)];
 
 			//Flaw or Secret
 			var flaw = 
