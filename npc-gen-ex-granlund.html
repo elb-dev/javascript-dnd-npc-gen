@@ -24,6 +24,8 @@
 		<p><a href="https://www.behindthename.com/random/random.php?number=1&sets=5&gender=both&surname=&randomsurname=yes&showextra=yes&usage_alb=1&usage_bas=1&usage_bre=1&usage_bul=1&usage_cat=1&usage_cro=1&usage_cze=1&usage_dan=1&usage_dut=1&usage_eng=1&usage_est=1&usage_fin=1&usage_fre=1&usage_fri=1&usage_gal=1&usage_geo=1&usage_ger=1&usage_gre=1&usage_hun=1&usage_iri=1&usage_ita=1&usage_lat=1&usage_lim=1&usage_lth=1&usage_mac=1&usage_nor=1&usage_pol=1&usage_por=1&usage_slk=1&usage_spa=1&usage_swe=1&usage_ukr=1&usage_wel=1" target="_blank">Name Generator</a></p>
 		<p><a href="https://www.16personalities.com/personality-types" target="_blank">Personality Types</a></p>
 		<br>
+		<p>Name</p>
+  		<input type="text" id="name" name="name">
 		<p>Age</p>
   		<input type="text" id="age" name="age">
   		<p>Gender</p>
@@ -131,9 +133,13 @@
 			document.getElementById("box").value = "";
 
 			//Name
-			var fName = String.fromCharCode(iRandomRange(65,90));
-			var lName = String.fromCharCode(iRandomRange(65,90));
-			document.getElementById("box").value = "Name: " + fName + " " + lName;
+			let name = document.getElementById("name").value;
+			if (name == ""){
+				var fName = String.fromCharCode(iRandomRange(65,90));
+				var lName = String.fromCharCode(iRandomRange(65,90));
+				name = fName + " " + lName;
+			}
+			document.getElementById("box").value += "Name: " + name;
 
 			//Age
 			var age;
