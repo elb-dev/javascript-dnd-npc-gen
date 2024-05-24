@@ -128,10 +128,12 @@
 		const YEAR = date.getFullYear();
 
 		function generateNpc(){
+			document.getElementById("box").value = "";
+
 			//Name
 			var fName = String.fromCharCode(iRandomRange(65,90));
 			var lName = String.fromCharCode(iRandomRange(65,90));
-			document.getElementById("box").innerHTML = "Name: " + fName + " " + lName;
+			document.getElementById("box").value = "Name: " + fName + " " + lName;
 
 			//Age
 			var age;
@@ -141,10 +143,10 @@
 			if (isNumeric(document.getElementById("age").value)){
 				age = document.getElementById("age").value;
 			}
-			document.getElementById("box").innerHTML += '\nAge: ' + age;
+			document.getElementById("box").value += '\nAge: ' + age;
 
 			//Race
-			document.getElementById("box").innerHTML += '\nRace:';
+			document.getElementById("box").value += '\nRace:';
 
 			//Gender
 			var genderChoice = ["Man", "Woman", "Non-Binary", "Other"];
@@ -152,7 +154,7 @@
 			if (gender == -1){
 				gender = iRandomRange(0,1);
 			}
-			document.getElementById("box").innerHTML += "\nGender: " + genderChoice[gender];
+			document.getElementById("box").value += "\nGender: " + genderChoice[gender];
 
 			//Affluence
 			let affluence = document.getElementById("affluence").value
@@ -161,7 +163,7 @@
 				affluence = diceRollDrop(2,4,true,1)-1;
 			}
 			let affluenceTypes = ["Poor", "Comfortable", "Fine", "Extravagant"];
-			document.getElementById("box").innerHTML += "\nWealth: " + affluenceTypes[affluence];
+			document.getElementById("box").value += "\nWealth: " + affluenceTypes[affluence];
 
 			//Alignment
 			var alignGNE = ["Good","Neutral","Evil"];
@@ -180,7 +182,7 @@
 			} else {
 				alignment = alignLNC[alignLNCChoice] + " " + alignGNE[alignGNEChoice];
 			}
-			document.getElementById("box").innerHTML += '\nAlignment: ' + alignment;
+			document.getElementById("box").value += '\nAlignment: ' + alignment;
 
 			//Stats
 			if (document.getElementById("ability score tilt").value == 0){
@@ -243,10 +245,10 @@
 				statConstitution = Math.round(statConstitution);
 				statConstitution = clamp(-4,4,statConstitution);
 			}
-			document.getElementById("box").innerHTML += "\nSTR: " + statStrength + " DEX: " + statDexterity + " CON: " + statConstitution + " INT: " + statIntelligence + " WIS: " + statWisdom + " CHA: " + statCharisma;
+			document.getElementById("box").value += "\nSTR: " + statStrength + " DEX: " + statDexterity + " CON: " + statConstitution + " INT: " + statIntelligence + " WIS: " + statWisdom + " CHA: " + statCharisma;
 
 			//Class/Occupation
-			document.getElementById("box").innerHTML += "\nClass/Occupation: Doorknob Licker";
+			document.getElementById("box").value += "\nClass/Occupation: Doorknob Licker";
 
 			//True height range is 105 to 241
 
@@ -264,7 +266,7 @@
 			let heightCentimeters = bellCurveLerp(heightPosition,heightMedians[sex],heightDeviations[sex]);
 			let heightInches = centimetersToInches(heightCentimeters);
 			let heightFeetAndInches = heightFormat(heightInches);
-			document.getElementById("box").innerHTML += "\nHeight: " + heightFeetAndInches + " - " + Math.round(heightCentimeters) + " cm";
+			document.getElementById("box").value += "\nHeight: " + heightFeetAndInches + " - " + Math.round(heightCentimeters) + " cm";
 
 			//Build
 			var buildMale = 
@@ -292,7 +294,7 @@
 				buildFat = diceRollDrop(2,5,true,1)-1;
 			}
 			let buildStr = statStrength+4;
-			document.getElementById("box").innerHTML += "\nBuild: " + builds[sex][buildFat][buildStr];
+			document.getElementById("box").value += "\nBuild: " + builds[sex][buildFat][buildStr];
 
 			//Personality
 			let personalityIE = document.getElementById("personality i or e").value;
@@ -336,8 +338,8 @@
 				"An enthusiastic, creative, and sociable free spirt who can always find a reason to smile."
 				];
 			let personalityAdditionalAT = ["A","T"];
-			document.getElementById("box").innerHTML += "\nPersonality: " + personalityNames[personalityValue] + " - " + personalityTypes[personalityValue] + "-" + personalityAdditionalAT[personalityAT];
-			document.getElementById("box").innerHTML += "\n" + personalityDescriptions[personalityValue];
+			document.getElementById("box").value += "\nPersonality: " + personalityNames[personalityValue] + " - " + personalityTypes[personalityValue] + "-" + personalityAdditionalAT[personalityAT];
+			document.getElementById("box").value += "\n" + personalityDescriptions[personalityValue];
 
 			//Appearance - Form
 			var appearanceForm = 
@@ -356,7 +358,7 @@
 			"Assymetrical Face",
 			"Piercing Eyes",
 			"Normal","Normal","Normal","Normal","Normal","Normal","Normal","Normal","Normal","Normal","Normal","Normal","Normal","Normal","Normal","Normal","Normal"];
-			document.getElementById("box").innerHTML += "\nAppearance Form: " + appearanceForm[iRandomRange(0,appearanceForm.length-1)];
+			document.getElementById("box").value += "\nAppearance Form: " + appearanceForm[iRandomRange(0,appearanceForm.length-1)];
 
 			//Mannerism
 			var quirk = 
@@ -380,7 +382,7 @@
 			"Taps fingers",
 			"Bites fingernails",
 			"Twirls hair or tugs beard"];
-			document.getElementById("box").innerHTML += "\nQuirk: " + quirk[iRandomRange(0,quirk.length-1)];
+			document.getElementById("box").value += "\nQuirk: " + quirk[iRandomRange(0,quirk.length-1)];
 
 			//Flaw or Secret
 			var flaw = 
@@ -396,17 +398,17 @@
 			"Secret crime or misdeed",
 			"Possession of forbidden lore",
 			"Foolhardy bravery"];
-			document.getElementById("box").innerHTML += "\nFlaw or Secret: " + flaw[iRandomRange(0,flaw.length-1)];
+			document.getElementById("box").value += "\nFlaw or Secret: " + flaw[iRandomRange(0,flaw.length-1)];
 
 			//Language
-			document.getElementById("box").innerHTML += "\nLanguages: "
+			document.getElementById("box").value += "\nLanguages: "
 
 			//Description
-			document.getElementById("box").innerHTML += "\nDescription:";
+			document.getElementById("box").value += "\nDescription:";
 		}
 
 		//Things in the footer
-		document.querySelector("#copyright").innerHTML = '&copy; 2018-' + YEAR + ' ELB';
+		document.querySelector("#copyright").value = '&copy; 2018-' + YEAR + ' ELB';
 
 	</script>
 </body>
