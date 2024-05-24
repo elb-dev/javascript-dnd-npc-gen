@@ -156,7 +156,8 @@
 
 			//Affluence
 			let affluence = document.getElementById("affluence").value
-			if (affluence = -1){
+			console.log(affluence);
+			if (affluence == -1){
 				affluence = diceRollDrop(2,4,true,1)-1;
 			}
 			let affluenceTypes = ["Poor", "Comfortable", "Fine", "Extravagant"];
