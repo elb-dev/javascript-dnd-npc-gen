@@ -79,17 +79,20 @@
 	  	</div>
 	  	<div class = "craft-section" id = "section-3-item" style="display: none;">
 		  	<p>Item Level</p>
-		  	<input type="text" id="item level" name="item level">
-		  	<p>Item Price</p>
-		  	<input type="text" id="item price" name="item price">
+		  	<input type="text" id="item level" name="item level" onchange="divFill4()">
+		  	<p>Item Price (Gold)</p>
+		  	<input type="text" id="item price" name="item price" onchange="divFill4()">
 		  	<p>Item Rarity</p>
-			<select id="crafting rarity">
+			<select id="item rarity" onchange="divFill4()">
 				<option value=0>...</option>
 				<option value=1>Common</option>
 				<option value=2>Uncommon</option>
 				<option value=3>Rare</option>
 				<option value=4>Unique</option>
 			</select>
+	  	</div>
+	  	<div class = "craft-section" id = "section-4-calculation" style="display: none;">
+		  	<p>Calculations go here!!!</p>
 	  	</div>
 	</main>
 	<footer class="bookend" id="footer">
@@ -136,8 +139,6 @@
 			} else {
 				outcome = 0;
 			}
-
-			console.log(outcome);
 
 			if (outcome == 0){
 				setVisibility("section-2-goal",false);
@@ -248,9 +249,31 @@
 		}
 
 		function divFill4(){
+			let outcome = 1;
+
 			let itemLevel = document.getElementById("item level").value;
 			let itemPrice = document.getElementById("item price").value;
-			let itemRarity = document.getElementById("item Rarity").value;
+			let itemRarity = document.getElementById("item rarity").value;
+
+			if (isNumeric(itemLevel)){
+				itemLevel = Math.round(itemLevel);
+			} else {
+				outcome = 0;
+			}
+			if (!isNumeric(itemPrice)){
+				outcome = 0;
+			}
+			if (itemRarity == 0){
+				outcome = 0;
+			}
+
+			if (outcome == 0){
+				setVisibility("section-4-calculation",false);
+			} else {
+				setVisibility("section-4-calculation",true);
+			}
+
+			console.log(outcome);
 		}
 
 		//Things in the footer
