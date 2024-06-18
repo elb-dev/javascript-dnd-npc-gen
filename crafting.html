@@ -23,11 +23,11 @@
 	<main class = "main-npc">
 		<div class = "craft-section" id = "section-1">
 		  	<p>Your Level</p>
-		  	<input type="text" id="player level" name="player level" onchange="divFill2()">
+		  	<input type="text" id="player level" name="player level" onchange="divFill2(false)">
 		  	<p>Your Crafting Bonus</p>
-		  	<input type="text" id="crafting bonus" name="crafting bonus" onchange="divFill2()">
+		  	<input type="text" id="crafting bonus" name="crafting bonus" onchange="divFill2(false)">
 		  	<p>Your Crafting Proficiency</p>
-			<select id="crafting proficiency" onchange="divFill2()">
+			<select id="crafting proficiency" onchange="divFill2(false)">
 				<option value=-1>...</option>
 				<option value=0>Untrained</option>
 				<option value=1>Trained</option>
@@ -38,52 +38,60 @@
 		</div>
 	  	<div class = "craft-section" id = "section-2-goal" style="display: none;">
 			<p>I am trying to...</p>
-			<select id="crafting goal" onchange="divFill3()">
+			<select id="crafting goal" onchange="divFill3(false)">
 				<option value=0>...</option>
 				<option value=1>invent a formula</option>
-				<option value=2>reverse engineer a formula</option>
-				<option value=3>craft a rune</option>
-				<option value=4>transfer a rune</option>
-				<option value=5>craft a magic item</option>
-				<option value=6>craft alchemical items</option>
-				<option value=7>craft snares</option>
-				<option value=8>craft any other mundane item</option>
+				<option value=2>invent a magic formula</option>
+				<option value=3>reverse engineer a formula</option>
+				<option value=4>reverse engineer a magic formula</option>
+				<option value=5>craft a rune</option>
+				<option value=6>transfer a rune</option>
+				<option value=7>craft a magic item</option>
+				<option value=8>craft alchemical items</option>
+				<option value=9>craft snares</option>
+				<option value=10>craft any other mundane item</option>
 			</select>
 	  	</div>
 	  	<div class = "craft-section" id = "section-2-untrained" style="display: none;">
 	  		<p>Sorry, you're untrained in crafting, so you can perform no crafting activities.</p>
 	  	</div>
 	  	<div class = "craft-section" id = "section-3-formula-invention" style="display: none;">
-	  		<p>Inventing a formula of any non-common item will require GM permission and will be more difficult based on the rarity. You need the Alchemical Crafting feat to invent alchemical formulas and the Magical Crafting feat to invent magical formulas.</p>
+	  		<p>Inventing a formula of any non-common item will require GM permission and will be more difficult based on the rarity. You need the Inventor feat for inventing, the Alchemical Crafting feat to invent alchemical formulas, and the Snare Crafting feat to invent snare formulas.</p>
+	  	</div>
+	  	<div class = "craft-section" id = "section-3-formula-invention-magic" style="display: none;">
+	  		<p>Inventing a formula of any non-common item will require GM permission and will be more difficult based on the rarity. You need the Inventor feat for inventing and the Magical Crafting feat to invent magical formulas.</p>
 	  	</div>
 	  	<div class = "craft-section" id = "section-3-formula-reverse-engineer" style="display: none;">
-	  		<p>Reverse engineering the formula of non-common items will be more difficult based on the rarity. You need the Alchemical Crafting feat to reverse engineer alchemical formulas and the Magical Crafting feat to reverse engineer magical formulas.</p>
+	  		<p>Reverse engineering the formula of non-common items will be more difficult based on the rarity. You need the Alchemical Crafting feat to reverse engineer alchemical formulas and the Magical Crafting feat to reverse engineer magical formulas. You also need the item on hand to disassemble.</p>
+	  	</div>
+	  	<div class = "craft-section" id = "section-3-formula-reverse-engineer-magic" style="display: none;">
+	  		<p>Reverse engineering the formula of non-common items will be more difficult based on the rarity. You need the Magical Crafting feat to reverse engineer magical formulas. You also need the item on hand to disassemble.</p>
 	  	</div>
 	  	<div class = "craft-section" id = "section-3-craft-rune" style="display: none;">
 	  		<p>Etching a rune requires the Magical Crafting feat and the appropriate formula. If you intend to etch it onto a runestone, a runestone will cost 3 gp.</p>
 	  	</div>
 	  	<div class = "craft-section" id = "section-3-transfer-rune" style="display: none;">
-	  		<p>Transfering a rune requires the Magical Crafting feat. If you intend to transfer it to a runestone, a runestone will cost 3 gp.</p>
+	  		<p>Transferring a rune requires the Magical Crafting feat. If you intend to transfer it to a runestone, a runestone will cost 3 gp. If you are transferring from a runestone, set the price to 0 gold. If you are swapping two runes, use the highest rune price (for a rune on a runestone the price is still 0 gold), the highest level, and the highest rarity.</p>
 	  	</div>
 	  	<div class = "craft-section" id = "section-3-craft-magic" style="display: none;">
-	  		<p>Crafting a magic item requires the Magical Crafting feat and the appropriate formula.</p>
+	  		<p>Crafting a magic item requires the Magical Crafting feat and the appropriate formula. If it's a consumable you can craft it in batches of up to 4 with a single check assuming you provide the materials for all the items and complete the batch all at once.</p>
 	  	</div>
 	  	<div class = "craft-section" id = "section-3-craft-alchemical" style="display: none;">
-	  		<p>Crafting an alchemical item requires the Alchemical Crafting feat and the appropriate formula.</p>
+	  		<p>Crafting an alchemical item requires the Alchemical Crafting feat and the appropriate formula. If it's a consumable you can craft it in batches of up to 4 with a single check assuming you provide the materials for all the items and complete the batch all at once.</p>
 	  	</div>
 	  	<div class = "craft-section" id = "section-3-craft-snare" style="display: none;">
 	  		<p>Crafting a snare requires the Snare Crafting feat and the appropriate formula.</p>
 	  	</div>
 	  	<div class = "craft-section" id = "section-3-craft-mundane" style="display: none;">
-	  		<p>Crafting a mundane item requires the appropriate formula.</p>
+	  		<p>Crafting a mundane item requires the appropriate formula. If it's a consumable you can craft it in batches of up to 4 with a single check assuming you provide the materials for all the items and complete the batch all at once.</p>
 	  	</div>
 	  	<div class = "craft-section" id = "section-3-item" style="display: none;">
 		  	<p>Item Level</p>
-		  	<input type="text" id="item level" name="item level" onchange="divFill4()">
-		  	<p>Item Price (Gold)</p>
-		  	<input type="text" id="item price" name="item price" onchange="divFill4()">
+		  	<input type="text" id="item level" name="item level" onchange="divFill4(false)">
+		  	<p>Item Price (Gold) (if it is a magic item use price as written in official sources)</p>
+		  	<input type="text" id="item price" name="item price" onchange="divFill4(false)">
 		  	<p>Item Rarity</p>
-			<select id="item rarity" onchange="divFill4()">
+			<select id="item rarity" onchange="divFill4(false)">
 				<option value=0>...</option>
 				<option value=1>Common</option>
 				<option value=2>Uncommon</option>
@@ -91,8 +99,22 @@
 				<option value=4>Unique</option>
 			</select>
 	  	</div>
+	  	<div class = "craft-section" id = "section-4-level" style="display: none;">
+		  	<p>Sorry, you're too low of a level to perform this craft action for this item.</p>
+	  	</div>
 	  	<div class = "craft-section" id = "section-4-calculation" style="display: none;">
-		  	<p>Calculations go here!!!</p>
+		  	<p id="calculate-cost">Minimum Cost to Craft:</p>
+		  	<p id="calculate-work">Cost Saved per Day of Work:</p>
+		  	<p id="calculate-time">Time to Craft:</p>
+		  	<p id="calculate-dc">Craft DC:</p>
+		  	<p id="calculate-success">Likelihood of Success:</p>
+	  	</div>
+	  	<div class = "craft-section" id = "section-4-results" style="display: none;">
+		  	<p id="results-crit-success">Crit Success:</p>
+		  	<p id="results-success">Success:</p>
+		  	<p id="results-failure">Failure:</p>
+		  	<p id="results-crit-failure">Crit Failure:</p>
+		  	<p id="results-additional-info-end"></p>
 	  	</div>
 	</main>
 	<footer class="bookend" id="footer">
@@ -108,6 +130,37 @@
 		var date = new Date();
 		const YEAR = date.getFullYear();
 
+		const craftingTable = [
+			[0.01, 0.05, 0.05, 0.05, 0.05], //0
+			[0.02, 0.2, 0.2, 0.2, 0.2], //1
+			[0.04, 0.3, 0.3, 0.3, 0.3], //2
+			[0.08, 0.5, 0.5, 0.5, 0.5], //3
+			[0.1, 0.7, 0.8, 0.8, 0.8], //4
+			[0.2, 0.9, 1, 1, 1], //5
+			[0.3, 1.5, 2, 2, 2], //6
+			[0.4, 2, 2.5, 2.5, 2.5], //7
+			[0.5, 2.5, 3, 3, 3], //8
+			[0.6, 3, 4, 4, 4], //9
+			[0.7, 4, 5, 6, 6], //10
+			[0.8, 5, 6, 8, 8], //11
+			[0.9, 6, 8, 10, 10], //12
+			[1, 7, 10, 15, 15], //13
+			[1.5, 8, 15, 20, 20], //14
+			[2, 10, 20, 28, 28], //15
+			[2.5, 13, 25, 36, 40], //16
+			[3, 15, 30, 45, 55], //17
+			[4, 20, 45, 70, 90], //18
+			[6, 30, 60, 100, 130], //19
+			[8, 40, 75, 150, 200], //20
+			[10, 50, 90, 175, 300], //20 Crit Success
+			];
+
+		const craftingDC = [14, 15, 16, 18, 19, 20, 22, 23, 24, 26, 27, 28, 30, 31, 32, 34, 35, 36, 38, 39, 40];
+
+		const rarityDC = [0, 2, 5, 10];
+
+		const formulaPrices = [0.5,1,2,3,5,8,13,18,25,35,50,70,100,150,225,325,500,750,1200,2000,3500];
+
 		function clean(){
 			document.getElementById("div2").innerHTML = "";
 		}
@@ -121,7 +174,7 @@
             }
         }
 
-		function divFill2(){
+		function divFill2(autoFail){
 			let outcome = 2;
 			let playerLevel = document.getElementById("player level").value;
 			let craftingBonus = document.getElementById("crafting bonus").value;
@@ -140,7 +193,7 @@
 				outcome = 0;
 			}
 
-			if (outcome == 0){
+			if (outcome == 0 || autoFail){
 				setVisibility("section-2-goal",false);
 				setVisibility("section-2-untrained",false);
 			} else if (outcome == 1){
@@ -150,14 +203,22 @@
 				setVisibility("section-2-goal",true);
 				setVisibility("section-2-untrained",false);
 			}
+
+			let newAutoFail = false;
+			if (outcome == 0 || outcome == 1 || autoFail){
+				newAutoFail = true;
+			}
+			divFill3(newAutoFail);
 		}
 
-		function divFill3(){
+		function divFill3(autoFail){
 			let craftingGoal = document.getElementById("crafting goal").value;
 
-			if (craftingGoal == 0){	//None
+			if (craftingGoal == 0 || autoFail){	//None
 				setVisibility("section-3-formula-invention",false);
 				setVisibility("section-3-formula-reverse-engineer",false);
+				setVisibility("section-3-formula-invention-magic",false);
+				setVisibility("section-3-formula-reverse-engineer-magic",false);
 				setVisibility("section-3-craft-rune",false);
 				setVisibility("section-3-transfer-rune",false);
 				setVisibility("section-3-craft-magic",false);
@@ -168,6 +229,8 @@
 			} else if (craftingGoal == 1){	//Invent a Formula
 				setVisibility("section-3-formula-invention",true);
 				setVisibility("section-3-formula-reverse-engineer",false);
+				setVisibility("section-3-formula-invention-magic",false);
+				setVisibility("section-3-formula-reverse-engineer-magic",false);
 				setVisibility("section-3-craft-rune",false);
 				setVisibility("section-3-transfer-rune",false);
 				setVisibility("section-3-craft-magic",false);
@@ -175,19 +238,47 @@
 				setVisibility("section-3-craft-snare",false);
 				setVisibility("section-3-craft-mundane",false);
 				setVisibility("section-3-item",true);
-			} else if (craftingGoal == 2){	//Reverse Engineer a Formula
-				setVisibility("section-3-formula-invention",false);
-				setVisibility("section-3-formula-reverse-engineer",true);
-				setVisibility("section-3-craft-rune",false);
-				setVisibility("section-3-transfer-rune",false);
-				setVisibility("section-3-craft-magic",false);
-				setVisibility("section-3-craft-alchemical",false);
-				setVisibility("section-3-craft-snare",false);
-				setVisibility("section-3-craft-mundane",false);
-				setVisibility("section-3-item",true);
-			} else if (craftingGoal == 3){	//Etch a Rune
+			} else if (craftingGoal == 2){	//Invent a Magic Formula
 				setVisibility("section-3-formula-invention",false);
 				setVisibility("section-3-formula-reverse-engineer",false);
+				setVisibility("section-3-formula-invention-magic",true);
+				setVisibility("section-3-formula-reverse-engineer-magic",false);
+				setVisibility("section-3-craft-rune",false);
+				setVisibility("section-3-transfer-rune",false);
+				setVisibility("section-3-craft-magic",false);
+				setVisibility("section-3-craft-alchemical",false);
+				setVisibility("section-3-craft-snare",false);
+				setVisibility("section-3-craft-mundane",false);
+				setVisibility("section-3-item",true);
+			} else if (craftingGoal == 3){	//Reverse Engineer a Formula
+				setVisibility("section-3-formula-invention",false);
+				setVisibility("section-3-formula-reverse-engineer",true);
+				setVisibility("section-3-formula-invention-magic",false);
+				setVisibility("section-3-formula-reverse-engineer-magic",false);
+				setVisibility("section-3-craft-rune",false);
+				setVisibility("section-3-transfer-rune",false);
+				setVisibility("section-3-craft-magic",false);
+				setVisibility("section-3-craft-alchemical",false);
+				setVisibility("section-3-craft-snare",false);
+				setVisibility("section-3-craft-mundane",false);
+				setVisibility("section-3-item",true);
+			} else if (craftingGoal == 4){	//Reverse Engineer a Magic Formula
+				setVisibility("section-3-formula-invention",false);
+				setVisibility("section-3-formula-reverse-engineer",false);
+				setVisibility("section-3-formula-invention-magic",false);
+				setVisibility("section-3-formula-reverse-engineer-magic",true);
+				setVisibility("section-3-craft-rune",false);
+				setVisibility("section-3-transfer-rune",false);
+				setVisibility("section-3-craft-magic",false);
+				setVisibility("section-3-craft-alchemical",false);
+				setVisibility("section-3-craft-snare",false);
+				setVisibility("section-3-craft-mundane",false);
+				setVisibility("section-3-item",true);
+			} else if (craftingGoal == 5){	//Etch a Rune
+				setVisibility("section-3-formula-invention",false);
+				setVisibility("section-3-formula-reverse-engineer",false);
+				setVisibility("section-3-formula-invention-magic",false);
+				setVisibility("section-3-formula-reverse-engineer-magic",false);
 				setVisibility("section-3-craft-rune",true);
 				setVisibility("section-3-transfer-rune",false);
 				setVisibility("section-3-craft-magic",false);
@@ -195,9 +286,11 @@
 				setVisibility("section-3-craft-snare",false);
 				setVisibility("section-3-craft-mundane",false);
 				setVisibility("section-3-item",true);
-			} else if (craftingGoal == 4){	//Transfer a Rune
+			} else if (craftingGoal == 6){	//Transfer a Rune
 				setVisibility("section-3-formula-invention",false);
 				setVisibility("section-3-formula-reverse-engineer",false);
+				setVisibility("section-3-formula-invention-magic",false);
+				setVisibility("section-3-formula-reverse-engineer-magic",false);
 				setVisibility("section-3-craft-rune",false);
 				setVisibility("section-3-transfer-rune",true);
 				setVisibility("section-3-craft-magic",false);
@@ -205,9 +298,11 @@
 				setVisibility("section-3-craft-snare",false);
 				setVisibility("section-3-craft-mundane",false);
 				setVisibility("section-3-item",true);
-			} else if (craftingGoal == 5){	//Craft a magic item
+			} else if (craftingGoal == 7){	//Craft a magic item
 				setVisibility("section-3-formula-invention",false);
 				setVisibility("section-3-formula-reverse-engineer",false);
+				setVisibility("section-3-formula-invention-magic",false);
+				setVisibility("section-3-formula-reverse-engineer-magic",false);
 				setVisibility("section-3-craft-rune",false);
 				setVisibility("section-3-transfer-rune",false);
 				setVisibility("section-3-craft-magic",true);
@@ -215,9 +310,11 @@
 				setVisibility("section-3-craft-snare",false);
 				setVisibility("section-3-craft-mundane",false);
 				setVisibility("section-3-item",true);
-			} else if (craftingGoal == 6){	//Craft an alchemical item
+			} else if (craftingGoal == 8){	//Craft an alchemical item
 				setVisibility("section-3-formula-invention",false);
 				setVisibility("section-3-formula-reverse-engineer",false);
+				setVisibility("section-3-formula-invention-magic",false);
+				setVisibility("section-3-formula-reverse-engineer-magic",false);
 				setVisibility("section-3-craft-rune",false);
 				setVisibility("section-3-transfer-rune",false);
 				setVisibility("section-3-craft-magic",false);
@@ -225,9 +322,11 @@
 				setVisibility("section-3-craft-snare",false);
 				setVisibility("section-3-craft-mundane",false);
 				setVisibility("section-3-item",true);
-			} else if (craftingGoal == 7){	//Craft a snare
+			} else if (craftingGoal == 9){	//Craft a snare
 				setVisibility("section-3-formula-invention",false);
 				setVisibility("section-3-formula-reverse-engineer",false);
+				setVisibility("section-3-formula-invention-magic",false);
+				setVisibility("section-3-formula-reverse-engineer-magic",false);
 				setVisibility("section-3-craft-rune",false);
 				setVisibility("section-3-transfer-rune",false);
 				setVisibility("section-3-craft-magic",false);
@@ -235,9 +334,11 @@
 				setVisibility("section-3-craft-snare",true);
 				setVisibility("section-3-craft-mundane",false);
 				setVisibility("section-3-item",true);
-			} else if (craftingGoal == 8){	//Craft a mundane item
+			} else if (craftingGoal == 10){	//Craft a mundane item
 				setVisibility("section-3-formula-invention",false);
 				setVisibility("section-3-formula-reverse-engineer",false);
+				setVisibility("section-3-formula-invention-magic",false);
+				setVisibility("section-3-formula-reverse-engineer-magic",false);
 				setVisibility("section-3-craft-rune",false);
 				setVisibility("section-3-transfer-rune",false);
 				setVisibility("section-3-craft-magic",false);
@@ -246,17 +347,37 @@
 				setVisibility("section-3-craft-mundane",true);
 				setVisibility("section-3-item",true);
 			}
+
+			let newAutoFail = false;
+			if (craftingGoal == 0 || autoFail){
+				newAutoFail = true;
+			}
+			divFill4(newAutoFail);
 		}
 
-		function divFill4(){
-			let outcome = 1;
+		function divFill4(autoFail){
+			let outcome = 2;
+
+			let priceMultiplier = [0,1,2,1,2,2,2,2,1,1,1];
+			let setupDays = [0, 0, 0, 2, 2, 1, 1, 1, 1, 1, 1]
 
 			let itemLevel = document.getElementById("item level").value;
 			let itemPrice = document.getElementById("item price").value;
 			let itemRarity = document.getElementById("item rarity").value;
 
+			let playerLevel = document.getElementById("player level").value;
+			playerLevel = Math.round(playerLevel);
+			let craftingBonus = document.getElementById("crafting bonus").value;
+			craftingBonus = Math.round(craftingBonus);
+			let craftingProficiency = document.getElementById("crafting proficiency").value;
+
+			let craftingGoal = document.getElementById("crafting goal").value;
+
 			if (isNumeric(itemLevel)){
 				itemLevel = Math.round(itemLevel);
+				if (itemLevel > playerLevel){
+					outcome = 1;
+				}
 			} else {
 				outcome = 0;
 			}
@@ -267,13 +388,92 @@
 				outcome = 0;
 			}
 
-			if (outcome == 0){
+			if (outcome == 0 || outcome == 1 || autoFail){
 				setVisibility("section-4-calculation",false);
+				setVisibility("section-4-results",false);
 			} else {
 				setVisibility("section-4-calculation",true);
+				setVisibility("section-4-results",true);
 			}
 
-			console.log(outcome);
+			if(outcome == 1 && autoFail == false){
+				setVisibility("section-4-level",true);
+			} else {
+				setVisibility("section-4-level",false);
+			}
+
+			//If everything looks good...
+			if (outcome == 2){
+				if (craftingGoal == 1 || craftingGoal == 2 || craftingGoal == 3 || craftingGoal == 4){
+					itemPrice = formulaPrices[itemLevel];
+				} else if (craftingGoal == 6){
+					itemPrice = itemPrice*0.2;
+				}
+				let minimumCost = itemPrice*0.5*priceMultiplier[craftingGoal];
+				document.getElementById("calculate-cost").innerHTML = "Minimum Cost to Craft: " + minimumCost;
+				document.getElementById("calculate-work").innerHTML = "Cost Saved per Day of Work: " + craftingTable[playerLevel][craftingProficiency] + " or " + craftingTable[playerLevel+1][craftingProficiency];
+				let successDaysWork = Math.ceil((itemPrice*0.5)/craftingTable[playerLevel][craftingProficiency]);
+				let critSuccessDaysWork = Math.ceil((itemPrice*0.5)/craftingTable[playerLevel+1][craftingProficiency]);
+				let successDaysTotal = setupDays[craftingGoal] + successDaysWork;
+				let critSuccessDaysTotal = setupDays[craftingGoal] + critSuccessDaysWork;
+				document.getElementById("calculate-time").innerHTML = "Time to Craft: " + setupDays[craftingGoal] + " Day(s) Setup + " + successDaysWork + " or " + critSuccessDaysWork + " Days Work = " + successDaysTotal + " or " + critSuccessDaysTotal + " Total Days Work";
+				let dcTotal = craftingDC[itemLevel] + rarityDC[itemRarity-1];
+				document.getElementById("calculate-dc").innerHTML = "Crafting DC: " + dcTotal;
+				let minimumRoll = dcTotal - craftingBonus;
+				let baseProbability = (21-minimumRoll)/20;
+				baseProbability = clamp(0,1,baseProbability);
+				if (craftingBonus+30 >= dcTotal && baseProbability == 0){
+					baseProbability = 0.05;
+				}
+				if(craftingBonus-9 < dcTotal && baseProbability == 1){
+					baseProbability = 0.95;
+				}
+				let percentageProbability = Math.round(baseProbability * 100);
+				document.getElementById("calculate-success").innerHTML = "Likelihood of Success: " + percentageProbability + "%"
+
+				let minimumCostCritFailSalvage = Math.floor(minimumCost * 0.9 * 100) / 100;
+
+				if (craftingGoal == 1 || craftingGoal == 2){
+					document.getElementById("results-crit-success").innerHTML = "Crit Success: You can successfully invent the formula and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + critSuccessDaysWork + " days at " + craftingTable[playerLevel+1][craftingProficiency] + " gold per day."
+					document.getElementById("results-success").innerHTML = "Success: You can successfully invent the formula and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + successDaysWork + " days at " + craftingTable[playerLevel][craftingProficiency] + " gold per day.";
+					document.getElementById("results-failure").innerHTML = "Failure: You fail to invent the formula, but you salvage the full " + minimumCost + " gold back. To try again you must start over tomorrow.";
+					document.getElementById("results-crit-failure").innerHTML = "Crit Failure: You fail to invent the formula and can only salvage " + minimumCostCritFailSalvage + " gold back. To try again you must start over tomorrow.";
+					document.getElementById("results-additional-info-end").innerHTML = "";
+					setVisibility("results-additional-info-end",false);
+				} else if (craftingGoal == 3 || craftingGoal == 4){
+					document.getElementById("results-crit-success").innerHTML = "Crit Success: You can successfully reverse engineer the formula and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + critSuccessDaysWork + " days at " + craftingTable[playerLevel+1][craftingProficiency] + " gold per day."
+					document.getElementById("results-success").innerHTML = "Success: You can successfully reverse engineer the formula and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + successDaysWork + " days at " + craftingTable[playerLevel][craftingProficiency] + " gold per day.";
+					document.getElementById("results-failure").innerHTML = "Failure: You fail to reverse engineer the formula, but you salvage the full " + minimumCost + " gold back. To try again you must start over tomorrow.";
+					document.getElementById("results-crit-failure").innerHTML = "Crit Failure: You fail to reverse engineer the formula and can only salvage " + minimumCostCritFailSalvage + " gold back. To try again you must start over tomorrow.";
+					itemPrice = document.getElementById("item price").value;
+					minimumCost = itemPrice*0.5*priceMultiplier[craftingGoal];
+					document.getElementById("results-additional-info-end").innerHTML = "IMPORTANT: Whether you successfully reverse engineered the formula or not, you're left with a disassembled item with all its components. You can either sell the components worth " + minimumCost + " gold or start crafting the item the next day if you have the formula.";
+					setVisibility("results-additional-info-end",true);
+				} else if (craftingGoal == 5){
+					document.getElementById("results-crit-success").innerHTML = "Crit Success: You can successfully etch the rune and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + critSuccessDaysWork + " days at " + craftingTable[playerLevel+1][craftingProficiency] + " gold per day."
+					document.getElementById("results-success").innerHTML = "Success: You can successfully etch the rune and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + successDaysWork + " days at " + craftingTable[playerLevel][craftingProficiency] + " gold per day.";
+					document.getElementById("results-failure").innerHTML = "Failure: You fail to etch the rune, but you salvage the full " + minimumCost + " gold back. To try again you must start over tomorrow.";
+					document.getElementById("results-crit-failure").innerHTML = "Crit Failure: You fail to etch the rune and can only salvage " + minimumCostCritFailSalvage + " gold back. If you're trying to etch the rune onto a runestone, you destroy the runestone. To try again you must start over tomorrow.";
+					document.getElementById("results-additional-info-end").innerHTML = "";
+					setVisibility("results-additional-info-end",false);
+				} else if (craftingGoal == 6){
+					document.getElementById("results-crit-success").innerHTML = "Crit Success: You can successfully transfer the rune(s) and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + critSuccessDaysWork + " days at " + craftingTable[playerLevel+1][craftingProficiency] + " gold per day."
+					document.getElementById("results-success").innerHTML = "Success: You can successfully transfer the rune(s) and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + successDaysWork + " days at " + craftingTable[playerLevel][craftingProficiency] + " gold per day.";
+					document.getElementById("results-failure").innerHTML = "Failure: You fail to transfer the rune(s), but you salvage the full " + minimumCost + " gold back. To try again you must start over tomorrow.";
+					document.getElementById("results-crit-failure").innerHTML = "Crit Failure: You fail to transfer the rune(s) and can only salvage " + minimumCostCritFailSalvage + " gold back. If you're trying to transfer a rune onto a runestone, you destroy the runestone. To try again you must start over tomorrow.";
+					document.getElementById("results-additional-info-end").innerHTML = "";
+					setVisibility("results-additional-info-end",false);
+				} else if (craftingGoal == 7 || craftingGoal == 8 || craftingGoal == 9 || craftingGoal == 10){
+					document.getElementById("results-crit-success").innerHTML = "Crit Success: You can successfully craft the item and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + critSuccessDaysWork + " days at " + craftingTable[playerLevel+1][craftingProficiency] + " gold per day."
+					document.getElementById("results-success").innerHTML = "Success: You can successfully craft the item and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + successDaysWork + " days at " + craftingTable[playerLevel][craftingProficiency] + " gold per day.";
+					document.getElementById("results-failure").innerHTML = "Failure: You fail to craft the item, but you salvage the full " + minimumCost + " gold back. To try again you must start over tomorrow.";
+					document.getElementById("results-crit-failure").innerHTML = "Crit Failure: You fail to craft the item and can only salvage " + minimumCostCritFailSalvage + " gold back. To try again you must start over tomorrow.";
+					document.getElementById("results-additional-info-end").innerHTML = "";
+					setVisibility("results-additional-info-end",false);
+				}
+
+			}
+
 		}
 
 		//Things in the footer
