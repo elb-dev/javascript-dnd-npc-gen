@@ -99,9 +99,21 @@
 				<option value=3>Rare</option>
 				<option value=4>Unique</option>
 			</select>
+	  		<div id = "section-3-item-formula-detail">
+	  			<p>Do I have the formula...?</p>
+				<select id="formula held" onchange="divFill4(false)">
+					<option value=-1>...</option>
+					<option value=0>No, and I need the formula</option>
+					<option value=1>No, but I don't need the formula due to a feat</option>
+					<option value=2>Yes, I have the formula</option>
+				</select>
+	  		</div>
 	  	</div>
 	  	<div class = "craft-section" id = "section-4-level" style="display: none;">
 		  	<p>Sorry, you're too low of a level to perform this craft action for this item.</p>
+	  	</div>
+	  	<div class = "craft-section" id = "section-4-formula" style="display: none;">
+		  	<p>Sorry, you need the formula to craft this item.</p>
 	  	</div>
 	  	<div class = "craft-section" id = "section-4-calculation" style="display: none;">
 		  	<p id="calculate-cost">Minimum Cost to Craft:</p>
@@ -227,6 +239,7 @@
 				setVisibility("section-3-craft-snare",false);
 				setVisibility("section-3-craft-mundane",false);
 				setVisibility("section-3-item",false);
+				setVisibility("section-3-item-formula-detail",false);
 			} else if (craftingGoal == 1){	//Invent a Formula
 				setVisibility("section-3-formula-invention",true);
 				setVisibility("section-3-formula-reverse-engineer",false);
@@ -238,6 +251,7 @@
 				setVisibility("section-3-craft-alchemical",false);
 				setVisibility("section-3-craft-snare",false);
 				setVisibility("section-3-craft-mundane",false);
+				setVisibility("section-3-item-formula-detail",false);
 				setVisibility("section-3-item",true);
 			} else if (craftingGoal == 2){	//Invent a Magic Formula
 				setVisibility("section-3-formula-invention",false);
@@ -250,6 +264,7 @@
 				setVisibility("section-3-craft-alchemical",false);
 				setVisibility("section-3-craft-snare",false);
 				setVisibility("section-3-craft-mundane",false);
+				setVisibility("section-3-item-formula-detail",false);
 				setVisibility("section-3-item",true);
 			} else if (craftingGoal == 3){	//Reverse Engineer a Formula
 				setVisibility("section-3-formula-invention",false);
@@ -262,6 +277,7 @@
 				setVisibility("section-3-craft-alchemical",false);
 				setVisibility("section-3-craft-snare",false);
 				setVisibility("section-3-craft-mundane",false);
+				setVisibility("section-3-item-formula-detail",false);
 				setVisibility("section-3-item",true);
 			} else if (craftingGoal == 4){	//Reverse Engineer a Magic Formula
 				setVisibility("section-3-formula-invention",false);
@@ -274,6 +290,7 @@
 				setVisibility("section-3-craft-alchemical",false);
 				setVisibility("section-3-craft-snare",false);
 				setVisibility("section-3-craft-mundane",false);
+				setVisibility("section-3-item-formula-detail",false);
 				setVisibility("section-3-item",true);
 			} else if (craftingGoal == 5){	//Etch a Rune
 				setVisibility("section-3-formula-invention",false);
@@ -286,6 +303,7 @@
 				setVisibility("section-3-craft-alchemical",false);
 				setVisibility("section-3-craft-snare",false);
 				setVisibility("section-3-craft-mundane",false);
+				setVisibility("section-3-item-formula-detail",true);
 				setVisibility("section-3-item",true);
 			} else if (craftingGoal == 6){	//Transfer a Rune
 				setVisibility("section-3-formula-invention",false);
@@ -298,6 +316,7 @@
 				setVisibility("section-3-craft-alchemical",false);
 				setVisibility("section-3-craft-snare",false);
 				setVisibility("section-3-craft-mundane",false);
+				setVisibility("section-3-item-formula-detail",false);
 				setVisibility("section-3-item",true);
 			} else if (craftingGoal == 7){	//Craft a magic item
 				setVisibility("section-3-formula-invention",false);
@@ -310,6 +329,7 @@
 				setVisibility("section-3-craft-alchemical",false);
 				setVisibility("section-3-craft-snare",false);
 				setVisibility("section-3-craft-mundane",false);
+				setVisibility("section-3-item-formula-detail",true);
 				setVisibility("section-3-item",true);
 			} else if (craftingGoal == 8){	//Craft an alchemical item
 				setVisibility("section-3-formula-invention",false);
@@ -322,6 +342,7 @@
 				setVisibility("section-3-craft-alchemical",true);
 				setVisibility("section-3-craft-snare",false);
 				setVisibility("section-3-craft-mundane",false);
+				setVisibility("section-3-item-formula-detail",true);
 				setVisibility("section-3-item",true);
 			} else if (craftingGoal == 9){	//Craft a snare
 				setVisibility("section-3-formula-invention",false);
@@ -334,6 +355,7 @@
 				setVisibility("section-3-craft-alchemical",false);
 				setVisibility("section-3-craft-snare",true);
 				setVisibility("section-3-craft-mundane",false);
+				setVisibility("section-3-item-formula-detail",true);
 				setVisibility("section-3-item",true);
 			} else if (craftingGoal == 10){	//Craft a mundane item
 				setVisibility("section-3-formula-invention",false);
@@ -346,6 +368,7 @@
 				setVisibility("section-3-craft-alchemical",false);
 				setVisibility("section-3-craft-snare",false);
 				setVisibility("section-3-craft-mundane",true);
+				setVisibility("section-3-item-formula-detail",true);
 				setVisibility("section-3-item",true);
 			}
 
@@ -360,8 +383,8 @@
 			let outcome = 2;
 
 			let priceMultiplier = [0,1,2,1,2,2,2,2,1,1,1];
-			let setupDays = [0, 0, 0, 2, 2, 1, 1, 1, 1, 1, 1]
 
+			let formulaHeld = document.getElementById("formula held").value;
 			let itemLevel = document.getElementById("item level").value;
 			let itemPrice = document.getElementById("item price").value;
 			let itemRarity = document.getElementById("item rarity").value;
@@ -389,7 +412,17 @@
 				outcome = 0;
 			}
 
-			if (outcome == 0 || outcome == 1 || autoFail){
+			if (craftingGoal == 5 || craftingGoal == clamp(7,10,craftingGoal)){
+				if (formulaHeld == -1){
+					outcome = 0;
+				} else if (formulaHeld == 0 && outcome == 2){
+					outcome = 3;
+				}
+			}
+
+			console.log("Outcome: " + outcome + ", Formula Held: " + formulaHeld);
+
+			if (outcome == 0 || outcome == 1 || outcome == 3 || autoFail){
 				setVisibility("section-4-calculation",false);
 				setVisibility("section-4-results",false);
 			} else {
@@ -403,6 +436,12 @@
 				setVisibility("section-4-level",false);
 			}
 
+			if(outcome == 3){
+				setVisibility("section-4-formula",true);
+			} else {
+				setVisibility("section-4-formula",false);
+			}
+
 			//If everything looks good...
 			if (outcome == 2){
 				if (craftingGoal == 1 || craftingGoal == 2 || craftingGoal == 3 || craftingGoal == 4){
@@ -412,12 +451,21 @@
 				}
 				let minimumCost = itemPrice*0.5*priceMultiplier[craftingGoal];
 				document.getElementById("calculate-cost").innerHTML = "Minimum Cost to Craft: " + minimumCost;
-				document.getElementById("calculate-work").innerHTML = "Cost Saved per Day of Work: " + craftingTable[playerLevel][craftingProficiency] + " or " + craftingTable[playerLevel+1][craftingProficiency];
+				document.getElementById("calculate-work").innerHTML = "Cost Saved per Day of Work: " + (craftingTable[playerLevel][craftingProficiency]*priceMultiplier[craftingGoal]) + " or " + (craftingTable[playerLevel+1][craftingProficiency]*priceMultiplier[craftingGoal]);
 				let successDaysWork = Math.ceil((itemPrice*0.5)/craftingTable[playerLevel][craftingProficiency]);
 				let critSuccessDaysWork = Math.ceil((itemPrice*0.5)/craftingTable[playerLevel+1][craftingProficiency]);
-				let successDaysTotal = setupDays[craftingGoal] + successDaysWork;
-				let critSuccessDaysTotal = setupDays[craftingGoal] + critSuccessDaysWork;
-				document.getElementById("calculate-time").innerHTML = "Time to Craft: " + setupDays[craftingGoal] + " Day(s) Setup + " + successDaysWork + " or " + critSuccessDaysWork + " Days Work = " + successDaysTotal + " or " + critSuccessDaysTotal + " Total Days Work";
+				let setupDays = 0;
+				if (craftingGoal == 3 || craftingGoal == 4){
+					setupDays = 2;
+				} else if (craftingGoal == clamp(5,10,craftingGoal)) {
+					setupDays = 1;
+					if (craftingGoal != 6 && formulaHeld != 2) {
+						setupDays = setupDays + 1;
+					}
+				}
+				let successDaysTotal = setupDays + successDaysWork;
+				let critSuccessDaysTotal = setupDays + critSuccessDaysWork;
+				document.getElementById("calculate-time").innerHTML = "Time to Craft: " + setupDays + " Day(s) Setup + " + successDaysWork + " or " + critSuccessDaysWork + " Days Work = " + successDaysTotal + " or " + critSuccessDaysTotal + " Total Days Work";
 				let dcTotal = craftingDC[itemLevel] + rarityDC[itemRarity-1];
 				document.getElementById("calculate-dc").innerHTML = "Crafting DC: " + dcTotal;
 				let minimumRoll = dcTotal - craftingBonus;
@@ -435,15 +483,15 @@
 				let minimumCostCritFailSalvage = Math.floor(minimumCost * 0.9 * 100) / 100;
 
 				if (craftingGoal == 1 || craftingGoal == 2){
-					document.getElementById("results-crit-success").innerHTML = "Crit Success: You can successfully invent the formula and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + critSuccessDaysWork + " days at " + craftingTable[playerLevel+1][craftingProficiency] + " gold per day."
-					document.getElementById("results-success").innerHTML = "Success: You can successfully invent the formula and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + successDaysWork + " days at " + craftingTable[playerLevel][craftingProficiency] + " gold per day.";
+					document.getElementById("results-crit-success").innerHTML = "Crit Success: You can successfully invent the formula and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + critSuccessDaysWork + " days at " + (craftingTable[playerLevel+1][craftingProficiency]*priceMultiplier[craftingGoal]) + " gold per day."
+					document.getElementById("results-success").innerHTML = "Success: You can successfully invent the formula and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + successDaysWork + " days at " + (craftingTable[playerLevel][craftingProficiency]*priceMultiplier[craftingGoal]) + " gold per day.";
 					document.getElementById("results-failure").innerHTML = "Failure: You fail to invent the formula, but you salvage the full " + minimumCost + " gold back. To try again you must start over tomorrow.";
 					document.getElementById("results-crit-failure").innerHTML = "Crit Failure: You fail to invent the formula and can only salvage " + minimumCostCritFailSalvage + " gold back. To try again you must start over tomorrow.";
 					document.getElementById("results-additional-info-end").innerHTML = "";
 					setVisibility("results-additional-info-end",false);
 				} else if (craftingGoal == 3 || craftingGoal == 4){
-					document.getElementById("results-crit-success").innerHTML = "Crit Success: You can successfully reverse engineer the formula and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + critSuccessDaysWork + " days at " + craftingTable[playerLevel+1][craftingProficiency] + " gold per day."
-					document.getElementById("results-success").innerHTML = "Success: You can successfully reverse engineer the formula and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + successDaysWork + " days at " + craftingTable[playerLevel][craftingProficiency] + " gold per day.";
+					document.getElementById("results-crit-success").innerHTML = "Crit Success: You can successfully reverse engineer the formula and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + critSuccessDaysWork + " days at " + (craftingTable[playerLevel+1][craftingProficiency]*priceMultiplier[craftingGoal]) + " gold per day."
+					document.getElementById("results-success").innerHTML = "Success: You can successfully reverse engineer the formula and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + successDaysWork + " days at " + (craftingTable[playerLevel][craftingProficiency]*priceMultiplier[craftingGoal]) + " gold per day.";
 					document.getElementById("results-failure").innerHTML = "Failure: You fail to reverse engineer the formula, but you salvage the full " + minimumCost + " gold back. To try again you must start over tomorrow.";
 					document.getElementById("results-crit-failure").innerHTML = "Crit Failure: You fail to reverse engineer the formula and can only salvage " + minimumCostCritFailSalvage + " gold back. To try again you must start over tomorrow.";
 					itemPrice = document.getElementById("item price").value;
@@ -451,22 +499,22 @@
 					document.getElementById("results-additional-info-end").innerHTML = "IMPORTANT: Whether you successfully reverse engineered the formula or not, you're left with a disassembled item with all its components. You can either sell the components worth " + minimumCost + " gold or start crafting the item the next day if you have the formula.";
 					setVisibility("results-additional-info-end",true);
 				} else if (craftingGoal == 5){
-					document.getElementById("results-crit-success").innerHTML = "Crit Success: You can successfully etch the rune and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + critSuccessDaysWork + " days at " + craftingTable[playerLevel+1][craftingProficiency] + " gold per day."
-					document.getElementById("results-success").innerHTML = "Success: You can successfully etch the rune and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + successDaysWork + " days at " + craftingTable[playerLevel][craftingProficiency] + " gold per day.";
+					document.getElementById("results-crit-success").innerHTML = "Crit Success: You can successfully etch the rune and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + critSuccessDaysWork + " days at " + (craftingTable[playerLevel+1][craftingProficiency]*priceMultiplier[craftingGoal]) + " gold per day."
+					document.getElementById("results-success").innerHTML = "Success: You can successfully etch the rune and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + successDaysWork + " days at " + (craftingTable[playerLevel][craftingProficiency]*priceMultiplier[craftingGoal]) + " gold per day.";
 					document.getElementById("results-failure").innerHTML = "Failure: You fail to etch the rune, but you salvage the full " + minimumCost + " gold back. To try again you must start over tomorrow.";
 					document.getElementById("results-crit-failure").innerHTML = "Crit Failure: You fail to etch the rune and can only salvage " + minimumCostCritFailSalvage + " gold back. If you're trying to etch the rune onto a runestone, you destroy the runestone. To try again you must start over tomorrow.";
 					document.getElementById("results-additional-info-end").innerHTML = "";
 					setVisibility("results-additional-info-end",false);
 				} else if (craftingGoal == 6){
-					document.getElementById("results-crit-success").innerHTML = "Crit Success: You can successfully transfer the rune(s) and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + critSuccessDaysWork + " days at " + craftingTable[playerLevel+1][craftingProficiency] + " gold per day."
-					document.getElementById("results-success").innerHTML = "Success: You can successfully transfer the rune(s) and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + successDaysWork + " days at " + craftingTable[playerLevel][craftingProficiency] + " gold per day.";
+					document.getElementById("results-crit-success").innerHTML = "Crit Success: You can successfully transfer the rune(s) and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + critSuccessDaysWork + " days at " + (craftingTable[playerLevel+1][craftingProficiency]*priceMultiplier[craftingGoal]) + " gold per day."
+					document.getElementById("results-success").innerHTML = "Success: You can successfully transfer the rune(s) and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + successDaysWork + " days at " + (craftingTable[playerLevel][craftingProficiency]*priceMultiplier[craftingGoal]) + " gold per day.";
 					document.getElementById("results-failure").innerHTML = "Failure: You fail to transfer the rune(s), but you salvage the full " + minimumCost + " gold back. To try again you must start over tomorrow.";
 					document.getElementById("results-crit-failure").innerHTML = "Crit Failure: You fail to transfer the rune(s) and can only salvage " + minimumCostCritFailSalvage + " gold back. If you're trying to transfer a rune onto a runestone, you destroy the runestone. To try again you must start over tomorrow.";
 					document.getElementById("results-additional-info-end").innerHTML = "";
 					setVisibility("results-additional-info-end",false);
 				} else if (craftingGoal == 7 || craftingGoal == 8 || craftingGoal == 9 || craftingGoal == 10){
-					document.getElementById("results-crit-success").innerHTML = "Crit Success: You can successfully craft the item and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + critSuccessDaysWork + " days at " + craftingTable[playerLevel+1][craftingProficiency] + " gold per day."
-					document.getElementById("results-success").innerHTML = "Success: You can successfully craft the item and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + successDaysWork + " days at " + craftingTable[playerLevel][craftingProficiency] + " gold per day.";
+					document.getElementById("results-crit-success").innerHTML = "Crit Success: You can successfully craft the item and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + critSuccessDaysWork + " days at " + (craftingTable[playerLevel+1][craftingProficiency]*priceMultiplier[craftingGoal]) + " gold per day."
+					document.getElementById("results-success").innerHTML = "Success: You can successfully craft the item and either pay the remaining " + minimumCost + " gold or work off the remaining gold for a max of " + successDaysWork + " days at " + (craftingTable[playerLevel][craftingProficiency]*priceMultiplier[craftingGoal]) + " gold per day.";
 					document.getElementById("results-failure").innerHTML = "Failure: You fail to craft the item, but you salvage the full " + minimumCost + " gold back. To try again you must start over tomorrow.";
 					document.getElementById("results-crit-failure").innerHTML = "Crit Failure: You fail to craft the item and can only salvage " + minimumCostCritFailSalvage + " gold back. To try again you must start over tomorrow.";
 					document.getElementById("results-additional-info-end").innerHTML = "";
