@@ -162,7 +162,26 @@ function bellCurveLerp(t, median, stdDev) {
     return inverseCDF(t, median, stdDev);
 }
 
+//Given an array of choices, chooses one to return.
+function choose(array) {
+    var length = array.length;
+    var choice = iRandomRange(0, length-1);
+    return array[choice];
+}
 
+function dateToDay(myDate){
+    let monthLengths = [31,28,31,30,31,30,31,31,30,31,30,31];
+    let currentDate = myDate.split("-")
+    currentDay = 0;
+
+    let n = 1
+    while(n < currentDate[1]){
+        currentDay += monthLengths[n-1];
+        n += 1;
+    }
+    currentDay += Number(currentDate[2]);
+    return currentDay
+}
 
 
 

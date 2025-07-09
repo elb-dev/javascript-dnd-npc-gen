@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+	<title>ELB's Pathfinder Tools</title>
+</head>
+<body>
+	<header class="bookend" id="header">
+		<h1><a href="/javascript-dnd-npc-gen">ELB's Pathfinder Tools</a></h1>
+		<nav>
+			<ul>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/npc-gen-upgraded">NPC Gen</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/weather-gen">Weather Generator</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/settlement-gen">Settlement Generator</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/encounter-gen">Encounter Generator</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/dice-roller">Dice Roller</a></li>
+				<li class="nav-item"><a href="/javascript-dnd-npc-gen/crafting">Crafting</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main class = "main-gen">
+		<h1>Generator</h1>
+		<p>Biome/Settlement</p>
+		<select id="biome">
+			<option value=0>Tropical Rainforest</option>
+			<option value=1>Temperate Rainforest</option>
+			<option value=2>Tropical Seasonal Forest/Savanna</option>
+			<option value=3>Temperate Seasonal Forest</option>
+			<option value=4>Woodland/Shrubland</option>
+			<option value=5>Boreal Forest</option>
+			<option value=6>Temperate Grassland/Cold Desert</option>
+			<option value=7>Tundra</option>
+			<option value=8>Subtropical Desert</option>
+			<option value=9>Ocean</option>
+			<option value=10>Miasma</option>
+		</select>
+		<select id="road">
+			<option value=0>On Road</option>
+			<option value=1>Off Road</option>
+		</select>
+		<select id="jobs">
+			<option value=0>Seeking Jobs</option>
+			<option value=1>Not Seeking Jobs</option>
+		</select>
+		<input id="date" type="date" value="0050-08-29" />
+		<br>
+		<input type="button" onclick="generateEncounter()" value="GENERATE ENCOUNTER">
+		<p id="encounterTitle"></p>
+		<p id="encounterDescription"></p>
+		<p id="senseDirection"></p>
+		<p id="senseDirectionNormal"></p>
+		<p id="senseDirectionHard"></p>
+		<p id="senseDirectionVery"></p>
+		<p id="senseDirectionExtreme"></p>
+		<br>
+		<h1>Travel Activities</h1>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=511" target="_blank"><p>Avoid Notice</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=65" target="_blank"><p>Cover Tracks</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=512" target="_blank"><p>Defend</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=513" target="_blank"><p>Detect Magic</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=515" target="_blank"><p>Hustle</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=516" target="_blank"><p>Investigate</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=518" target="_blank"><p>Scout</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=519" target="_blank"><p>Search</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=64" target="_blank"><p>Sense Direction</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=66" target="_blank"><p>Track</p></a>
+		<br>
+		<h1>Other Exploration Activities</h1>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=520" target="_blank"><p>Affix a Talisman</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=32" target="_blank"><p>Borrow an Arcane Spell</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=601" target="_blank"><p>Call Companion</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=52" target="_blank"><p>Coerce</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=22" target="_blank"><p>Decipher Writing</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=514" target="_blank"><p>Follow the Expert</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=49" target="_blank"><p>Gather Information</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=44" target="_blank"><p>Identify Alchemy</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=24" target="_blank"><p>Identify Magic</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=46" target="_blank"><p>Impersonate</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=25" target="_blank"><p>Learn a Spell</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=50" target="_blank"><p>Make an Impression</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=544" target="_blank"><p>Pursue a Lead</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=71" target="_blank"><p>Refocus</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=42" target="_blank"><p>Repair</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=517" target="_blank"><p>Repeat a Spell</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=31" target="_blank"><p>Squeeze</p></a>
+		<a href="https://2e.aonprd.com/Actions.aspx?ID=57" target="_blank"><p>Treat Wounds</p></a>
+	</main>
+	<footer class="bookend" id="footer">
+		<ul id="footerul">
+			<li id="copyright">&copy; 2018-YEAR ELB</li>
+			<li><a href="https://github.com/elb-dev/javascript-dnd-npc-gen">Github</a></li>
+			<li><a href="https://github.com/elb-dev/javascript-dnd-npc-gen/blob/master/LICENSE">License</a></li>
+		</ul>
+	</footer>
+
+	<script type="text/javascript" src = "js/functions.js"></script>
+	<script type="text/javascript">
+
+		function dateValue(myDate){
+			var myDay = dateToDay(myDate);
+			var myYear = Number(myDate.split("-")[0]);
+			return (myYear*365)+myDay;
+		}
+
+		function generateEncounter(){
+
+			//Main Variables
+			var currentBiome = document.getElementById("biome").value;
+			var road = document.getElementById("road").value;
+			var jobs = document.getElementById("jobs").value;
+			var jobValues = [10,25,40,70,120,200,320,500,720,1000,1400,2000,2800,4000,6000,9000,13000,20000,30000,48000,80000,140000];
+
+			//Date
+			var currentDate = document.getElementById("date").value;
+			var currentDateValue = dateValue(currentDate);
+			var startDate = "0050-08-29";
+			var startDateValue = dateValue(startDate);
+			var endDate = "0054-08-29";
+			var endDateValue = dateValue(endDate);
+			var daysFromStart = currentDateValue-startDateValue;
+			var dateLerp = clamp(0, 1, (daysFromStart)/(endDateValue-startDateValue));
+
+			var monsterAttackMod = Math.floor(daysFromStart/3);
+			var monsterJobMod = Math.floor(daysFromStart/7);
+			var vesselAttackMod = Math.floor(daysFromStart/6);
+
+			//Chances For Each Encounter Type, assumes both road and seeking jobs
+			if (currentBiome >= 0 && currentBiome <= 6){
+				var monsterAttack = 16+monsterAttackMod;
+				var banditAttack = 3;
+				var monsterJob = 17+monsterJobMod;
+				var hazard = 14;
+				var vesselAttack = 10+vesselAttackMod;
+				var harmless = 14;
+				var nothing = 51;
+			} else if (currentBiome >= 7 && currentBiome <= 8){
+				var monsterAttack = 21+monsterAttackMod;
+				var banditAttack = 6;
+				var monsterJob = 17+monsterJobMod;
+				var hazard = 29;
+				var vesselAttack = 10+vesselAttackMod;
+				var harmless = 14;
+				var nothing = 28;
+			} else if (currentBiome == 9){
+				var monsterAttack = 1;
+				var banditAttack = 12;
+				var monsterJob = 0;
+				var hazard = 1;
+				var vesselAttack = 2+Math.floor(vesselAttackMod/4);
+				var harmless = 7;
+				var nothing = 85;
+			} else if (currentBiome == 10){
+				var monsterAttack = 70+monsterAttackMod;
+				var banditAttack = 0;
+				var monsterJob = 0;
+				var hazard = 14;
+				var vesselAttack = 0;
+				var harmless = 5;
+				var nothing = 31;
+			}
+
+			if (road == 1 && currentBiome != 9 && currentBiome != 10){
+				nothing -= monsterAttack;
+				monsterAttack *= 2;
+				monsterJob *= 0.5;
+				nothing += monsterJob;
+			}
+			if (jobs == 1){
+				nothing += monsterJob;
+				monsterJob = 0;
+			}
+
+			//Rolling Encounter Type
+			var totalValues = [monsterAttack,banditAttack,monsterJob,hazard,harmless,nothing,vesselAttack];
+			var choiceNames = ["Monster Attack", "Bandit Attack", "Monster Job", "Hazard", "Harmless", "Nothing", "Vessel Attack"]
+			var chanceRolls = [];
+			for (var i = 0; i < totalValues.length; i++){
+				var n = 0;
+				while (n < totalValues[i]){
+					n++;
+					chanceRolls[chanceRolls.length] = i;
+				}
+			}
+			var encounterChoice = chanceRolls[iRandomRange(0,chanceRolls.length-1)];
+
+			//Monster Difficulty
+			var monsterLevelMin = Math.round(lerp(-4,6,dateLerp));
+			var monsterLevelMax = Math.round(lerp(12,20,dateLerp));
+			do {
+				var monsterLevel = iRandomRangeBell(monsterLevelMin,monsterLevelMax,3);
+			} while (monsterLevel < -1)
+
+			var monsterCountMin = Math.round(lerp(-2,2,dateLerp));
+			do {
+				var monsterCount = iRandomRangeBell(monsterCountMin,8,3);
+			} while (monsterCount < 1)
+
+			//Monster Job Pay
+			var monsterPayModMax = 0.3;
+			var monsterPayModMin = 0.1;
+			var monsterPayMod = lerp(monsterPayModMax, monsterPayModMin, dateLerp);
+			var monsterPay = Math.round(jobValues[monsterLevel+1]*monsterPayMod*monsterCount);
+
+			//Bandit Difficulty
+			do {
+				var banditCount = iRandomRange(-3,15,4);
+			} while (banditCount < 1)
+			var banditRuse = iRandomRange(1,10);
+
+			//Hazard Difficulty
+			do {
+				var hazardLevel = iRandomRangeBell(-7,5,3)
+			} while (hazardLevel < -1)
+
+			//Vessel Attack Difficulty
+			do {
+				var vesselDifficulty = iRandomRangeBell(-4, 4, 3);
+			} while (vesselDifficulty < 0)
+			var vesselDifficultyChoices = ["TRIVIAL", "LOW", "MODERATE", "SEVERE", "EXTREME"];
+			var vesselDifficultChoice = vesselDifficultyChoices[vesselDifficulty];
+			var vesselPlans = ["They decide to ambush the players from hiding.", "They set a trap for the players and try to clean up afterwards.", "They reveal themselves and attack if they believe the players aren't Vessel Followers.", "They reveal themselves and their malicious intent immediately."];
+			var vesselKnowledge = ["They don't know who the players are.", "They know who the players are."];
+			var vesselMonster = ["They are only people.", "They have some monsters working among them."];
+			var vesselPlansChoice = iRandomRange(0, 3);
+			var vesselKnowledgeMonsterChoiceOptions = [[0,0,0,0,1],[0,0,0,1,1],[0,0,1,1,1],[0,1,1,1,1],[1,1,1,1,1]];
+			var choiceLerp = Math.round(lerp(0,4,dateLerp));
+			var vesselKnowledgeChoice = choose(vesselKnowledgeMonsterChoiceOptions[choiceLerp]);
+			var vesselMonsterChoice = choose(vesselKnowledgeMonsterChoiceOptions[choiceLerp]);
+
+			//Description
+			document.getElementById("encounterTitle").innerHTML = choiceNames[encounterChoice];
+			if (encounterChoice == 0){
+				document.getElementById("encounterDescription").innerHTML = "Level: "+monsterLevel+" Count: "+monsterCount;
+			} else if (encounterChoice == 1) {
+				if (banditRuse != 1){
+					document.getElementById("encounterDescription").innerHTML = "Bandit Count: "+banditCount+" They will only attack if their numbers are larger than the party.";
+				} else {
+					document.getElementById("encounterDescription").innerHTML = "Bandit Count: "+banditCount+" They will attempt a ruse of some kind to steal something.";
+				}
+			} else if (encounterChoice == 2) {
+				document.getElementById("encounterDescription").innerHTML = "Level: "+monsterLevel+" Count: "+monsterCount+" Pay: "+monsterPay;
+			} else if (encounterChoice == 3) {
+				document.getElementById("encounterDescription").innerHTML = "Level: "+hazardLevel;
+			} else if (encounterChoice == 4) {
+				document.getElementById("encounterDescription").innerHTML = "The encounter is harmless. Focus on RP.";
+			} else if (encounterChoice == 5) {
+				document.getElementById("encounterDescription").innerHTML = "Nothing happens. Travel proceeds as normal.";
+			} else if (encounterChoice == 6) {
+				document.getElementById("encounterDescription").innerHTML = "Vessel followers attack with a "+vesselDifficultChoice+" threat level. "+vesselPlans[vesselPlansChoice]+" "+vesselKnowledge[vesselKnowledgeChoice]+" "+vesselMonster[vesselMonsterChoice];
+			}
+
+			var directionDc = [10,12,15,20];
+			var directionDifficulty = "Untrained Survival";
+			if (currentBiome == 0 || currentBiome == 1 || currentBiome == 3 || currentBiome == 5) {
+				directionDc = [15,17,20,25];
+				directionDifficulty = "Trained Survival";
+			} else if (currentBiome == 10) {
+				directionDc = [20,22,25,30];
+				directionDifficulty = "Expert Survival";
+			}
+			if (road == 0){
+				var directionString = "";
+				var directionStringNormal = "";
+				var directionStringHard = "";
+				var directionStringVery = "";
+				var directionStringExtreme = "";
+			} else if (road == 1){
+				var directionString = "Sense Direction DCs"
+				var directionStringNormal = "Clear Weather: "+directionDifficulty+" "+directionDc[0];
+				var directionStringHard = "Poor Weather: "+directionDifficulty+" "+directionDc[1];
+				var directionStringVery = "Stormy Weather: "+directionDifficulty+" "+directionDc[2];
+				var directionStringExtreme = "Extreme Weather: "+directionDifficulty+" "+directionDc[3];
+			}
+			document.getElementById("senseDirection").innerHTML = directionString;
+			document.getElementById("senseDirectionNormal").innerHTML = directionStringNormal;
+			document.getElementById("senseDirectionHard").innerHTML = directionStringHard;
+			document.getElementById("senseDirectionVery").innerHTML = directionStringVery;
+			document.getElementById("senseDirectionExtreme").innerHTML = directionStringExtreme;
+		}
+
+	</script>
+</body>
+</html>

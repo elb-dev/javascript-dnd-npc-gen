@@ -62,7 +62,7 @@
 			<option value=true>Yes</option>
 		</select>
 		<p>Date</p>
-		<input id="date" type="date" value="0049-01-01" />
+		<input id="date" type="date" value="0050-01-01" />
 		<br>
 		<input type="button" onclick="generateWeather()" value="GENERATE WEATHER">
 		<h2>Weather</h2>
@@ -92,20 +92,6 @@
 		var blackouts = createBlackouts();
 		var earthquakes = createEarthquakes();
 		var holidays = createHolidays();
-
-		function dateToDay(myDate){
-			let monthLengths = [31,28,31,30,31,30,31,31,30,31,30,31];
-			let currentDate = myDate.split("-")
-			currentDay = 0;
-
-			let n = 1
-			while(n < currentDate[1]){
-				currentDay += monthLengths[n-1];
-				n += 1;
-			}
-			currentDay += Number(currentDate[2]);
-			return currentDay
-		}
 
 		function determineTempEffectRange(temp,humidity){
 			temp -= lerp(0,15,humidity);
