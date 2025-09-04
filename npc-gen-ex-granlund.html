@@ -282,16 +282,16 @@
 			document.getElementById("box").value += "\nBuild: " + builds[sex][buildFat][buildStr];
 
 			//Personality
-			let personalityTypes = ["absent-minded", "excitable", "nurturing", "perceptive", "cheery", "mopey", "dramatic", "boring", "braggart", "chatty", "crybaby", "paranoid", "rude", "stubborn", "sweet talker", "flirty", "worrywart", "jokester", "sarcastic", "edgy", "inappropriate", "snooty", "prim and proper", "polite", "shy", "awkward", "vain", "sleazy", "people pleaser"];
+			let personalityTypes = ["absent-minded", "excitable", "nurturing", "perceptive", "cheery", "mopey", "dramatic", "boring", "braggart", "chatty", "crybaby", "paranoid", "rude", "stubborn", "sweet talker", "flirty", "worrywart", "jokester", "sarcastic", "edgy", "inappropriate", "snooty", "prim and proper", "polite", "shy", "awkward", "vain", "sleazy", "people pleaser", "up-tight", "industrious", "rambly", "helpful", "honest", "blunt", "loyal", "analytical", "sensitive", "considerate"];
 			let personalitySlots = [-1, -1, -1];
 			do {
-				personalitySlots[0] = iRandomRange(0, personalityTypes.length-1);
-				personalitySlots[1] = iRandomRange(0, personalityTypes.length-1);
-				personalitySlots[2] = iRandomRange(0, personalityTypes.length-1);
+				personalitySlots[0] = personalityTypes[iRandomRange(0, personalityTypes.length-1)];
+				personalitySlots[1] = personalityTypes[iRandomRange(0, personalityTypes.length-1)];
+				personalitySlots[2] = personalityTypes[iRandomRange(0, personalityTypes.length-1)];
 				console.log(personalitySlots);
 			} while (personalitySlots[0] == personalitySlots[1] || personalitySlots[1] == personalitySlots[2] || personalitySlots[2] == personalitySlots[0]);
 
-			document.getElementById("box").value += "\nPersonality: " + personalityTypes[personalitySlots[0]] + ", " + personalityTypes[personalitySlots[1]] + ", " + personalityTypes[personalitySlots[2]];
+			document.getElementById("box").value += "\nPersonality: " + personalitySlots[0] + ", " + personalitySlots[1] + ", " + personalitySlots[2];
 
 			//Appearance - Form
 			var appearanceForm = 
