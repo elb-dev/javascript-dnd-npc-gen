@@ -87,30 +87,7 @@
 			<option value=4>Extremely High Fat</option>
 		</select>
 		<p>Personality</p>
-		<select id="personality i or e">
-			<option value=-1>Random Introvert/Extrovert</option>
-			<option value=0>Introvert</option>
-			<option value=1>Extrovert</option>
-		</select>
-		<select id="personality s or n">
-			<option value=-1>Random Observant/Intuitive</option>
-			<option value=0>Observant</option>
-			<option value=1>Intuitive</option>
-		</select>
-		<select id="personality t or f">
-			<option value=-1>Random Thinking/Feeling</option>
-			<option value=0>Thinking</option>
-			<option value=1>Feeling</option>
-		</select>
-		<select id="personality j or p">
-			<option value=-1>Random Judging/Prospecting</option>
-			<option value=0>Judging</option>
-			<option value=1>Prospecting</option>
-		</select>
-		<select id="personality a or t">
-			<option value=-1>Random Assertive/Turbulent</option>
-			<option value=0>Assertive</option>
-			<option value=1>Turbulent</option>
+		<input type="text" id="personality" name="personality" placeholder="3 Words">
 		</select>
 		<br>
 		<input type="button" onclick="generateNpc()" value="GENERATE NPC">
@@ -305,49 +282,16 @@
 			document.getElementById("box").value += "\nBuild: " + builds[sex][buildFat][buildStr];
 
 			//Personality
-			let personalityIE = document.getElementById("personality i or e").value;
-			let personalitySN = document.getElementById("personality s or n").value;
-			let personalityTF = document.getElementById("personality t or f").value;
-			let personalityJP = document.getElementById("personality j or p").value;
-			let personalityAT = document.getElementById("personality a or t").value;
+			let personalityTypes = ["absent-minded", "excitable", "nurturing", "perceptive", "cheery", "mopey", "dramatic", "boring", "braggart", "chatty", "crybaby", "paranoid", "rude", "stubborn", "sweet talker", "flirty", "worrywart", "jokester", "sarcastic", "edgy", "inappropriate", "snooty", "prim and proper", "polite", "shy", "awkward", "vain", "sleazy", "people pleaser"];
+			let personalitySlots = [-1, -1, -1];
+			do {
+				personalitySlots[0] = iRandomRange(0, personalityTypes.length-1);
+				personalitySlots[1] = iRandomRange(0, personalityTypes.length-1);
+				personalitySlots[2] = iRandomRange(0, personalityTypes.length-1);
+				console.log(personalitySlots);
+			} while (personalitySlots[0] == personalitySlots[1] || personalitySlots[1] == personalitySlots[2] || personalitySlots[2] == personalitySlots[0]);
 
-			let personalityArray = [personalityJP, personalityTF, personalitySN, personalityIE];
-			let personalityValue = 0;
-
-			for (let p = 0; p < personalityArray.length; p++){
-				if (personalityArray[p] == -1){
-					personalityArray[p] = iRandomRange(0,1);
-				}
-				personalityValue += (personalityArray[p] * (2 ** p))
-			}
-			if (personalityAT == -1){
-				personalityAT = iRandomRange(0,1);
-			}
-
-			//somethingtypetyp = ["00000", "00001", "00010", "00011", "00100", "00101", "00110", "00111", "01000", "01001", "01010", "01011", "01100", "01101", "01110", "01111", "10000", "10001", "10010", "10011", "10100", "10101", "10110", "10111", "11000", "11001", "11010", "11011", "11100", "11101", "11110", "11111"]
-			let personalityTypes = ["ISTJ", "ISTP", "ISFJ", "ISFP", "INTJ", "INTP", "INFJ", "INFP", "ESTJ", "ESTP", "ESFJ", "ESFP", "ENTJ", "ENTP", "ENFJ", "ENFP"];
-			let personalityNames = ["Logistician", "Virtuoso", "Defender", "Adventurer", "Architect", "Logician", "Advocate", "Mediator", "Executive", "Entrepreneur", "Consul", "Entertainer", "Commander", "Debater", "Protagonist", "Campaigner"];
-			let personalityDescriptions = [
-				"A practical and fact-minded individual, whose reliability cannot be doubted.",
-				"A bold and practical experimenter, master of many kinds of tools.",
-				"A very dedicated and warm protector, always ready to defend their loved ones.",
-				"A flexible and charming artist, always ready to explore and experience something new.",
-				"An imaginative and strategic thinker with a plan for everything.",
-				"An innovative inventor with an unquenchable thirst for knowledge.",
-				"Quiet and mystical, yet a very inspiring and tireless idealist.",
-				"A poetic, kind, and altruistic person, always eager to help a good cause.",
-				"An excellent administrator, unspurpassed at managing things - or people.",
-				"A smart, energetic, and very perceptive person who truly enjoys living on the edge.",
-				"An extraordinarily caring, social, and popular person, always eager to help.",
-				"A spontaneous, energetic, and enthusiastic person - life is never boring around them.",
-				"A bold, imaginative, and strong-willed leader, always finding a way - or making one.",
-				"A smart and curious thinker who cannot resist an intellectual challenge.",
-				"A charismatic and inspiring leader, able to mesmerize their listeners.",
-				"An enthusiastic, creative, and sociable free spirt who can always find a reason to smile."
-				];
-			let personalityAdditionalAT = ["A","T"];
-			document.getElementById("box").value += "\nPersonality: " + personalityNames[personalityValue] + " - " + personalityTypes[personalityValue] + "-" + personalityAdditionalAT[personalityAT];
-			document.getElementById("box").value += "\n" + personalityDescriptions[personalityValue];
+			document.getElementById("box").value += "\nPersonality: " + personalityTypes[personalitySlots[0]] + ", " + personalityTypes[personalitySlots[1]] + ", " + personalityTypes[personalitySlots[2]];
 
 			//Appearance - Form
 			var appearanceForm = 
