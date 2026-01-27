@@ -23,7 +23,7 @@
 	<main class = "main-npc">
 		<p>This character generator is specifically for my custom setting, Ex-Granlund. It will be updated over time as well to better fit the needs of my own games.</p>
 		<p><a href="https://www.behindthename.com/random/random.php?number=1&sets=5&gender=both&surname=&randomsurname=yes&showextra=yes&usage_alb=1&usage_bas=1&usage_bre=1&usage_bul=1&usage_cat=1&usage_cro=1&usage_cze=1&usage_dan=1&usage_dut=1&usage_eng=1&usage_est=1&usage_fin=1&usage_fre=1&usage_fri=1&usage_gal=1&usage_geo=1&usage_ger=1&usage_gre=1&usage_hun=1&usage_iri=1&usage_ita=1&usage_lat=1&usage_lim=1&usage_lth=1&usage_mac=1&usage_nor=1&usage_pol=1&usage_por=1&usage_slk=1&usage_spa=1&usage_swe=1&usage_ukr=1&usage_wel=1" target="_blank">Name Generator</a></p>
-		<p><a href="https://www.16personalities.com/personality-types" target="_blank">Personality Types</a></p>
+		<p><a href="https://www.generatorslist.com/random/animals/random-animal-generator" target="_blank">Animal Generator</p>
 		<br>
 		<p>Name</p>
   		<input type="text" id="name" name="name">
@@ -282,7 +282,7 @@
 			document.getElementById("box").value += "\nBuild: " + builds[sex][buildFat][buildStr];
 
 			//Personality
-			let personalityTypes = ["absent-minded", "excitable", "nurturing", "perceptive", "cheery", "mopey", "dramatic", "boring", "braggart", "chatty", "crybaby", "paranoid", "rude", "stubborn", "sweet talker", "flirty", "worrywart", "jokester", "sarcastic", "edgy", "inappropriate", "snooty", "prim and proper", "polite", "shy", "awkward", "vain", "sleazy", "people pleaser", "up-tight", "industrious", "rambly", "helpful", "honest", "blunt", "loyal", "analytical", "sensitive", "considerate", "charitable", "spineless", "modest", "humble", "reserved"];
+			let personalityTypes = ["absent-minded", "excitable", "nurturing", "perceptive", "cheery", "mopey", "dramatic", "boring", "braggart", "chatty", "crybaby", "paranoid", "rude", "stubborn", "sweet talker", "flirty", "worrywart", "jokester", "sarcastic", "edgy", "inappropriate", "snooty", "prim and proper", "polite", "shy", "awkward", "vain", "sleazy", "people pleaser", "up-tight", "industrious", "rambly", "helpful", "honest", "blunt", "loyal", "analytical", "sensitive", "considerate", "charitable", "spineless", "modest", "humble", "reserved", "nervous", "curious", "earnest"];
 			let personalitySlots = [-1, -1, -1];
 			do {
 				personalitySlots[0] = personalityTypes[iRandomRange(0, personalityTypes.length-1)];
